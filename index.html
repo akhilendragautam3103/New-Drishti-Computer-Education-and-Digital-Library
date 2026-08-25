@@ -164,95 +164,1063 @@
     </div>
 
 </section>
-<!-- ================= QUICK SERVICES ================= -->
 
-    <section class="quick">
+<!-- ================= QUICK SERVICES LOGIN ================= -->
 
-        <div class="quick-card"> <span>💻</span>
-            <h3>Computer Center</h3>
-            <p>Basic to Advanced Computer Courses</p>
-            <div class="computer-links">
-                <a href="https://forms.gle/USBDMr1UrHRmj5Cx7" target="_blank" class="computer-btn"> 📝 Online Form </a>
-                <p><a href="https://docs.google.com/spreadsheets/d/1cCwvyy24-HGBFuZsOWkrJ6y90uxzMi0ELLdYoo05Ox8/edit?usp=drivesdk"
-                        target="_blank" class="computer-btn"> 📊 Student Data </a></p>
-                <p><a href="https://forms.gle/NfgfkC4aqq3sDR7U7" target="_blank" class="computer-btn"> 📝 Fees Entry
-                        Form </a></p>
-                <p><a href="https://docs.google.com/spreadsheets/d/1FCCMjvLO5yZcyRuOsJD8_HADvZIQhOzzGckbtnhUQBE/edit?usp=sharing"
-                        target="_blank" class="computer-btn"> 📊 Fees Details</a></p>
-            </div>
+<section class="quick-login-section">
+
+```
+<div class="quick-login-card">
+
+    <div class="quick-login-icon">
+        🔐
+    </div>
+
+    <h2>Quick Services</h2>
+
+    <p>
+        Computer Center, CSC, Digital Library, MGKVP और अन्य
+        सभी महत्वपूर्ण सेवाओं तक पहुँचने के लिए Login करें।
+    </p>
+
+    <button
+        type="button"
+        class="quick-login-btn"
+        onclick="openQuickLogin()">
+        🔐 Quick Services Login
+    </button>
+
+</div>
+```
+
+</section>
+
+<!-- ================= QUICK SERVICES PASSWORD POPUP ================= -->
+
+<div id="quickLoginModal" class="quick-modal">
+
+```
+<div class="quick-login-popup">
+
+    <button
+        type="button"
+        class="quick-close"
+        onclick="closeQuickLogin()">
+        &times;
+    </button>
+
+    <div class="quick-popup-icon">
+        🔐
+    </div>
+
+    <h2>Quick Services Login</h2>
+
+    <p>
+        कृपया Quick Services खोलने के लिए Password दर्ज करें।
+    </p>
+
+    <input
+        type="password"
+        id="quickPassword"
+        placeholder="Enter Password"
+        autocomplete="off"
+        onkeydown="if(event.key === 'Enter') checkQuickPassword()">
+
+    <button
+        type="button"
+        class="quick-submit-btn"
+        onclick="checkQuickPassword()">
+        🔓 Login
+    </button>
+
+    <p
+        id="quickLoginError"
+        class="quick-error">
+    </p>
+
+</div>
+```
+
+</div>
+
+<!-- ================= QUICK SERVICES DASHBOARD ================= -->
+
+<section
+    id="quickServicesPanel"
+    class="quick-services-panel"
+    style="display:none;">
+
+```
+<div class="quick-dashboard-header">
+
+    <div>
+        <h2>⚡ Quick Services</h2>
+
+        <p>
+            New Drishti Computer Education & Digital Library
+        </p>
+    </div>
+
+    <button
+        type="button"
+        class="quick-logout-btn"
+        onclick="quickLogout()">
+        🔒 Logout
+    </button>
+
+</div>
+
+
+<div class="quick-dashboard-grid">
+
+
+    <!-- ================= COMPUTER CENTER ================= -->
+
+    <div class="quick-card">
+
+        <span>💻</span>
+
+        <h3>Computer Center</h3>
+
+        <p>
+            Basic to Advanced Computer Courses
+        </p>
+
+        <div class="computer-links">
+
+            <a
+                href="https://forms.gle/USBDMr1UrHRmj5Cx7"
+                target="_blank"
+                class="computer-btn">
+                📝 Online Form
+            </a>
+
+            <a
+                href="https://docs.google.com/spreadsheets/d/1cCwvyy24-HGBFuZsOWkrJ6y90uxzMi0ELLdYoo05Ox8/edit?usp=drivesdk"
+                target="_blank"
+                class="computer-btn">
+                📊 Student Data
+            </a>
+
+            <a
+                href="https://forms.gle/NfgfkC4aqq3sDR7U7"
+                target="_blank"
+                class="computer-btn">
+                📝 Fees Entry Form
+            </a>
+
+            <a
+                href="https://docs.google.com/spreadsheets/d/1FCCMjvLO5yZcyRuOsJD8_HADvZIQhOzzGckbtnhUQBE/edit?usp=sharing"
+                target="_blank"
+                class="computer-btn">
+                📊 Fees Details
+            </a>
+
         </div>
 
-        <div class="quick-card">
-            <span>🏛️</span>
-            <h3>CSC Center</h3>
-            <p>Various Digital & Online Services</p>
-            <div class="computer-links">
-                <a href="https://edistrict.up.gov.in/edistrictup/" target="_blank" class="computer-btn"> 📝 e-District
-                </a>
-                <p><a href="https://uidai.gov.in/hi" target="_blank" class="computer-btn"> 📝 Aadhar Service </a></p>
-                <p><a href="https://unifiedportal-mem.epfindia.gov.in/memberinterface/" target="_blank"
-                        class="computer-btn"> 📝 EPFO </a></p>
-                <p><a href="https://student.nielit.gov.in/" target="_blank" class="computer-btn"> 📝 CCC
-                        Registration</a></p>
-                <p><a href="https://jhatpatportal.uppcl.org/jhatpat/auth/home/login" target="_blank"
-                        class="computer-btn"> 📝 Bijali Connection </a></p>
-            </div>
+    </div>
+
+
+    <!-- ================= CSC CENTER ================= -->
+
+    <div class="quick-card">
+
+        <span>🏛️</span>
+
+        <h3>CSC Center</h3>
+
+        <p>
+            Various Digital & Online Services
+        </p>
+
+        <div class="computer-links">
+
+            <a
+                href="https://edistrict.up.gov.in/edistrictup/"
+                target="_blank"
+                class="computer-btn">
+                📝 e-District
+            </a>
+
+            <a
+                href="https://uidai.gov.in/hi"
+                target="_blank"
+                class="computer-btn">
+                📝 Aadhar Service
+            </a>
+
+            <a
+                href="https://unifiedportal-mem.epfindia.gov.in/memberinterface/"
+                target="_blank"
+                class="computer-btn">
+                📝 EPFO
+            </a>
+
+            <a
+                href="https://student.nielit.gov.in/"
+                target="_blank"
+                class="computer-btn">
+                📝 CCC Registration
+            </a>
+
+            <a
+                href="https://jhatpatportal.uppcl.org/jhatpat/auth/home/login"
+                target="_blank"
+                class="computer-btn">
+                📝 Bijali Connection
+            </a>
+
         </div>
 
-        <div class="quick-card">
-            <span>📚</span>
-            <h3>Digital Library</h3>
-            <p>Study & Computer Based Learning</p>
-            <div class="computer-links">
-                <a href="https://forms.gle/a7qt2yLA7C8LvqHT7" target="_blank" class="computer-btn"> 📝 Online Form </a>
-                <p><a href="https://docs.google.com/spreadsheets/d/1HsvGOh9KtiS_5emz0AE2scOjWaq5M1XgPZQ5frU2mfw/edit?usp=sharing"
-                        target="_blank" class="computer-btn"> 📊 Student Data </a></p>
-                <p><a href="https://forms.gle/NfgfkC4aqq3sDR7U7" target="_blank" class="computer-btn"> 📝 Fees Entry
-                        Form </a></p>
-                <p><a href="https://docs.google.com/spreadsheets/d/1FCCMjvLO5yZcyRuOsJD8_HADvZIQhOzzGckbtnhUQBE/edit?usp=sharing"
-                        target="_blank" class="computer-btn"> 📊 Fees Details</a></p>
-            </div>
+    </div>
+
+
+    <!-- ================= DIGITAL LIBRARY ================= -->
+
+    <div class="quick-card">
+
+        <span>📚</span>
+
+        <h3>Digital Library</h3>
+
+        <p>
+            Study & Computer Based Learning
+        </p>
+
+        <div class="computer-links">
+
+            <a
+                href="https://forms.gle/a7qt2yLA7C8LvqHT7"
+                target="_blank"
+                class="computer-btn">
+                📝 Online Form
+            </a>
+
+            <a
+                href="https://docs.google.com/spreadsheets/d/1HsvGOh9KtiS_5emz0AE2scOjWaq5M1XgPZQ5frU2mfw/edit?usp=sharing"
+                target="_blank"
+                class="computer-btn">
+                📊 Student Data
+            </a>
+
+            <a
+                href="https://forms.gle/NfgfkC4aqq3sDR7U7"
+                target="_blank"
+                class="computer-btn">
+                📝 Fees Entry Form
+            </a>
+
+            <a
+                href="https://docs.google.com/spreadsheets/d/1FCCMjvLO5yZcyRuOsJD8_HADvZIQhOzzGckbtnhUQBE/edit?usp=sharing"
+                target="_blank"
+                class="computer-btn">
+                📊 Fees Details
+            </a>
+
         </div>
 
-        <div class="quick-card">
-            <span>🏛️</span>
-            <h3>MGKVP</h3>
-            <p>Various Digital & Online Services</p>
+    </div>
 
-            <div class="computer-links">
-                <a href="https://mgkvpvonline.org/" target="_blank" class="computer-btn"> 📊 MGKVP Dashboard </a>
-                <p><a href="https://sakaldihapgcollege.ac.in/" target="_blank" class="computer-btn"> 📝 Admission
-                        Form</a></p>
-                <p><a href="https://mgkvp.samarth.edu.in/index.php/site/login" target="_blank" class="computer-btn"> 📊
-                        Download Admit Card </a></p>
-                <p><a href="https://janhit.mgkvp.ac.in/" target="_blank" class="computer-btn"> 📊 Download Result
-                    </a></p>
-            </div>
-        </div>
-        <div class="quick-card">
-            <span>🏛️</span>
-            <h3>OTHER</h3>
-            <p>Other Digital & Online Services</p>
 
-            <div class="computer-links">
-                <a href="https://upswdhms.upsdc.gov.in/registration" target="_blank" class="computer-btn"> 📝 Rajkiya
-                    Awas Online </a>
-                <P><a href="https://www.sarkariresult.com/" target="_blank" class="computer-btn"> 📝 Sarkari Result </a>
-                </P>
-                <P><a href="https://upsssc.gov.in/" target="_blank" class="computer-btn"> 📝 UPSSSC </a></P>
-                <P><a href="https://chatgpt.com/" target="_blank" class="computer-btn"> 📝 Chat Gpt</a></P>
-            </div>
-        </div>
-        <div class="quick-card">
-            <span>📚</span>
-            <h3>MISCELLANEOUS</h3>
-            <p>Growing up</p>
-            <div class="computer-links">
-                <a href="https://docs.google.com/spreadsheets/d/1SEilE75ps9J1GTblTlJBmaDUVYeSLrKmS6kE0mGim_M/edit?usp=sharing" target="_blank" class="feedback"> 📊 Feedback Details </a>
-            </div>
+    <!-- ================= MGKVP ================= -->
+
+    <div class="quick-card">
+
+        <span>🏛️</span>
+
+        <h3>MGKVP</h3>
+
+        <p>
+            Various Digital & Online Services
+        </p>
+
+        <div class="computer-links">
+
+            <a
+                href="https://mgkvpvonline.org/"
+                target="_blank"
+                class="computer-btn">
+                📊 MGKVP Dashboard
+            </a>
+
+            <a
+                href="https://sakaldihapgcollege.ac.in/"
+                target="_blank"
+                class="computer-btn">
+                📝 Admission Form
+            </a>
+
+            <a
+                href="https://mgkvp.samarth.edu.in/index.php/site/login"
+                target="_blank"
+                class="computer-btn">
+                📊 Download Admit Card
+            </a>
+
+            <a
+                href="https://janhit.mgkvp.ac.in/"
+                target="_blank"
+                class="computer-btn">
+                📊 Download Result
+            </a>
+
         </div>
 
-    </section>
+    </div>
+
+
+    <!-- ================= OTHER ================= -->
+
+    <div class="quick-card">
+
+        <span>🌐</span>
+
+        <h3>OTHER</h3>
+
+        <p>
+            Other Digital & Online Services
+        </p>
+
+        <div class="computer-links">
+
+            <a
+                href="https://upswdhms.upsdc.gov.in/registration"
+                target="_blank"
+                class="computer-btn">
+                📝 Rajkiya Awas Online
+            </a>
+
+            <a
+                href="https://www.sarkariresult.com/"
+                target="_blank"
+                class="computer-btn">
+                📝 Sarkari Result
+            </a>
+
+            <a
+                href="https://upsssc.gov.in/"
+                target="_blank"
+                class="computer-btn">
+                📝 UPSSSC
+            </a>
+
+            <a
+                href="https://chatgpt.com/"
+                target="_blank"
+                class="computer-btn">
+                🤖 ChatGPT
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= MISCELLANEOUS ================= -->
+
+    <div class="quick-card">
+
+        <span>📊</span>
+
+        <h3>MISCELLANEOUS</h3>
+
+        <p>
+            Other Management Services
+        </p>
+
+        <div class="computer-links">
+
+            <a
+                href="https://docs.google.com/spreadsheets/d/1SEilE75ps9J1GTblTlJBmaDUVYeSLrKmS6kE0mGim_M/edit?usp=sharing"
+                target="_blank"
+                class="feedback">
+                📊 Feedback Details
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+```
+
+</section>
+
+<!-- ================= QUICK SERVICES CSS ================= -->
+
+<style>
+
+.quick-login-section {
+
+    padding: 40px 20px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+}
+
+
+.quick-login-card {
+
+    width: 100%;
+
+    max-width: 500px;
+
+    padding: 35px;
+
+    text-align: center;
+
+    border-radius: 20px;
+
+    background: linear-gradient(
+        135deg,
+        #ffffff,
+        #eef6ff
+    );
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,0.15);
+
+    border: 1px solid #dce8f5;
+
+}
+
+
+.quick-login-icon {
+
+    font-size: 55px;
+
+    margin-bottom: 10px;
+
+}
+
+
+.quick-login-card h2 {
+
+    margin-bottom: 10px;
+
+    font-size: 28px;
+
+}
+
+
+.quick-login-card p {
+
+    margin-bottom: 20px;
+
+    line-height: 1.6;
+
+}
+
+
+.quick-login-btn {
+
+    border: none;
+
+    padding: 14px 28px;
+
+    border-radius: 30px;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    color: white;
+
+    background: linear-gradient(
+        135deg,
+        #0066ff,
+        #7b2cff
+    );
+
+    transition: 0.3s;
+
+}
+
+
+.quick-login-btn:hover {
+
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 8px 20px rgba(0,0,0,0.2);
+
+}
+
+
+/* ================= LOGIN MODAL ================= */
+
+.quick-modal {
+
+    display: none;
+
+    position: fixed;
+
+    z-index: 99999;
+
+    left: 0;
+
+    top: 0;
+
+    width: 100%;
+
+    height: 100%;
+
+    background: rgba(0,0,0,0.75);
+
+    justify-content: center;
+
+    align-items: center;
+
+    padding: 20px;
+
+}
+
+
+.quick-login-popup {
+
+    position: relative;
+
+    width: 100%;
+
+    max-width: 400px;
+
+    padding: 35px;
+
+    text-align: center;
+
+    background: white;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 15px 50px rgba(0,0,0,0.4);
+
+    animation: quickPopup 0.3s ease;
+
+}
+
+
+@keyframes quickPopup {
+
+    from {
+
+        transform: scale(0.7);
+
+        opacity: 0;
+
+    }
+
+    to {
+
+        transform: scale(1);
+
+        opacity: 1;
+
+    }
+
+}
+
+
+.quick-close {
+
+    position: absolute;
+
+    right: 15px;
+
+    top: 10px;
+
+    border: none;
+
+    background: transparent;
+
+    font-size: 30px;
+
+    cursor: pointer;
+
+}
+
+
+.quick-popup-icon {
+
+    font-size: 50px;
+
+    margin-bottom: 10px;
+
+}
+
+
+.quick-login-popup h2 {
+
+    margin-bottom: 10px;
+
+}
+
+
+.quick-login-popup input {
+
+    width: 100%;
+
+    padding: 13px;
+
+    margin: 15px 0;
+
+    border: 1px solid #ccc;
+
+    border-radius: 10px;
+
+    font-size: 16px;
+
+    outline: none;
+
+}
+
+
+.quick-login-popup input:focus {
+
+    border-color: #0066ff;
+
+    box-shadow:
+        0 0 5px rgba(0,102,255,0.3);
+
+}
+
+
+.quick-submit-btn {
+
+    width: 100%;
+
+    padding: 13px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: #0066ff;
+
+    color: white;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+}
+
+
+.quick-submit-btn:hover {
+
+    background: #004dcc;
+
+}
+
+
+.quick-error {
+
+    color: #e00000;
+
+    min-height: 20px;
+
+    margin-top: 10px;
+
+    font-weight: bold;
+
+}
+
+
+/* ================= DASHBOARD ================= */
+
+.quick-services-panel {
+
+    padding: 40px 20px;
+
+}
+
+
+.quick-dashboard-header {
+
+    max-width: 1200px;
+
+    margin: 0 auto 30px;
+
+    padding: 20px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 20px;
+
+    border-radius: 15px;
+
+    background: linear-gradient(
+        135deg,
+        #0066ff,
+        #7b2cff
+    );
+
+    color: white;
+
+}
+
+
+.quick-dashboard-header h2 {
+
+    margin: 0 0 5px;
+
+}
+
+
+.quick-dashboard-header p {
+
+    margin: 0;
+
+}
+
+
+.quick-logout-btn {
+
+    padding: 10px 18px;
+
+    border: none;
+
+    border-radius: 25px;
+
+    cursor: pointer;
+
+    font-weight: bold;
+
+    background: white;
+
+    color: #333;
+
+}
+
+
+.quick-dashboard-grid {
+
+    max-width: 1200px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(280px, 1fr));
+
+    gap: 20px;
+
+}
+
+
+/* ================= QUICK CARDS ================= */
+
+.quick-card {
+
+    padding: 25px;
+
+    border-radius: 18px;
+
+    background: white;
+
+    box-shadow:
+        0 8px 25px rgba(0,0,0,0.12);
+
+    border: 1px solid #e5e5e5;
+
+    text-align: center;
+
+    transition: 0.3s;
+
+}
+
+
+.quick-card:hover {
+
+    transform: translateY(-5px);
+
+    box-shadow:
+        0 12px 30px rgba(0,0,0,0.18);
+
+}
+
+
+.quick-card > span {
+
+    font-size: 42px;
+
+    display: block;
+
+    margin-bottom: 10px;
+
+}
+
+
+.quick-card h3 {
+
+    margin-bottom: 8px;
+
+}
+
+
+.quick-card p {
+
+    margin-bottom: 15px;
+
+}
+
+
+.computer-links {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+
+}
+
+
+.computer-btn,
+.feedback {
+
+    display: block;
+
+    padding: 11px 15px;
+
+    text-decoration: none;
+
+    border-radius: 8px;
+
+    color: white;
+
+    background: #0066ff;
+
+    font-weight: 600;
+
+    transition: 0.3s;
+
+}
+
+
+.computer-btn:hover,
+.feedback:hover {
+
+    transform: translateX(4px);
+
+    background: #004dcc;
+
+}
+
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 600px) {
+
+    .quick-login-card {
+
+        padding: 25px 18px;
+
+    }
+
+
+    .quick-dashboard-header {
+
+        flex-direction: column;
+
+        text-align: center;
+
+    }
+
+
+    .quick-services-panel {
+
+        padding: 25px 12px;
+
+    }
+
+}
+
+</style>
+
+<!-- ================= QUICK SERVICES JAVASCRIPT ================= -->
+
+<script>
+
+    // ==========================================
+    // QUICK SERVICES PASSWORD
+    // ==========================================
+
+    const QUICK_SERVICE_PASSWORD = "NDCE@2026";
+
+
+    // ==========================================
+    // OPEN LOGIN POPUP
+    // ==========================================
+
+    function openQuickLogin() {
+
+        document.getElementById("quickLoginModal").style.display = "flex";
+
+        document.getElementById("quickPassword").value = "";
+
+        document.getElementById("quickLoginError").textContent = "";
+
+        setTimeout(function () {
+
+            document.getElementById("quickPassword").focus();
+
+        }, 100);
+
+    }
+
+
+    // ==========================================
+    // CLOSE LOGIN POPUP
+    // ==========================================
+
+    function closeQuickLogin() {
+
+        document.getElementById("quickLoginModal").style.display = "none";
+
+    }
+
+
+    // ==========================================
+    // CHECK PASSWORD
+    // ==========================================
+
+    function checkQuickPassword() {
+
+        const password =
+            document.getElementById("quickPassword").value;
+
+        const error =
+            document.getElementById("quickLoginError");
+
+
+        if (password === QUICK_SERVICE_PASSWORD) {
+
+            closeQuickLogin();
+
+            document.getElementById(
+                "quickServicesPanel"
+            ).style.display = "block";
+
+
+            // Scroll to Quick Services
+
+            document.getElementById(
+                "quickServicesPanel"
+            ).scrollIntoView({
+                behavior: "smooth"
+            });
+
+
+            // Save login for current browser session
+
+            sessionStorage.setItem(
+                "quickServicesLogin",
+                "true"
+            );
+
+
+        } else {
+
+            error.textContent =
+                "❌ गलत Password! कृपया सही Password डालें।";
+
+            document.getElementById(
+                "quickPassword"
+            ).value = "";
+
+            document.getElementById(
+                "quickPassword"
+            ).focus();
+
+        }
+
+    }
+
+
+    // ==========================================
+    // LOGOUT
+    // ==========================================
+
+    function quickLogout() {
+
+        sessionStorage.removeItem(
+            "quickServicesLogin"
+        );
+
+
+        document.getElementById(
+            "quickServicesPanel"
+        ).style.display = "none";
+
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    }
+
+
+    // ==========================================
+    // CHECK EXISTING SESSION
+    // ==========================================
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        function () {
+
+            if (
+                sessionStorage.getItem(
+                    "quickServicesLogin"
+                ) === "true"
+            ) {
+
+                document.getElementById(
+                    "quickServicesPanel"
+                ).style.display = "block";
+
+            }
+
+        }
+    );
+
+
+    // ==========================================
+    // CLOSE POPUP WHEN CLICKING OUTSIDE
+    // ==========================================
+
+    document.getElementById(
+        "quickLoginModal"
+    ).addEventListener(
+        "click",
+        function (event) {
+
+            if (
+                event.target === this
+            ) {
+
+                closeQuickLogin();
+
+            }
+
+        }
+    );
+
+</script>
 
 
 <!-- ================= ABOUT ================= -->
