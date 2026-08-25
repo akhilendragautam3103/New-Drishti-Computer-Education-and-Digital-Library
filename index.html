@@ -39,7 +39,69 @@
 
 <!-- ================= HOME ================= -->
 
+<!-- ================= HOME / IMAGE SLIDER ================= -->
+
 <section id="home" class="hero">
+
+    <!-- BACKGROUND IMAGE SLIDER -->
+
+    <div class="hero-slider">
+
+        <div class="hero-slide active"
+             style="background-image: url('images/photo1.jpg');">
+        </div>
+
+        <div class="hero-slide"
+             style="background-image: url('images/photo2.jpg');">
+        </div>
+
+        <div class="hero-slide"
+             style="background-image: url('images/photo3.jpg');">
+        </div>
+
+        <div class="hero-slide"
+             style="background-image: url('images/photo4.jpg');">
+        </div>
+
+        <div class="hero-slide"
+             style="background-image: url('images/photo5.jpg');">
+        </div>
+
+        <div class="hero-slide"
+             style="background-image: url('images/photo6.jpg');">
+        </div>
+
+    </div>
+
+
+    <!-- DARK OVERLAY -->
+
+    <div class="hero-overlay"></div>
+
+
+    <!-- LEFT ARROW -->
+
+    <button
+        class="slider-arrow slider-prev"
+        onclick="previousHeroSlide()">
+
+        ❮
+
+    </button>
+
+
+    <!-- RIGHT ARROW -->
+
+    <button
+        class="slider-arrow slider-next"
+        onclick="nextHeroSlide()">
+
+        ❯
+
+    </button>
+
+
+    <!-- HOME CONTENT -->
 
     <div class="hero-text">
 
@@ -71,25 +133,37 @@
     </div>
 
 
-    <div class="hero-card">
+    <!-- SLIDER DOTS -->
 
-        <div class="computer">
-            💻
-        </div>
+    <div class="hero-dots">
 
-        <h3>
-            Learn • Grow • Succeed
-        </h3>
+        <span class="hero-dot active"
+              onclick="showHeroSlide(0)">
+        </span>
 
-        <p>
-            Digital Education for Everyone
-        </p>
+        <span class="hero-dot"
+              onclick="showHeroSlide(1)">
+        </span>
+
+        <span class="hero-dot"
+              onclick="showHeroSlide(2)">
+        </span>
+
+        <span class="hero-dot"
+              onclick="showHeroSlide(3)">
+        </span>
+
+        <span class="hero-dot"
+              onclick="showHeroSlide(4)">
+        </span>
+
+        <span class="hero-dot"
+              onclick="showHeroSlide(5)">
+        </span>
 
     </div>
 
 </section>
-
-
 <!-- ================= QUICK SERVICES ================= -->
 
     <section class="quick">
