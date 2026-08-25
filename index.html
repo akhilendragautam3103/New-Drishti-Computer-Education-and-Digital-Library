@@ -1796,5 +1796,421 @@
 
 <script src="script.js"></script>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- ================= AUTO ENQUIRY POPUP ================= -->
+
+<div id="enquiryPopup" class="enquiry-popup">
+
+    <div class="enquiry-popup-content">
+
+        <button type="button"
+                class="enquiry-close"
+                onclick="closeEnquiryPopup()">
+            &times;
+        </button>
+
+        <div class="enquiry-popup-icon">
+            📩
+        </div>
+
+        <h2>Submit Enquiry</h2>
+
+        <p>
+            New Drishti Computer Education & Digital Library
+            में Admission एवं Course की जानकारी के लिए Enquiry भेजें।
+        </p>
+
+        <form id="popupEnquiryForm">
+
+            <input
+                type="text"
+                id="popupName"
+                placeholder="👤 Your Name"
+                autocomplete="name"
+                required
+            >
+
+            <input
+                type="tel"
+                id="popupPhone"
+                placeholder="📱 Mobile Number"
+                maxlength="10"
+                inputmode="numeric"
+                autocomplete="tel"
+                required
+            >
+
+            <select id="popupCourse" required>
+
+                <option value="">
+                    🎓 Select Course
+                </option>
+
+                <option value="DCA">DCA</option>
+                <option value="ADCA">ADCA</option>
+                <option value="CCC">CCC</option>
+                <option value="Tally">Tally</option>
+                <option value="Typing">Hindi & English Typing</option>
+                <option value="Library">Digital Library</option>
+
+            </select>
+
+            <textarea
+                id="popupMessage"
+                placeholder="📝 Your Message">
+            </textarea>
+
+            <button
+                type="submit"
+                id="popupSubmitBtn"
+                class="popup-submit-btn">
+                📩 Submit Enquiry
+            </button>
+
+            <div id="popupFormStatus"></div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<style>
+
+/* ================= ENQUIRY POPUP ================= */
+
+.enquiry-popup {
+
+    display: none;
+
+    position: fixed;
+
+    z-index: 100000;
+
+    left: 0;
+    top: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background: rgba(0,0,0,0.78);
+
+    justify-content: center;
+    align-items: center;
+
+    padding: 15px;
+
+}
+
+
+/* ================= POPUP BOX ================= */
+
+.enquiry-popup-content {
+
+    position: relative;
+
+    width: 100%;
+    max-width: 450px;
+
+    max-height: 92vh;
+
+    overflow-y: auto;
+
+    padding: 32px 28px;
+
+    background: white;
+
+    border-radius: 22px;
+
+    text-align: center;
+
+    box-shadow:
+        0 20px 60px rgba(0,0,0,0.45);
+
+    animation: enquiryPopupAnimation 0.4s ease;
+
+}
+
+
+@keyframes enquiryPopupAnimation {
+
+    from {
+
+        transform: scale(0.7);
+
+        opacity: 0;
+
+    }
+
+    to {
+
+        transform: scale(1);
+
+        opacity: 1;
+
+    }
+
+}
+
+
+/* ================= CLOSE ================= */
+
+.enquiry-close {
+
+    position: absolute;
+
+    right: 12px;
+    top: 10px;
+
+    width: 38px;
+    height: 38px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: #eeeeee;
+
+    color: #333;
+
+    font-size: 28px;
+
+    cursor: pointer;
+
+}
+
+
+.enquiry-close:hover {
+
+    background: #ff3333;
+
+    color: white;
+
+}
+
+
+/* ================= ICON ================= */
+
+.enquiry-popup-icon {
+
+    font-size: 55px;
+
+    margin-bottom: 5px;
+
+}
+
+
+/* ================= TITLE ================= */
+
+.enquiry-popup-content h2 {
+
+    margin: 5px 0 10px;
+
+    color: #0066ff;
+
+    font-size: 28px;
+
+}
+
+
+.enquiry-popup-content > p {
+
+    color: #555;
+
+    line-height: 1.6;
+
+    margin-bottom: 20px;
+
+}
+
+
+/* ================= FORM ================= */
+
+#popupEnquiryForm {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 12px;
+
+}
+
+
+#popupEnquiryForm input,
+#popupEnquiryForm select,
+#popupEnquiryForm textarea {
+
+    width: 100%;
+
+    padding: 13px 14px;
+
+    border: 1px solid #d3d3d3;
+
+    border-radius: 10px;
+
+    font-size: 15px;
+
+    outline: none;
+
+    font-family: inherit;
+
+}
+
+
+#popupEnquiryForm input:focus,
+#popupEnquiryForm select:focus,
+#popupEnquiryForm textarea:focus {
+
+    border-color: #0066ff;
+
+    box-shadow:
+        0 0 6px rgba(0,102,255,0.20);
+
+}
+
+
+#popupEnquiryForm textarea {
+
+    min-height: 80px;
+
+    resize: vertical;
+
+}
+
+
+/* ================= SUBMIT BUTTON ================= */
+
+.popup-submit-btn {
+
+    width: 100%;
+
+    padding: 14px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: linear-gradient(
+        135deg,
+        #0066ff,
+        #7b2cff
+    );
+
+    color: white;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+
+}
+
+
+.popup-submit-btn:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 20px rgba(0,0,0,0.20);
+
+}
+
+
+.popup-submit-btn:disabled {
+
+    opacity: 0.7;
+
+    cursor: not-allowed;
+
+}
+
+
+/* ================= STATUS ================= */
+
+#popupFormStatus {
+
+    min-height: 22px;
+
+    margin-top: 5px;
+
+    font-weight: bold;
+
+}
+
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 600px) {
+
+    .enquiry-popup-content {
+
+        padding: 28px 18px;
+
+        border-radius: 18px;
+
+    }
+
+    .enquiry-popup-content h2 {
+
+        font-size: 24px;
+
+    }
+
+    .enquiry-popup-icon {
+
+        font-size: 45px;
+
+    }
+
+}
+
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+    
+    
 </body>
 </html>
