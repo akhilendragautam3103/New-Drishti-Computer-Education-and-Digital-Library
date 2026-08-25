@@ -769,3 +769,450 @@ body.dark .library {
     gap:25px;
     align-items:start;
 }
+
+/* ==========================================
+   NEW DRISHTI HOME IMAGE SLIDER
+========================================== */
+
+#home.hero {
+
+    position: relative;
+
+    width: 100%;
+
+    height: 100vh;
+
+    min-height: 650px;
+
+    overflow: hidden;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+}
+
+
+/* ==========================================
+   SLIDER
+========================================== */
+
+.hero-slider {
+
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+
+    height: 100%;
+
+    overflow: hidden;
+
+}
+
+
+.hero-slide {
+
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+
+    height: 100%;
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+
+    opacity: 0;
+
+    transform: translateX(100%);
+
+    transition:
+        transform 1.3s ease-in-out,
+        opacity 1.3s ease-in-out;
+
+}
+
+
+/* ACTIVE IMAGE */
+
+.hero-slide.active {
+
+    opacity: 1;
+
+    transform: translateX(0);
+
+    z-index: 2;
+
+}
+
+
+/* IMAGE GOING LEFT */
+
+.hero-slide.previous {
+
+    opacity: 0;
+
+    transform: translateX(-100%);
+
+    z-index: 1;
+
+}
+
+
+/* ==========================================
+   DARK OVERLAY
+========================================== */
+
+.hero-overlay {
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 3;
+
+    background:
+        linear-gradient(
+            rgba(0,0,0,0.60),
+            rgba(0,0,0,0.35),
+            rgba(0,0,0,0.65)
+        );
+
+    pointer-events: none;
+
+}
+
+
+/* ==========================================
+   HERO TEXT
+========================================== */
+
+#home .hero-text {
+
+    position: relative;
+
+    z-index: 5;
+
+    max-width: 950px;
+
+    padding: 30px;
+
+    text-align: center;
+
+    color: white;
+
+}
+
+
+#home .hero-text h1 {
+
+    font-size: clamp(
+        38px,
+        7vw,
+        75px
+    );
+
+    margin-bottom: 15px;
+
+    text-shadow:
+        3px 3px 10px #000;
+
+}
+
+
+#home .hero-text h1 span {
+
+    color: #ffd700;
+
+}
+
+
+#home .hero-text h2 {
+
+    font-size: clamp(
+        20px,
+        3vw,
+        34px
+    );
+
+    margin-bottom: 18px;
+
+    text-shadow:
+        2px 2px 8px #000;
+
+}
+
+
+#home .hero-text p {
+
+    font-size: clamp(
+        16px,
+        2vw,
+        22px
+    );
+
+    line-height: 1.7;
+
+    margin-bottom: 30px;
+
+    text-shadow:
+        2px 2px 8px #000;
+
+}
+
+
+/* ==========================================
+   BUTTONS
+========================================== */
+
+#home .hero-buttons {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 15px;
+
+    flex-wrap: wrap;
+
+}
+
+
+#home .hero-buttons .btn {
+
+    padding: 13px 28px;
+
+    border-radius: 30px;
+
+    text-decoration: none;
+
+    font-weight: bold;
+
+    background: #ffd700;
+
+    color: #111;
+
+    border: 2px solid #ffd700;
+
+    transition: 0.3s;
+
+}
+
+
+#home .hero-buttons .btn.outline {
+
+    background: transparent;
+
+    color: white;
+
+    border: 2px solid white;
+
+}
+
+
+#home .hero-buttons .btn:hover {
+
+    transform: translateY(-4px) scale(1.05);
+
+    box-shadow:
+        0 8px 20px
+        rgba(0,0,0,0.4);
+
+}
+
+
+/* ==========================================
+   SLIDER ARROWS
+========================================== */
+
+.slider-arrow {
+
+    position: absolute;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    z-index: 10;
+
+    width: 50px;
+
+    height: 50px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255,255,255,0.25);
+
+    color: white;
+
+    font-size: 28px;
+
+    cursor: pointer;
+
+    backdrop-filter: blur(5px);
+
+    transition: 0.3s;
+
+}
+
+
+.slider-arrow:hover {
+
+    background: #ffd700;
+
+    color: #111;
+
+    transform:
+        translateY(-50%)
+        scale(1.1);
+
+}
+
+
+.slider-prev {
+
+    left: 20px;
+
+}
+
+
+.slider-next {
+
+    right: 20px;
+
+}
+
+
+/* ==========================================
+   SLIDER DOTS
+========================================== */
+
+.hero-dots {
+
+    position: absolute;
+
+    bottom: 25px;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    z-index: 10;
+
+    display: flex;
+
+    gap: 10px;
+
+}
+
+
+.hero-dot {
+
+    width: 13px;
+
+    height: 13px;
+
+    border-radius: 50%;
+
+    background: white;
+
+    opacity: 0.55;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+
+}
+
+
+.hero-dot.active {
+
+    opacity: 1;
+
+    background: #ffd700;
+
+    transform: scale(1.4);
+
+}
+
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media (max-width: 768px) {
+
+    #home.hero {
+
+        min-height: 650px;
+
+    }
+
+
+    #home .hero-text {
+
+        padding:
+            30px 45px;
+
+    }
+
+
+    #home .hero-text h1 {
+
+        font-size: 38px;
+
+    }
+
+
+    #home .hero-text h2 {
+
+        font-size: 20px;
+
+    }
+
+
+    #home .hero-text p {
+
+        font-size: 15px;
+
+    }
+
+
+    .slider-arrow {
+
+        width: 40px;
+
+        height: 40px;
+
+        font-size: 21px;
+
+    }
+
+
+    .slider-prev {
+
+        left: 8px;
+
+    }
+
+
+    .slider-next {
+
+        right: 8px;
+
+    }
+
+}
