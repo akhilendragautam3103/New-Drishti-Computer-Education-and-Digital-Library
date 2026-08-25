@@ -678,3 +678,393 @@ document.getElementById("galleryModal").addEventListener("click", function(event
     }
 
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ======================================================
+// NEW DRISHTI AUTO ENQUIRY POPUP
+// GOOGLE SHEET SUBMISSION
+// ======================================================
+
+
+const POPUP_GOOGLE_SCRIPT_URL =
+"https://script.google.com/macros/s/AKfycbyWmz-3Yw0FQBHqJSPMKG--E_px-8qm5pm97tGc1bWFnY7eYi5ryhnAaoNWDKwCqGjT6A/exec";
+
+
+// ======================================================
+// OPEN POPUP AUTOMATICALLY
+// ======================================================
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        const enquiryPopup =
+            document.getElementById("enquiryPopup");
+
+        if (!enquiryPopup) {
+            return;
+        }
+
+
+        // Website open होने के 700ms बाद popup
+
+        setTimeout(
+            function () {
+
+                enquiryPopup.style.display = "flex";
+
+            },
+            700
+        );
+
+    }
+);
+
+
+// ======================================================
+// CLOSE ENQUIRY POPUP
+// ======================================================
+
+function closeEnquiryPopup() {
+
+    const popup =
+        document.getElementById("enquiryPopup");
+
+    if (popup) {
+
+        popup.style.display = "none";
+
+    }
+
+}
+
+
+// ======================================================
+// CLOSE POPUP OUTSIDE CLICK
+// ======================================================
+
+const enquiryPopup =
+    document.getElementById("enquiryPopup");
+
+
+if (enquiryPopup) {
+
+    enquiryPopup.addEventListener(
+        "click",
+        function (event) {
+
+            if (event.target === this) {
+
+                closeEnquiryPopup();
+
+            }
+
+        }
+    );
+
+}
+
+
+// ======================================================
+// ESC KEY
+// ======================================================
+
+document.addEventListener(
+    "keydown",
+    function (event) {
+
+        if (event.key === "Escape") {
+
+            closeEnquiryPopup();
+
+        }
+
+    }
+);
+
+
+// ======================================================
+// POPUP ENQUIRY FORM
+// ======================================================
+
+const popupEnquiryForm =
+    document.getElementById("popupEnquiryForm");
+
+
+if (popupEnquiryForm) {
+
+    popupEnquiryForm.addEventListener(
+        "submit",
+        async function (event) {
+
+            event.preventDefault();
+
+
+            // ------------------------------------------
+            // GET VALUES
+            // ------------------------------------------
+
+            const name =
+                document
+                .getElementById("popupName")
+                .value
+                .trim();
+
+
+            const phone =
+                document
+                .getElementById("popupPhone")
+                .value
+                .trim();
+
+
+            const course =
+                document
+                .getElementById("popupCourse")
+                .value;
+
+
+            const message =
+                document
+                .getElementById("popupMessage")
+                .value
+                .trim();
+
+
+            const submitButton =
+                document.getElementById(
+                    "popupSubmitBtn"
+                );
+
+
+            const status =
+                document.getElementById(
+                    "popupFormStatus"
+                );
+
+
+            // ------------------------------------------
+            // NAME VALIDATION
+            // ------------------------------------------
+
+            if (name === "") {
+
+                status.style.color = "red";
+
+                status.textContent =
+                    "❌ कृपया अपना नाम दर्ज करें।";
+
+                document
+                    .getElementById("popupName")
+                    .focus();
+
+                return;
+
+            }
+
+
+            // ------------------------------------------
+            // PHONE VALIDATION
+            // ------------------------------------------
+
+            if (!/^[0-9]{10}$/.test(phone)) {
+
+                status.style.color = "red";
+
+                status.textContent =
+                    "❌ कृपया 10 अंकों का सही Mobile Number दर्ज करें।";
+
+                document
+                    .getElementById("popupPhone")
+                    .focus();
+
+                return;
+
+            }
+
+
+            // ------------------------------------------
+            // COURSE VALIDATION
+            // ------------------------------------------
+
+            if (course === "") {
+
+                status.style.color = "red";
+
+                status.textContent =
+                    "❌ कृपया Course Select करें।";
+
+                document
+                    .getElementById("popupCourse")
+                    .focus();
+
+                return;
+
+            }
+
+
+            // ------------------------------------------
+            // LOADING
+            // ------------------------------------------
+
+            submitButton.disabled = true;
+
+            submitButton.innerHTML =
+                "⏳ Sending...";
+
+
+            status.style.color = "#0066ff";
+
+            status.textContent =
+                "⏳ आपकी enquiry भेजी जा रही है...";
+
+
+            // ------------------------------------------
+            // FORM DATA
+            // ------------------------------------------
+
+            const formData =
+                new FormData();
+
+
+            formData.append(
+                "name",
+                name
+            );
+
+
+            formData.append(
+                "phone",
+                phone
+            );
+
+
+            formData.append(
+                "course",
+                course
+            );
+
+
+            formData.append(
+                "message",
+                message
+            );
+
+
+            // ------------------------------------------
+            // SEND TO GOOGLE SHEET
+            // ------------------------------------------
+
+            try {
+
+                await fetch(
+                    POPUP_GOOGLE_SCRIPT_URL,
+                    {
+                        method: "POST",
+
+                        body: formData,
+
+                        mode: "no-cors"
+                    }
+                );
+
+
+                // --------------------------------------
+                // SUCCESS
+                // --------------------------------------
+
+                status.style.color = "green";
+
+                status.textContent =
+                    "✅ Enquiry Successfully Submitted!";
+
+
+                alert(
+                    "धन्यवाद " +
+                    name +
+                    "!\n\n" +
+                    "आपकी enquiry successfully submit हो गई है।\n\n" +
+                    "हम आपको शीघ्र संपर्क करेंगे।"
+                );
+
+
+                // --------------------------------------
+                // RESET
+                // --------------------------------------
+
+                popupEnquiryForm.reset();
+
+
+                // --------------------------------------
+                // CLOSE POPUP
+                // --------------------------------------
+
+                setTimeout(
+                    function () {
+
+                        closeEnquiryPopup();
+
+                        status.textContent = "";
+
+                    },
+                    1500
+                );
+
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    "Popup Enquiry Error:",
+                    error
+                );
+
+
+                status.style.color = "red";
+
+                status.textContent =
+                    "❌ Enquiry भेजने में समस्या हुई। कृपया पुनः प्रयास करें।";
+
+
+            }
+
+
+            // ------------------------------------------
+            // RESET BUTTON
+            // ------------------------------------------
+
+            submitButton.disabled = false;
+
+            submitButton.innerHTML =
+                "📩 Submit Enquiry";
+
+        }
+    );
+
+}
