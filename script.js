@@ -432,3 +432,218 @@ window.addEventListener(
 
     }
 );
+
+
+/* ==========================================
+   NEW DRISHTI HOME IMAGE SLIDER
+========================================== */
+
+const heroSlides =
+    document.querySelectorAll(".hero-slide");
+
+const heroDots =
+    document.querySelectorAll(".hero-dot");
+
+let heroCurrentSlide = 0;
+
+let heroAutoSlide;
+
+
+/* ==========================================
+   SHOW SLIDE
+========================================== */
+
+function showHeroSlide(index) {
+
+    if (index >= heroSlides.length) {
+
+        index = 0;
+
+    }
+
+    if (index < 0) {
+
+        index = heroSlides.length - 1;
+
+    }
+
+
+    heroSlides.forEach(
+        (slide, i) => {
+
+            slide.classList.remove(
+                "active",
+                "previous"
+            );
+
+
+            if (i < index) {
+
+                slide.classList.add(
+                    "previous"
+                );
+
+            }
+
+        }
+    );
+
+
+    heroDots.forEach(
+        dot => {
+
+            dot.classList.remove(
+                "active"
+            );
+
+        }
+    );
+
+
+    heroSlides[index]
+        .classList.add("active");
+
+
+    if (heroDots[index]) {
+
+        heroDots[index]
+            .classList.add("active");
+
+    }
+
+
+    heroCurrentSlide = index;
+
+}
+
+
+/* ==========================================
+   NEXT
+========================================== */
+
+function nextHeroSlide() {
+
+    showHeroSlide(
+        heroCurrentSlide + 1
+    );
+
+    restartHeroSlider();
+
+}
+
+
+/* ==========================================
+   PREVIOUS
+========================================== */
+
+function previousHeroSlide() {
+
+    showHeroSlide(
+        heroCurrentSlide - 1
+    );
+
+    restartHeroSlider();
+
+}
+
+
+/* ==========================================
+   AUTO SLIDER
+   5 SECOND
+========================================== */
+
+function startHeroSlider() {
+
+    heroAutoSlide =
+        setInterval(
+            function() {
+
+                showHeroSlide(
+                    heroCurrentSlide + 1
+                );
+
+            },
+            5000
+        );
+
+}
+
+
+function restartHeroSlider() {
+
+    clearInterval(
+        heroAutoSlide
+    );
+
+    startHeroSlider();
+
+}
+
+
+/* START */
+
+startHeroSlider();
+
+
+/* ==========================================
+   MOBILE SWIPE
+========================================== */
+
+let heroTouchStartX = 0;
+
+let heroTouchEndX = 0;
+
+
+const heroSection =
+    document.querySelector("#home");
+
+
+if (heroSection) {
+
+    heroSection.addEventListener(
+        "touchstart",
+        function(e) {
+
+            heroTouchStartX =
+                e.changedTouches[0].screenX;
+
+        },
+        { passive: true }
+    );
+
+
+    heroSection.addEventListener(
+        "touchend",
+        function(e) {
+
+            heroTouchEndX =
+                e.changedTouches[0].screenX;
+
+
+            const difference =
+                heroTouchStartX -
+                heroTouchEndX;
+
+
+            /* SWIPE LEFT */
+
+            if (difference > 50) {
+
+                nextHeroSlide();
+
+            }
+
+
+            /* SWIPE RIGHT */
+
+            if (difference < -50) {
+
+                previousHeroSlide();
+
+            }
+
+        },
+        { passive: true }
+    );
+
+}
