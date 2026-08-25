@@ -28,6 +28,7 @@
         <a href="#services">Services</a>
         <a href="#courses">Courses</a>
         <a href="#library">Digital Library</a>
+        <a href="#gallery">Gallery</a>
         <a href="#contact">Contact</a>
     </nav>
 
@@ -473,6 +474,89 @@
     </div>
 
 </section>
+
+    <!-- ================= GALLERY ================= -->
+
+<section id="gallery" class="section gallery-section">
+
+    <h2 class="title">
+        Photo Gallery
+    </h2>
+
+    <p class="center-text">
+        New Drishti Computer Education & Digital Library की कुछ यादगार तस्वीरें
+    </p>
+
+    <div class="gallery-grid">
+
+        <div class="gallery-item">
+            <img src="images/gallery/photo1.jpg"
+                 alt="New Drishti Photo 1"
+                 onclick="openGallery(this.src)">
+        </div>
+
+        <div class="gallery-item">
+            <img src="images/gallery/photo2.jpg"
+                 alt="New Drishti Photo 2"
+                 onclick="openGallery(this.src)">
+        </div>
+
+        <div class="gallery-item">
+            <img src="images/gallery/photo3.jpg"
+                 alt="New Drishti Photo 3"
+                 onclick="openGallery(this.src)">
+        </div>
+
+        <div class="gallery-item">
+            <img src="images/gallery/photo4.jpg"
+                 alt="New Drishti Photo 4"
+                 onclick="openGallery(this.src)">
+        </div>
+
+        <div class="gallery-item">
+            <img src="images/gallery/photo5.jpg"
+                 alt="New Drishti Photo 5"
+                 onclick="openGallery(this.src)">
+        </div>
+
+        <div class="gallery-item">
+            <img src="images/gallery/photo6.jpg"
+                 alt="New Drishti Photo 6"
+                 onclick="openGallery(this.src)">
+        </div>
+
+        <div class="gallery-item">
+            <img src="images/gallery/photo7.jpg"
+                 alt="New Drishti Photo 7"
+                 onclick="openGallery(this.src)">
+        </div>
+
+        <div class="gallery-item">
+            <img src="images/gallery/photo8.jpg"
+                 alt="New Drishti Photo 8"
+                 onclick="openGallery(this.src)">
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= GALLERY POPUP ================= -->
+
+<div id="galleryModal" class="gallery-modal">
+
+    <span class="gallery-close"
+          onclick="closeGallery()">
+        &times;
+    </span>
+
+    <img id="galleryModalImage"
+         class="gallery-modal-image"
+         src=""
+         alt="Gallery Image">
+
+</div>
 
 
 <!-- ================= WHY US ================= -->
