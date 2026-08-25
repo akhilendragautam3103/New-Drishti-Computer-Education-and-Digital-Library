@@ -647,3 +647,34 @@ if (heroSection) {
     );
 
 }
+
+// ================= GALLERY POPUP =================
+
+function openGallery(imageSrc) {
+
+    const modal = document.getElementById("galleryModal");
+    const modalImage = document.getElementById("galleryModalImage");
+
+    modalImage.src = imageSrc;
+
+    modal.style.display = "flex";
+}
+
+
+function closeGallery() {
+
+    const modal = document.getElementById("galleryModal");
+
+    modal.style.display = "none";
+}
+
+
+// Close popup when clicking outside image
+
+document.getElementById("galleryModal").addEventListener("click", function(event) {
+
+    if (event.target === this) {
+        closeGallery();
+    }
+
+});
