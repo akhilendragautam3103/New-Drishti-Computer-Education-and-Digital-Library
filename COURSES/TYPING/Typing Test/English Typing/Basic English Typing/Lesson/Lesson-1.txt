@@ -1,0 +1,1708 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Lesson-1 | English Typing Test | New Drishti</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background:
+                linear-gradient(135deg, #667eea, #764ba2);
+            min-height: 100vh;
+            color: #222;
+        }
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        header {
+            background: rgba(255,255,255,0.96);
+            padding: 16px 5%;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            box-shadow:
+                0 5px 20px rgba(0,0,0,0.20);
+
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 23px;
+            font-weight: bold;
+            color: #4b2aad;
+        }
+
+        .logo small {
+            display: block;
+            font-size: 12px;
+            color: #555;
+            margin-top: 3px;
+        }
+
+        .back-btn {
+            text-decoration: none;
+            background: #4b2aad;
+            color: white;
+
+            padding: 10px 18px;
+            border-radius: 25px;
+
+            font-weight: bold;
+        }
+
+        .back-btn:hover {
+            background: #351d8a;
+        }
+
+        /* =========================
+           MAIN CONTAINER
+        ========================= */
+
+        .container {
+            max-width: 1150px;
+            margin: 35px auto;
+            padding: 15px;
+        }
+
+        .title {
+            text-align: center;
+            color: white;
+            margin-bottom: 25px;
+        }
+
+        .title h1 {
+            font-size: 35px;
+            margin-bottom: 8px;
+        }
+
+        .title p {
+            font-size: 17px;
+        }
+
+        /* =========================
+           CONTROL PANEL
+        ========================= */
+
+        .control-panel {
+
+            background: white;
+
+            padding: 18px;
+
+            border-radius: 18px;
+
+            display: flex;
+
+            flex-wrap: wrap;
+
+            justify-content: center;
+
+            align-items: center;
+
+            gap: 10px;
+
+            box-shadow:
+                0 10px 30px rgba(0,0,0,0.18);
+
+            margin-bottom: 20px;
+        }
+
+        .control-panel label {
+            font-weight: bold;
+        }
+
+        select {
+
+            padding: 10px 15px;
+
+            border-radius: 8px;
+
+            border: 1px solid #bbb;
+
+            font-size: 15px;
+        }
+
+        button {
+
+            border: none;
+
+            padding: 11px 18px;
+
+            border-radius: 25px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            font-size: 14px;
+
+            transition: 0.2s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+        }
+
+        .start {
+            background: #28a745;
+            color: white;
+        }
+
+        .stop {
+            background: #dc3545;
+            color: white;
+        }
+
+        .restart {
+            background: #ff9800;
+            color: white;
+        }
+
+        .home {
+            background: #4b2aad;
+            color: white;
+        }
+
+        /* =========================
+           TIMER
+        ========================= */
+
+        .timer-box {
+
+            background: white;
+
+            border-radius: 18px;
+
+            padding: 20px;
+
+            text-align: center;
+
+            margin-bottom: 20px;
+
+            box-shadow:
+                0 10px 30px rgba(0,0,0,0.18);
+        }
+
+        .timer-label {
+
+            font-size: 15px;
+
+            color: #666;
+
+            margin-bottom: 5px;
+        }
+
+        #timer {
+
+            font-size: 45px;
+
+            font-weight: bold;
+
+            color: #4b2aad;
+
+            letter-spacing: 2px;
+        }
+
+        /* =========================
+           STATISTICS
+        ========================= */
+
+        .stats {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(auto-fit, minmax(130px, 1fr));
+
+            gap: 12px;
+
+            margin-bottom: 20px;
+        }
+
+        .stat {
+
+            background: white;
+
+            padding: 16px;
+
+            border-radius: 15px;
+
+            text-align: center;
+
+            box-shadow:
+                0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .stat h3 {
+
+            font-size: 13px;
+
+            color: #777;
+
+            margin-bottom: 7px;
+        }
+
+        .stat p {
+
+            font-size: 25px;
+
+            font-weight: bold;
+
+            color: #4b2aad;
+        }
+
+        /* =========================
+           TYPING AREA
+        ========================= */
+
+        .typing-box {
+
+            background: white;
+
+            padding: 25px;
+
+            border-radius: 20px;
+
+            box-shadow:
+                0 10px 30px rgba(0,0,0,0.20);
+
+            margin-bottom: 20px;
+        }
+
+        .typing-box h2 {
+
+            color: #4b2aad;
+
+            margin-bottom: 15px;
+
+            text-align: center;
+        }
+
+        /* Passage */
+
+        #passage {
+
+            background: #f5f5f5;
+
+            border: 2px solid #ddd;
+
+            border-radius: 12px;
+
+            padding: 20px;
+
+            min-height: 180px;
+
+            font-family:
+                "Courier New",
+                monospace;
+
+            font-size: 21px;
+
+            line-height: 1.8;
+
+            margin-bottom: 20px;
+
+            user-select: none;
+
+            overflow-wrap: break-word;
+        }
+
+        .word {
+            margin-right: 7px;
+        }
+
+        .correct {
+            color: #159447;
+        }
+
+        .wrong {
+            color: #dc3545;
+
+            background: #ffdede;
+
+            border-radius: 4px;
+        }
+
+        .current {
+
+            background: #fff3cd;
+
+            border-radius: 4px;
+
+            padding: 2px 3px;
+        }
+
+        /* Input */
+
+        #typingInput {
+
+            width: 100%;
+
+            height: 140px;
+
+            resize: none;
+
+            border: 2px solid #4b2aad;
+
+            border-radius: 12px;
+
+            padding: 15px;
+
+            font-family:
+                "Courier New",
+                monospace;
+
+            font-size: 20px;
+
+            line-height: 1.6;
+
+            outline: none;
+
+            background: #fff;
+
+        }
+
+        #typingInput:focus {
+
+            box-shadow:
+                0 0 0 4px rgba(75,42,173,0.15);
+        }
+
+        #typingInput:disabled {
+
+            background: #eee;
+
+            cursor: not-allowed;
+        }
+
+        .instruction {
+
+            text-align: center;
+
+            color: #666;
+
+            margin-top: 12px;
+
+            font-size: 14px;
+        }
+
+        /* =========================
+           NAVIGATION
+        ========================= */
+
+        .navigation {
+
+            display: flex;
+
+            justify-content: center;
+
+            flex-wrap: wrap;
+
+            gap: 12px;
+
+            margin: 20px 0;
+        }
+
+        .navigation a {
+
+            text-decoration: none;
+
+            color: white;
+
+            padding: 12px 20px;
+
+            border-radius: 25px;
+
+            background: rgba(0,0,0,0.35);
+
+            font-weight: bold;
+        }
+
+        .navigation a:hover {
+
+            background: rgba(0,0,0,0.55);
+        }
+
+        /* =========================
+           RESULT
+        ========================= */
+
+        .result {
+
+            display: none;
+
+            background: white;
+
+            padding: 30px;
+
+            border-radius: 20px;
+
+            text-align: center;
+
+            box-shadow:
+                0 10px 30px rgba(0,0,0,0.2);
+
+            margin-top: 20px;
+        }
+
+        .result h2 {
+
+            color: #4b2aad;
+
+            margin-bottom: 20px;
+        }
+
+        .result-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(auto-fit, minmax(130px, 1fr));
+
+            gap: 12px;
+        }
+
+        .result-item {
+
+            background: #f5f5f5;
+
+            padding: 15px;
+
+            border-radius: 12px;
+        }
+
+        .result-item strong {
+
+            display: block;
+
+            font-size: 25px;
+
+            color: #4b2aad;
+
+            margin-top: 5px;
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+
+            text-align: center;
+
+            color: white;
+
+            padding: 25px;
+
+            line-height: 1.8;
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media(max-width:600px) {
+
+            .logo {
+                font-size: 17px;
+            }
+
+            .logo small {
+                font-size: 9px;
+            }
+
+            .back-btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+
+            .title h1 {
+                font-size: 27px;
+            }
+
+            #passage {
+                font-size: 18px;
+                line-height: 1.7;
+                padding: 15px;
+            }
+
+            #typingInput {
+                font-size: 18px;
+            }
+
+            #timer {
+                font-size: 38px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header>
+
+    <div class="logo">
+
+        💻 NEW DRISHTI
+
+        <small>
+            Computer Education & Digital Library
+        </small>
+
+    </div>
+
+    <a href="typing.html"
+       class="back-btn">
+
+        ← Back
+
+    </a>
+
+</header>
+
+
+
+<!-- =========================
+     MAIN
+========================= -->
+
+<div class="container">
+
+
+    <div class="title">
+
+        <h1>
+            ⌨️ English Typing Test
+        </h1>
+
+        <p>
+            Lesson-1 | Home Row Typing Practice
+        </p>
+
+    </div>
+
+
+
+    <!-- =========================
+         CONTROL PANEL
+    ========================= -->
+
+    <div class="control-panel">
+
+        <label>
+            Test Time:
+        </label>
+
+        <select id="timeSelect">
+
+            <option value="60">
+                1 Minute
+            </option>
+
+            <option value="120">
+                2 Minutes
+            </option>
+
+            <option value="300" selected>
+                5 Minutes
+            </option>
+
+            <option value="600">
+                10 Minutes
+            </option>
+
+        </select>
+
+
+        <button
+            class="start"
+            onclick="startTest()">
+
+            ▶ Start Test
+
+        </button>
+
+
+        <button
+            class="stop"
+            onclick="stopTest()">
+
+            ⏹ Stop Timing
+
+        </button>
+
+
+        <button
+            class="restart"
+            onclick="restartTest()">
+
+            🔄 Restart
+
+        </button>
+
+
+        <button
+            class="home"
+            onclick="goHome()">
+
+            🏠 Lessons
+
+        </button>
+
+    </div>
+
+
+
+    <!-- =========================
+         TIMER
+    ========================= -->
+
+    <div class="timer-box">
+
+        <div class="timer-label">
+            TIME REMAINING
+        </div>
+
+        <div id="timer">
+            05:00
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================
+         STATISTICS
+    ========================= -->
+
+    <div class="stats">
+
+        <div class="stat">
+
+            <h3>
+                Gross WPM
+            </h3>
+
+            <p id="grossWpm">
+                0
+            </p>
+
+        </div>
+
+
+        <div class="stat">
+
+            <h3>
+                Net WPM
+            </h3>
+
+            <p id="netWpm">
+                0
+            </p>
+
+        </div>
+
+
+        <div class="stat">
+
+            <h3>
+                Accuracy
+            </h3>
+
+            <p id="accuracy">
+                100%
+            </p>
+
+        </div>
+
+
+        <div class="stat">
+
+            <h3>
+                Correct Words
+            </h3>
+
+            <p id="correctWords">
+                0
+            </p>
+
+        </div>
+
+
+        <div class="stat">
+
+            <h3>
+                Wrong Words
+            </h3>
+
+            <p id="wrongWords">
+                0
+            </p>
+
+        </div>
+
+
+        <div class="stat">
+
+            <h3>
+                Characters
+            </h3>
+
+            <p id="characters">
+                0
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================
+         TYPING AREA
+    ========================= -->
+
+    <div class="typing-box">
+
+        <h2>
+            Lesson-1 Typing Passage
+        </h2>
+
+
+        <div id="passage">
+
+            <!-- JavaScript will load passage -->
+
+        </div>
+
+
+        <textarea
+            id="typingInput"
+            placeholder="Click Start Test and type the above text here..."
+            disabled
+            spellcheck="false"
+            autocomplete="off"
+            autocorrect="off"
+            autocapitalize="off"></textarea>
+
+
+        <div class="instruction">
+
+            💡 Start Test पर क्लिक करें और ऊपर दिए गए
+            text को बिल्कुल उसी प्रकार type करें।
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================
+         RESULT
+    ========================= -->
+
+    <div
+        class="result"
+        id="result">
+
+        <h2>
+            🎉 Test Completed!
+        </h2>
+
+        <div class="result-grid">
+
+
+            <div class="result-item">
+
+                Gross WPM
+
+                <strong id="resultGross">
+                    0
+                </strong>
+
+            </div>
+
+
+            <div class="result-item">
+
+                Net WPM
+
+                <strong id="resultNet">
+                    0
+                </strong>
+
+            </div>
+
+
+            <div class="result-item">
+
+                Accuracy
+
+                <strong id="resultAccuracy">
+                    0%
+                </strong>
+
+            </div>
+
+
+            <div class="result-item">
+
+                Correct Words
+
+                <strong id="resultCorrect">
+                    0
+                </strong>
+
+            </div>
+
+
+            <div class="result-item">
+
+                Wrong Words
+
+                <strong id="resultWrong">
+                    0
+                </strong>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================
+         LESSON NAVIGATION
+    ========================= -->
+
+    <div class="navigation">
+
+        <a href="typing.html">
+            ⏮ Previous Lesson
+        </a>
+
+
+        <a href="lesson-2.html">
+            Next Lesson ⏭
+        </a>
+
+
+        <a href="typing.html">
+            📚 All Lessons
+        </a>
+
+    </div>
+
+
+</div>
+
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+    <strong>
+        NEW DRISHTI COMPUTER EDUCATION
+    </strong>
+
+    <p>
+        Computer Education • Digital Library • CSC Center
+    </p>
+
+    <p>
+        © 2026 New Drishti Computer Education
+    </p>
+
+</footer>
+
+
+
+<script>
+
+/* ==========================================
+   LESSON-1 TEXT
+========================================== */
+
+const passageText = `
+jjffj ffjjf jffjj ffjjf ffjfj fjfjf jjffj jffjf fjjff fjjfj jjfjf fjfjf
+jfjff fjjfj jffjf jfjfj ffjfj fjfjf jfjfj fjjjf jffjf fjfjf ffjjf jfjfj
+jfjfj fjfjj fjjjf jfjfj fjjjf jffjf jjffj fjfjf jjfjf jffjf jfjff jffjf
+ffjfj jffjf jffjf jfffj
+`.trim();
+
+
+/* ==========================================
+   VARIABLES
+========================================== */
+
+let timeLimit = 300;
+
+let timeLeft = 300;
+
+let timerInterval = null;
+
+let testStarted = false;
+
+let testFinished = false;
+
+let startTime = null;
+
+
+/* ==========================================
+   DOM ELEMENTS
+========================================== */
+
+const passage =
+    document.getElementById("passage");
+
+const typingInput =
+    document.getElementById("typingInput");
+
+const timer =
+    document.getElementById("timer");
+
+const timeSelect =
+    document.getElementById("timeSelect");
+
+const result =
+    document.getElementById("result");
+
+
+/* ==========================================
+   LOAD PASSAGE
+========================================== */
+
+function loadPassage() {
+
+    passage.innerHTML = "";
+
+    const words =
+        passageText.split(/\s+/);
+
+    words.forEach((word, index) => {
+
+        const span =
+            document.createElement("span");
+
+        span.className = "word";
+
+        span.id =
+            "word-" + index;
+
+        span.textContent =
+            word;
+
+        passage.appendChild(span);
+
+    });
+
+}
+
+
+/* ==========================================
+   FORMAT TIME
+========================================== */
+
+function formatTime(seconds) {
+
+    const minutes =
+        Math.floor(seconds / 60);
+
+    const secs =
+        seconds % 60;
+
+    return String(minutes).padStart(2, "0")
+        + ":"
+        + String(secs).padStart(2, "0");
+
+}
+
+
+/* ==========================================
+   UPDATE TIMER
+========================================== */
+
+function updateTimer() {
+
+    timer.textContent =
+        formatTime(timeLeft);
+
+}
+
+
+/* ==========================================
+   START TEST
+========================================== */
+
+function startTest() {
+
+    if (testStarted) {
+        return;
+    }
+
+    if (testFinished) {
+        restartTest();
+    }
+
+    timeLimit =
+        parseInt(timeSelect.value);
+
+    timeLeft =
+        timeLimit;
+
+    testStarted = true;
+
+    testFinished = false;
+
+    startTime =
+        Date.now();
+
+    typingInput.disabled = false;
+
+    typingInput.focus();
+
+    result.style.display = "none";
+
+    clearInterval(timerInterval);
+
+    timerInterval =
+        setInterval(() => {
+
+            timeLeft--;
+
+            updateTimer();
+
+            updateStatistics();
+
+            if (timeLeft <= 0) {
+
+                finishTest();
+
+            }
+
+        }, 1000);
+
+    updateTimer();
+
+}
+
+
+/* ==========================================
+   STOP TEST
+========================================== */
+
+function stopTest() {
+
+    if (!testStarted) {
+        return;
+    }
+
+    clearInterval(timerInterval);
+
+    testStarted = false;
+
+    typingInput.disabled = true;
+
+    updateStatistics();
+
+    showResult();
+
+}
+
+
+/* ==========================================
+   RESTART TEST
+========================================== */
+
+function restartTest() {
+
+    clearInterval(timerInterval);
+
+    timeLimit =
+        parseInt(timeSelect.value);
+
+    timeLeft =
+        timeLimit;
+
+    testStarted = false;
+
+    testFinished = false;
+
+    startTime = null;
+
+    typingInput.value = "";
+
+    typingInput.disabled = true;
+
+    result.style.display = "none";
+
+    updateTimer();
+
+    resetWords();
+
+    updateStatistics();
+
+}
+
+
+/* ==========================================
+   RESET WORDS
+========================================== */
+
+function resetWords() {
+
+    const words =
+        passageText.split(/\s+/);
+
+    words.forEach((word, index) => {
+
+        const span =
+            document.getElementById(
+                "word-" + index
+            );
+
+        if (span) {
+
+            span.className = "word";
+
+        }
+
+    });
+
+}
+
+
+/* ==========================================
+   TYPING INPUT
+========================================== */
+
+typingInput.addEventListener(
+    "input",
+    function () {
+
+        if (!testStarted) {
+            return;
+        }
+
+        updatePassage();
+
+        updateStatistics();
+
+        checkCompletion();
+
+    }
+);
+
+
+/* ==========================================
+   UPDATE PASSAGE
+========================================== */
+
+function updatePassage() {
+
+    const typed =
+        typingInput.value;
+
+    const target =
+        passageText;
+
+    const targetWords =
+        target.split(/\s+/);
+
+    const typedWords =
+        typed.split(/\s+/);
+
+    targetWords.forEach(
+        (word, index) => {
+
+            const span =
+                document.getElementById(
+                    "word-" + index
+                );
+
+            if (!span) {
+                return;
+            }
+
+            const typedWord =
+                typedWords[index] || "";
+
+            span.className =
+                "word";
+
+            if (
+                typedWord === word &&
+                typedWord.length > 0
+            ) {
+
+                span.classList.add(
+                    "correct"
+                );
+
+            }
+            else if (
+                typedWord.length > 0
+            ) {
+
+                span.classList.add(
+                    "wrong"
+                );
+
+            }
+
+        }
+    );
+
+
+    /* Highlight current word */
+
+    const currentIndex =
+        typedWords.length - 1;
+
+    const currentSpan =
+        document.getElementById(
+            "word-" + currentIndex
+        );
+
+    if (
+        currentSpan &&
+        typed.length > 0 &&
+        !typed.endsWith(" ")
+    ) {
+
+        currentSpan.classList.add(
+            "current"
+        );
+
+    }
+
+}
+
+
+/* ==========================================
+   CALCULATE STATISTICS
+========================================== */
+
+function calculateStats() {
+
+    const typed =
+        typingInput.value;
+
+    const target =
+        passageText;
+
+
+    /* --------------------------------------
+       CHARACTERS
+    -------------------------------------- */
+
+    let correctCharacters = 0;
+
+    const checkLength =
+        Math.min(
+            typed.length,
+            target.length
+        );
+
+    for (
+        let i = 0;
+        i < checkLength;
+        i++
+    ) {
+
+        if (
+            typed[i] === target[i]
+        ) {
+
+            correctCharacters++;
+
+        }
+
+    }
+
+
+    /* --------------------------------------
+       TYPED CHARACTERS
+    -------------------------------------- */
+
+    const typedCharacters =
+        typed.length;
+
+
+    /* --------------------------------------
+       ACCURACY
+    -------------------------------------- */
+
+    let accuracy = 100;
+
+    if (typedCharacters > 0) {
+
+        accuracy =
+            (
+                correctCharacters /
+                typedCharacters
+            ) * 100;
+
+    }
+
+
+    /* --------------------------------------
+       WORDS
+    -------------------------------------- */
+
+    const typedWords =
+        typed.trim()
+            ? typed.trim().split(/\s+/)
+            : [];
+
+
+    const targetWords =
+        target.split(/\s+/);
+
+
+    let correctWords = 0;
+
+    let wrongWords = 0;
+
+
+    typedWords.forEach(
+        (word, index) => {
+
+            if (
+                targetWords[index] &&
+                word === targetWords[index]
+            ) {
+
+                correctWords++;
+
+            }
+            else {
+
+                wrongWords++;
+
+            }
+
+        }
+    );
+
+
+    /* --------------------------------------
+       TIME USED
+    -------------------------------------- */
+
+    let elapsedSeconds =
+        timeLimit - timeLeft;
+
+
+    if (
+        !testStarted &&
+        startTime
+    ) {
+
+        elapsedSeconds =
+            Math.max(
+                1,
+                Math.round(
+                    (Date.now() -
+                        startTime) / 1000
+                )
+            );
+
+    }
+
+
+    elapsedSeconds =
+        Math.max(
+            1,
+            elapsedSeconds
+        );
+
+
+    const minutes =
+        elapsedSeconds / 60;
+
+
+    /* --------------------------------------
+       GROSS WPM
+       Standard:
+       characters / 5 / minutes
+    -------------------------------------- */
+
+    const grossWpm =
+        (
+            typedCharacters / 5
+        ) / minutes;
+
+
+    /* --------------------------------------
+       NET WPM
+       Gross WPM - wrong words/minute
+    -------------------------------------- */
+
+    const netWpm =
+        Math.max(
+            0,
+            grossWpm -
+            (wrongWords / minutes)
+        );
+
+
+    return {
+
+        accuracy:
+            Math.min(
+                100,
+                accuracy
+            ),
+
+        correctWords,
+
+        wrongWords,
+
+        typedCharacters,
+
+        grossWpm,
+
+        netWpm
+
+    };
+
+}
+
+
+/* ==========================================
+   UPDATE STATISTICS
+========================================== */
+
+function updateStatistics() {
+
+    const stats =
+        calculateStats();
+
+
+    document.getElementById(
+        "grossWpm"
+    ).textContent =
+        Math.round(stats.grossWpm);
+
+
+    document.getElementById(
+        "netWpm"
+    ).textContent =
+        Math.round(stats.netWpm);
+
+
+    document.getElementById(
+        "accuracy"
+    ).textContent =
+        stats.accuracy.toFixed(1)
+        + "%";
+
+
+    document.getElementById(
+        "correctWords"
+    ).textContent =
+        stats.correctWords;
+
+
+    document.getElementById(
+        "wrongWords"
+    ).textContent =
+        stats.wrongWords;
+
+
+    document.getElementById(
+        "characters"
+    ).textContent =
+        stats.typedCharacters;
+
+}
+
+
+/* ==========================================
+   CHECK COMPLETION
+========================================== */
+
+function checkCompletion() {
+
+    const typed =
+        typingInput.value.trim();
+
+    if (
+        typed === passageText
+    ) {
+
+        finishTest();
+
+    }
+
+}
+
+
+/* ==========================================
+   FINISH TEST
+========================================== */
+
+function finishTest() {
+
+    clearInterval(timerInterval);
+
+    testStarted = false;
+
+    testFinished = true;
+
+    typingInput.disabled = true;
+
+    updateStatistics();
+
+    showResult();
+
+}
+
+
+/* ==========================================
+   SHOW RESULT
+========================================== */
+
+function showResult() {
+
+    const stats =
+        calculateStats();
+
+
+    document.getElementById(
+        "resultGross"
+    ).textContent =
+        Math.round(stats.grossWpm);
+
+
+    document.getElementById(
+        "resultNet"
+    ).textContent =
+        Math.round(stats.netWpm);
+
+
+    document.getElementById(
+        "resultAccuracy"
+    ).textContent =
+        stats.accuracy.toFixed(1)
+        + "%";
+
+
+    document.getElementById(
+        "resultCorrect"
+    ).textContent =
+        stats.correctWords;
+
+
+    document.getElementById(
+        "resultWrong"
+    ).textContent =
+        stats.wrongWords;
+
+
+    result.style.display =
+        "block";
+
+
+    result.scrollIntoView({
+        behavior: "smooth"
+    });
+
+}
+
+
+/* ==========================================
+   HOME
+========================================== */
+
+function goHome() {
+
+    window.location.href =
+        "typing.html";
+
+}
+
+
+/* ==========================================
+   TIME SELECT CHANGE
+========================================== */
+
+timeSelect.addEventListener(
+    "change",
+    function () {
+
+        if (!testStarted) {
+
+            timeLimit =
+                parseInt(
+                    timeSelect.value
+                );
+
+            timeLeft =
+                timeLimit;
+
+            updateTimer();
+
+        }
+
+    }
+);
+
+
+/* ==========================================
+   INITIAL LOAD
+========================================== */
+
+loadPassage();
+
+timeLimit =
+    parseInt(timeSelect.value);
+
+timeLeft =
+    timeLimit;
+
+updateTimer();
+
+updateStatistics();
+
+
+</script>
+
+
+</body>
+
+</html>

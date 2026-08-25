@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CCC Mock Test 1 | New Drishti</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:linear-gradient(135deg,#e0f2fe,#f5f3ff);
+    color:#222;
+}
+.header{
+    background:linear-gradient(135deg,#2563eb,#7c3aed);
+    color:white;
+    text-align:center;
+    padding:20px;
+}
+.header h1{margin:0}
+.test-box{
+    max-width:850px;
+    margin:30px auto;
+    background:white;
+    padding:25px;
+    border-radius:18px;
+    box-shadow:0 10px 30px #0002;
+}
+.top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+    margin-bottom:20px;
+    flex-wrap:wrap;
+}
+.timer{
+    background:#fee2e2;
+    color:#b91c1c;
+    padding:10px 18px;
+    border-radius:10px;
+    font-weight:bold;
+}
+.progress{
+    background:#e5e7eb;
+    height:10px;
+    border-radius:10px;
+    overflow:hidden;
+    margin-bottom:25px;
+}
+.progress-bar{
+    height:100%;
+    width:5%;
+    background:#2563eb;
+    transition:.3s;
+}
+.question{
+    font-size:20px;
+    font-weight:bold;
+    margin-bottom:20px;
+}
+.option{
+    display:block;
+    border:2px solid #ddd;
+    padding:13px;
+    margin:10px 0;
+    border-radius:10px;
+    cursor:pointer;
+    transition:.2s;
+}
+.option:hover{
+    border-color:#2563eb;
+    background:#eff6ff;
+}
+.option input{margin-right:10px}
+.buttons{
+    display:flex;
+    justify-content:space-between;
+    margin-top:25px;
+}
+button{
+    border:0;
+    padding:12px 22px;
+    border-radius:10px;
+    color:white;
+    background:#2563eb;
+    cursor:pointer;
+    font-weight:bold;
+}
+button:hover{opacity:.85}
+#prev{background:#64748b}
+#submit{background:#16a34a}
+.result{
+    display:none;
+    text-align:center;
+    padding:30px;
+}
+.score{
+    font-size:40px;
+    font-weight:bold;
+    color:#16a34a;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+    <h1>💻 NEW DRISHTI</h1>
+    <p>CCC Online Mock Test - 1</p>
+</div>
+
+<div class="test-box">
+
+<div class="top">
+    <strong id="questionNo">Question 1 / 20</strong>
+    <div class="timer">⏱ Time: <span id="time">20:00</span></div>
+</div>
+
+<div class="progress">
+    <div class="progress-bar" id="progressBar"></div>
+</div>
+
+<div id="quiz"></div>
+
+<div class="buttons">
+    <button id="prev" onclick="previousQuestion()">← Previous</button>
+    <button id="next" onclick="nextQuestion()">Next →</button>
+    <button id="submit" onclick="submitTest()">Submit Test</button>
+</div>
+
+<div class="result" id="result">
+    <h2>🎉 Test Completed!</h2>
+    <p>Your Score</p>
+    <div class="score" id="score"></div>
+    <p id="message"></p>
+    <button onclick="location.reload()">🔄 Retake Test</button>
+</div>
+
+</div>
+
+<script>
+
+const questions = [
+
+["CCC का पूरा नाम क्या है?",
+["Course on Computer Concepts","Computer Course Certificate","Central Computer Course","Certificate Computer Course"],0],
+
+["CPU का पूरा नाम क्या है?",
+["Central Processing Unit","Computer Processing Unit","Central Program Unit","Control Processing Unit"],0],
+
+["कंप्यूटर का मस्तिष्क किसे कहा जाता है?",
+["Monitor","CPU","Keyboard","Mouse"],1],
+
+["RAM का पूरा नाम क्या है?",
+["Read Access Memory","Random Access Memory","Run Access Memory","Random Active Memory"],1],
+
+["Keyboard में Function Keys कितनी होती हैं?",
+["10","12","14","16"],1],
+
+["MS Word किस प्रकार का software है?",
+["Word Processing","Spreadsheet","Presentation","Antivirus"],0],
+
+["MS Excel में data किसमें रखा जाता है?",
+["Slides","Cells","Pages","Frames"],1],
+
+["PowerPoint का उपयोग किसके लिए होता है?",
+["Presentation","Calculation","Typing","Programming"],0],
+
+["Internet पर website देखने के लिए क्या उपयोग होता है?",
+["Browser","Compiler","Calculator","Paint"],0],
+
+["Google Chrome क्या है?",
+["Operating System","Browser","Antivirus","Database"],1],
+
+["E-mail का पूरा नाम क्या है?",
+["Electronic Mail","Easy Mail","Express Mail","External Mail"],0],
+
+["WWW का पूरा नाम क्या है?",
+["World Wide Web","World Web Window","Web World Wide","Wide World Web"],0],
+
+["USB का पूरा नाम क्या है?",
+["Universal Serial Bus","United Serial Bus","Universal System Bus","User Serial Bus"],0],
+
+["कंप्यूटर में स्थायी memory कौन सी है?",
+["RAM","ROM","Cache","Register"],1],
+
+["Delete की गई file सामान्यतः कहाँ जाती है?",
+["Desktop","Recycle Bin","Control Panel","Taskbar"],1],
+
+["Operating System का उदाहरण कौन सा है?",
+["Windows","MS Word","Google","Excel"],0],
+
+["Shortcut Ctrl + C का उपयोग किसके लिए होता है?",
+["Cut","Copy","Close","Create"],1],
+
+["Ctrl + V का उपयोग किसके लिए होता है?",
+["Paste","Print","View","Save"],0],
+
+["Ctrl + S का उपयोग किसके लिए होता है?",
+["Search","Save","Select","Send"],1],
+
+["कंप्यूटर में output देखने के लिए कौन सा device है?",
+["Keyboard","Mouse","Monitor","Scanner"],2]
+
+];
+
+let current=0;
+let answers=new Array(questions.length).fill(null);
+let timeLeft=1200;
+
+function showQuestion(){
+
+    const q=questions[current];
+
+    document.getElementById("questionNo").innerText=
+        `Question ${current+1} / ${questions.length}`;
+
+    document.getElementById("progressBar").style.width=
+        ((current+1)/questions.length*100)+"%";
+
+    let html=`<div class="question">${current+1}. ${q[0]}</div>`;
+
+    q[1].forEach((option,index)=>{
+
+        html+=`
+        <label class="option">
+        <input type="radio"
+        name="answer"
+        value="${index}"
+        ${answers[current]===index?"checked":""}
+        onchange="answers[current]=${index}">
+        ${option}
+        </label>`;
+
+    });
+
+    document.getElementById("quiz").innerHTML=html;
+
+    document.getElementById("prev").style.visibility=
+        current===0?"hidden":"visible";
+
+    document.getElementById("next").style.display=
+        current===questions.length-1?"none":"block";
+
+    document.getElementById("submit").style.display=
+        current===questions.length-1?"block":"none";
+}
+
+function nextQuestion(){
+    if(current<questions.length-1){
+        current++;
+        showQuestion();
+    }
+}
+
+function previousQuestion(){
+    if(current>0){
+        current--;
+        showQuestion();
+    }
+}
+
+function submitTest(){
+
+    let score=0;
+
+    questions.forEach((q,i)=>{
+        if(answers[i]===q[2]) score++;
+    });
+
+    document.getElementById("quiz").style.display="none";
+    document.querySelector(".buttons").style.display="none";
+    document.querySelector(".progress").style.display="none";
+    document.querySelector(".top").style.display="none";
+
+    document.getElementById("result").style.display="block";
+
+    document.getElementById("score").innerText=
+        score+" / "+questions.length;
+
+    let percentage=(score/questions.length)*100;
+
+    document.getElementById("message").innerText=
+        percentage>=80 ? "🌟 Excellent Performance!" :
+        percentage>=60 ? "👍 Very Good! Keep Practicing." :
+        percentage>=40 ? "🙂 Good! More Practice Required." :
+        "📚 Keep Practicing and Try Again.";
+}
+
+function timer(){
+
+    let min=Math.floor(timeLeft/60);
+    let sec=timeLeft%60;
+
+    document.getElementById("time").innerText=
+        `${String(min).padStart(2,"0")}:${String(sec).padStart(2,"0")}`;
+
+    if(timeLeft<=0){
+        submitTest();
+        return;
+    }
+
+    timeLeft--;
+}
+
+showQuestion();
+setInterval(timer,1000);
+
+</script>
+
+</body>
+</html>

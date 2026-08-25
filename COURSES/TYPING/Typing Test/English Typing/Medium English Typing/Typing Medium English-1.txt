@@ -1,0 +1,1883 @@
+<!DOCTYPE html>
+<html lang="hi">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Typing Test | New Drishti</title>
+
+<style>
+
+/* =========================
+   RESET
+========================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    background:linear-gradient(135deg,#eff6ff,#f0fdf4,#fff7ed);
+    color:#222;
+    min-height:100vh;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+header{
+    background:linear-gradient(135deg,#172554,#1d4ed8,#2563eb);
+    color:white;
+    padding:16px 5%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 4px 15px rgba(0,0,0,.2);
+}
+
+.logo{
+    font-size:23px;
+    font-weight:bold;
+}
+
+.logo small{
+    display:block;
+    font-size:12px;
+    font-weight:normal;
+    margin-top:4px;
+}
+
+.back-btn{
+    color:white;
+    text-decoration:none;
+    padding:10px 18px;
+    background:rgba(255,255,255,.18);
+    border-radius:8px;
+}
+
+.back-btn:hover{
+    background:white;
+    color:#1d4ed8;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+    text-align:center;
+    padding:28px 15px 15px;
+}
+
+.hero h1{
+    font-size:34px;
+    color:#172554;
+}
+
+.hero p{
+    margin-top:8px;
+    color:#555;
+}
+
+/* =========================
+   STUDENT DETAILS
+========================= */
+
+.student-box{
+    width:94%;
+    max-width:1100px;
+    margin:15px auto;
+    background:white;
+    padding:20px;
+    border-radius:15px;
+    box-shadow:0 5px 20px rgba(0,0,0,.1);
+}
+
+.student-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:15px;
+}
+
+.input-group label{
+    display:block;
+    font-weight:bold;
+    margin-bottom:6px;
+}
+
+.input-group input,
+.input-group select{
+    width:100%;
+    padding:12px;
+    border:1px solid #cbd5e1;
+    border-radius:8px;
+    font-size:16px;
+    outline:none;
+}
+
+.input-group input:focus,
+.input-group select:focus{
+    border-color:#2563eb;
+}
+
+/* =========================
+   CONTROLS
+========================= */
+
+.controls{
+    width:94%;
+    max-width:1100px;
+    margin:15px auto;
+    background:white;
+    padding:18px;
+    border-radius:15px;
+    box-shadow:0 5px 20px rgba(0,0,0,.1);
+
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    align-items:center;
+    gap:12px;
+}
+
+.controls label{
+    font-weight:bold;
+}
+
+.controls select{
+    padding:10px 15px;
+    border:1px solid #ccc;
+    border-radius:7px;
+    font-size:15px;
+}
+
+/* =========================
+   STATS
+========================= */
+
+.stats{
+    width:94%;
+    max-width:1100px;
+    margin:20px auto;
+
+    display:grid;
+    grid-template-columns:repeat(7,1fr);
+    gap:10px;
+}
+
+.stat{
+    background:white;
+    border-radius:12px;
+    padding:14px 5px;
+    text-align:center;
+    box-shadow:0 4px 12px rgba(0,0,0,.08);
+}
+
+.stat h3{
+    font-size:11px;
+    color:#64748b;
+    margin-bottom:5px;
+}
+
+.stat strong{
+    font-size:23px;
+    color:#2563eb;
+}
+
+/* =========================
+   TYPING BOX
+========================= */
+
+.typing-box{
+    width:94%;
+    max-width:1100px;
+    margin:20px auto;
+    background:white;
+    padding:22px;
+    border-radius:16px;
+    box-shadow:0 5px 20px rgba(0,0,0,.1);
+}
+
+/* =========================
+   PASSAGE
+========================= */
+
+.text-display{
+    background:#f8fafc;
+    border:2px solid #dbeafe;
+    border-radius:12px;
+    padding:20px;
+    min-height:190px;
+
+    font-size:20px;
+    line-height:1.9;
+    letter-spacing:.4px;
+
+    margin-bottom:18px;
+
+    user-select:none;
+}
+
+.hindi-text{
+    font-family:"Noto Sans Devanagari",
+                "Mangal",
+                Arial,
+                sans-serif;
+}
+
+.correct{
+    color:#15803d;
+}
+
+.incorrect{
+    color:#dc2626;
+    background:#fee2e2;
+    text-decoration:underline;
+}
+
+.current{
+    background:#bfdbfe;
+    border-bottom:3px solid #2563eb;
+}
+
+/* =========================
+   TEXTAREA
+========================= */
+
+textarea{
+    width:100%;
+    min-height:160px;
+    resize:vertical;
+
+    padding:18px;
+
+    border:2px solid #cbd5e1;
+    border-radius:12px;
+
+    font-size:19px;
+    line-height:1.7;
+
+    outline:none;
+
+    font-family:Arial,sans-serif;
+}
+
+textarea.hindi-input{
+    font-family:"Noto Sans Devanagari",
+                "Mangal",
+                Arial,
+                sans-serif;
+}
+
+textarea:focus{
+    border-color:#2563eb;
+}
+
+/* =========================
+   PROGRESS
+========================= */
+
+.progress-container{
+    margin-top:20px;
+}
+
+.progress-info{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:6px;
+    font-size:14px;
+    font-weight:bold;
+}
+
+.progress-bar{
+    height:14px;
+    background:#e5e7eb;
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.progress{
+    height:100%;
+    width:0%;
+    background:linear-gradient(
+        90deg,
+        #2563eb,
+        #16a34a
+    );
+    transition:.2s;
+}
+
+/* =========================
+   BUTTONS
+========================= */
+
+.buttons{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:12px;
+    margin-top:18px;
+}
+
+button{
+    border:none;
+    padding:12px 24px;
+    border-radius:8px;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.3s;
+}
+
+button:hover{
+    transform:translateY(-2px);
+}
+
+.start{
+    background:#16a34a;
+    color:white;
+}
+
+.pause{
+    background:#f59e0b;
+    color:white;
+}
+
+.restart{
+    background:#dc2626;
+    color:white;
+}
+
+.print{
+    background:#2563eb;
+    color:white;
+}
+
+/* =========================
+   RESULT
+========================= */
+
+.result{
+    display:none;
+
+    width:94%;
+    max-width:850px;
+
+    margin:25px auto;
+
+    background:white;
+
+    border-radius:18px;
+
+    padding:30px;
+
+    text-align:center;
+
+    box-shadow:0 6px 25px rgba(0,0,0,.15);
+}
+
+.result-header{
+    border-bottom:2px solid #e5e7eb;
+    padding-bottom:15px;
+    margin-bottom:20px;
+}
+
+.result-header h2{
+    color:#172554;
+}
+
+.result-header p{
+    margin-top:5px;
+    color:#64748b;
+}
+
+.result-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:12px;
+}
+
+.result-card{
+    background:#f8fafc;
+    padding:18px 8px;
+    border-radius:10px;
+}
+
+.result-card h3{
+    font-size:13px;
+    color:#64748b;
+}
+
+.result-card strong{
+    display:block;
+    margin-top:6px;
+    font-size:25px;
+    color:#2563eb;
+}
+
+.result-message{
+    margin:22px 0;
+    font-size:20px;
+    font-weight:bold;
+}
+
+.target-result{
+    margin:10px 0 20px;
+    padding:12px;
+    background:#eff6ff;
+    border-radius:10px;
+}
+
+.result-buttons{
+    display:flex;
+    justify-content:center;
+    gap:12px;
+    flex-wrap:wrap;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+    margin-top:35px;
+    background:#172554;
+    color:white;
+    text-align:center;
+    padding:25px 15px;
+}
+
+footer strong{
+    font-size:20px;
+}
+
+footer p{
+    margin-top:6px;
+    color:#cbd5e1;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:1000px){
+
+    .stats{
+        grid-template-columns:repeat(4,1fr);
+    }
+
+}
+
+@media(max-width:700px){
+
+    header{
+        flex-direction:column;
+        gap:12px;
+        text-align:center;
+    }
+
+    .student-grid{
+        grid-template-columns:1fr;
+    }
+
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .text-display{
+        font-size:17px;
+    }
+
+    textarea{
+        font-size:17px;
+    }
+
+    .result-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+@media print{
+
+    body{
+        background:white;
+    }
+
+    header,
+    .hero,
+    .student-box,
+    .controls,
+    .stats,
+    .typing-box,
+    footer,
+    .result-buttons{
+        display:none !important;
+    }
+
+    .result{
+        display:block !important;
+        width:100%;
+        max-width:100%;
+        box-shadow:none;
+        margin:0;
+    }
+
+}
+
+/* =========================
+   MOBILE SMALL
+========================= */
+
+@media(max-width:400px){
+
+    .stats{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .stat strong{
+        font-size:20px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- ================= HEADER ================= -->
+
+<header>
+
+    <div class="logo">
+
+        💻 NEW DRISHTI
+
+        <small>
+            Computer Education & Digital Library
+        </small>
+
+    </div>
+
+    <a href="index.html"
+       class="back-btn">
+
+        ← Back to Home
+
+    </a>
+
+</header>
+
+
+<!-- ================= HERO ================= -->
+
+<section class="hero">
+
+    <h1>⌨️ Typing Test</h1>
+
+    <p>
+        English & Hindi Typing Practice
+    </p>
+
+</section>
+
+
+<!-- ================= STUDENT DETAILS ================= -->
+
+<section class="student-box">
+
+    <div class="student-grid">
+
+        <div class="input-group">
+
+            <label>
+                Student Name
+            </label>
+
+            <input
+                type="text"
+                id="studentName"
+                placeholder="Enter Student Name">
+
+        </div>
+
+
+        <div class="input-group">
+
+            <label>
+                Roll Number
+            </label>
+
+            <input
+                type="text"
+                id="rollNumber"
+                placeholder="Enter Roll Number">
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= CONTROLS ================= -->
+
+<div class="controls">
+
+    <label>
+        Language:
+    </label>
+
+    <select id="languageSelect">
+
+        <option value="english">
+            English Typing
+        </option>
+
+        <option value="hindi">
+            Hindi Typing
+        </option>
+
+    </select>
+
+
+    <label>
+        Time:
+    </label>
+
+    <select id="timeSelect">
+
+        <option value="60">
+            1 Minute
+        </option>
+
+        <option value="120">
+            2 Minutes
+        </option>
+
+        <option value="300" selected>
+            5 Minutes
+        </option>
+
+        <option value="600">
+            10 Minutes
+        </option>
+
+    </select>
+
+
+    <label>
+        Target:
+    </label>
+
+    <select id="targetSelect">
+
+        <option value="20">
+            20 WPM
+        </option>
+
+        <option value="25">
+            25 WPM
+        </option>
+
+        <option value="30" selected>
+            30 WPM
+        </option>
+
+        <option value="40">
+            40 WPM
+        </option>
+
+        <option value="50">
+            50 WPM
+        </option>
+
+    </select>
+
+</div>
+
+
+<!-- ================= LIVE STATS ================= -->
+
+<section class="stats">
+
+    <div class="stat">
+
+        <h3>TIME</h3>
+
+        <strong id="timer">
+            05:00
+        </strong>
+
+    </div>
+
+
+    <div class="stat">
+
+        <h3>WPM</h3>
+
+        <strong id="wpm">
+            0
+        </strong>
+
+    </div>
+
+
+    <div class="stat">
+
+        <h3>CPM</h3>
+
+        <strong id="cpm">
+            0
+        </strong>
+
+    </div>
+
+
+    <div class="stat">
+
+        <h3>ACCURACY</h3>
+
+        <strong id="accuracy">
+            100%
+        </strong>
+
+    </div>
+
+
+    <div class="stat">
+
+        <h3>CORRECT</h3>
+
+        <strong id="correct">
+            0
+        </strong>
+
+    </div>
+
+
+    <div class="stat">
+
+        <h3>ERRORS</h3>
+
+        <strong id="errors">
+            0
+        </strong>
+
+    </div>
+
+
+    <div class="stat">
+
+        <h3>TARGET</h3>
+
+        <strong id="targetDisplay">
+            30
+        </strong>
+
+    </div>
+
+</section>
+
+
+<!-- ================= TYPING AREA ================= -->
+
+<section class="typing-box">
+
+
+    <div class="text-display"
+         id="textDisplay">
+    </div>
+
+
+    <textarea
+        id="typingInput"
+        placeholder="Click Start Test and begin typing..."
+        disabled>
+    </textarea>
+
+
+    <div class="progress-container">
+
+        <div class="progress-info">
+
+            <span>
+                Typing Progress
+            </span>
+
+            <span id="progressText">
+                0%
+            </span>
+
+        </div>
+
+        <div class="progress-bar">
+
+            <div class="progress"
+                 id="progress">
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="buttons">
+
+        <button
+            class="start"
+            id="startBtn">
+
+            ▶ Start Test
+
+        </button>
+
+
+        <button
+            class="pause"
+            id="pauseBtn">
+
+            ⏸ Pause
+
+        </button>
+
+
+        <button
+            class="restart"
+            id="restartBtn">
+
+            🔄 Restart
+
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- ================= RESULT ================= -->
+
+<section class="result"
+         id="resultBox">
+
+
+    <div class="result-header">
+
+        <h2>
+            🏆 NEW DRISHTI
+        </h2>
+
+        <p>
+            Typing Test Performance Report
+        </p>
+
+    </div>
+
+
+    <div style="margin-bottom:20px;">
+
+        <strong>
+            Student:
+        </strong>
+
+        <span id="resultName">
+            -
+        </span>
+
+        &nbsp;&nbsp; | &nbsp;&nbsp;
+
+        <strong>
+            Roll No:
+        </strong>
+
+        <span id="resultRoll">
+            -
+        </span>
+
+    </div>
+
+
+    <div class="target-result">
+
+        Target:
+        <strong id="resultTarget">
+            30 WPM
+        </strong>
+
+        &nbsp; | &nbsp;
+
+        Language:
+        <strong id="resultLanguage">
+            English
+        </strong>
+
+    </div>
+
+
+    <div class="result-grid">
+
+
+        <div class="result-card">
+
+            <h3>
+                WPM
+            </h3>
+
+            <strong id="finalWpm">
+                0
+            </strong>
+
+        </div>
+
+
+        <div class="result-card">
+
+            <h3>
+                CPM
+            </h3>
+
+            <strong id="finalCpm">
+                0
+            </strong>
+
+        </div>
+
+
+        <div class="result-card">
+
+            <h3>
+                Accuracy
+            </h3>
+
+            <strong id="finalAccuracy">
+                0%
+            </strong>
+
+        </div>
+
+
+        <div class="result-card">
+
+            <h3>
+                Errors
+            </h3>
+
+            <strong id="finalErrors">
+                0
+            </strong>
+
+        </div>
+
+    </div>
+
+
+    <div class="result-message"
+         id="resultMessage">
+
+    </div>
+
+
+    <div class="result-buttons">
+
+        <button
+            class="print"
+            onclick="window.print()">
+
+            🖨️ Print Result
+
+        </button>
+
+
+        <button
+            class="restart"
+            onclick="resetTest()">
+
+            🔄 New Test
+
+        </button>
+
+    </div>
+
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <strong>
+        NEW DRISHTI
+    </strong>
+
+    <p>
+        Computer Education • Digital Library • CSC Center
+    </p>
+
+    <p>
+        © 2026 New Drishti Computer Education
+    </p>
+
+</footer>
+
+
+<script>
+
+/* =====================================================
+   NEW DRISHTI
+   ADVANCED ENGLISH + HINDI TYPING TEST
+===================================================== */
+
+
+/* ================= PASSAGES ================= */
+
+const englishPassages = [
+
+`Computer education is very important in the modern world. Every student should learn basic computer skills because computers are used in schools, offices, banks, shops and many other places. Regular typing practice helps students improve their speed and accuracy.`,
+
+`Typing is an important computer skill that can save time and increase productivity. A good typist should focus on accuracy first and speed later. Proper finger placement, correct posture and regular practice can help a student become a confident and efficient typist.`,
+
+`Technology has changed the way people communicate, learn and work. Computers and the internet provide many opportunities for education and professional development. Students who practice typing regularly can complete their assignments faster and develop better keyboard control and concentration.`
+
+];
+
+
+const hindiPassages = [
+
+`कंप्यूटर शिक्षा आज के आधुनिक युग में बहुत महत्वपूर्ण है। प्रत्येक विद्यार्थी को कंप्यूटर का सामान्य ज्ञान होना चाहिए। कंप्यूटर का प्रयोग विद्यालय, कार्यालय, बैंक, दुकान और अनेक स्थानों पर किया जाता है। नियमित टाइपिंग अभ्यास से विद्यार्थी अपनी गति और शुद्धता में सुधार कर सकता है।`,
+
+`टाइपिंग एक महत्वपूर्ण कंप्यूटर कौशल है। अच्छी टाइपिंग के लिए सही उंगलियों का प्रयोग, सही बैठने की स्थिति और नियमित अभ्यास आवश्यक है। विद्यार्थी को पहले शुद्धता पर ध्यान देना चाहिए और धीरे धीरे अपनी टाइपिंग गति को बढ़ाना चाहिए।`,
+
+`तकनीक ने हमारे सीखने और काम करने के तरीके को बदल दिया है। कंप्यूटर और इंटरनेट शिक्षा के क्षेत्र में अनेक अवसर प्रदान करते हैं। नियमित टाइपिंग अभ्यास से विद्यार्थी अपना कार्य जल्दी पूरा कर सकता है और कीबोर्ड पर बेहतर नियंत्रण प्राप्त कर सकता है।`
+
+];
+
+
+/* ================= VARIABLES ================= */
+
+let currentText = "";
+
+let timerSeconds = 300;
+
+let remainingSeconds = 300;
+
+let timerInterval = null;
+
+let isRunning = false;
+
+let isPaused = false;
+
+
+/* ================= ELEMENTS ================= */
+
+const studentName =
+document.getElementById("studentName");
+
+const rollNumber =
+document.getElementById("rollNumber");
+
+const languageSelect =
+document.getElementById("languageSelect");
+
+const timeSelect =
+document.getElementById("timeSelect");
+
+const targetSelect =
+document.getElementById("targetSelect");
+
+const textDisplay =
+document.getElementById("textDisplay");
+
+const typingInput =
+document.getElementById("typingInput");
+
+const timer =
+document.getElementById("timer");
+
+const wpm =
+document.getElementById("wpm");
+
+const cpm =
+document.getElementById("cpm");
+
+const accuracy =
+document.getElementById("accuracy");
+
+const correct =
+document.getElementById("correct");
+
+const errors =
+document.getElementById("errors");
+
+const targetDisplay =
+document.getElementById("targetDisplay");
+
+const progress =
+document.getElementById("progress");
+
+const progressText =
+document.getElementById("progressText");
+
+const resultBox =
+document.getElementById("resultBox");
+
+
+/* ================= LOAD PASSAGE ================= */
+
+function loadPassage(){
+
+    let language =
+        languageSelect.value;
+
+    let passages =
+        language === "hindi"
+        ?
+        hindiPassages
+        :
+        englishPassages;
+
+
+    /*
+       Random passage
+    */
+
+    const random =
+        Math.floor(
+            Math.random() * passages.length
+        );
+
+
+    currentText =
+        passages[random];
+
+
+    textDisplay.innerHTML = "";
+
+
+    if(language === "hindi"){
+
+        textDisplay.classList.add(
+            "hindi-text"
+        );
+
+        typingInput.classList.add(
+            "hindi-input"
+        );
+
+    }else{
+
+        textDisplay.classList.remove(
+            "hindi-text"
+        );
+
+        typingInput.classList.remove(
+            "hindi-input"
+        );
+
+    }
+
+
+    currentText.split("").forEach(
+        function(char,index){
+
+            const span =
+                document.createElement("span");
+
+            span.textContent = char;
+
+            span.id =
+                "char-" + index;
+
+            textDisplay.appendChild(span);
+
+        }
+    );
+
+}
+
+
+/* ================= FORMAT TIME ================= */
+
+function formatTime(seconds){
+
+    const minutes =
+        Math.floor(seconds / 60);
+
+    const secs =
+        seconds % 60;
+
+    return String(minutes).padStart(2,"0")
+        + ":" +
+        String(secs).padStart(2,"0");
+
+}
+
+
+/* ================= RESET ================= */
+
+function resetTest(){
+
+    clearInterval(timerInterval);
+
+    isRunning = false;
+
+    isPaused = false;
+
+
+    timerSeconds =
+        Number(timeSelect.value);
+
+    remainingSeconds =
+        timerSeconds;
+
+
+    timer.textContent =
+        formatTime(remainingSeconds);
+
+
+    typingInput.value = "";
+
+    typingInput.disabled = true;
+
+
+    wpm.textContent = "0";
+
+    cpm.textContent = "0";
+
+    accuracy.textContent = "100%";
+
+    correct.textContent = "0";
+
+    errors.textContent = "0";
+
+
+    targetDisplay.textContent =
+        targetSelect.value;
+
+
+    progress.style.width = "0%";
+
+    progressText.textContent = "0%";
+
+
+    resultBox.style.display = "none";
+
+
+    document.getElementById(
+        "pauseBtn"
+    ).textContent =
+        "⏸ Pause";
+
+
+    loadPassage();
+
+}
+
+
+/* ================= START ================= */
+
+function startTest(){
+
+    if(isRunning){
+        return;
+    }
+
+
+    if(
+        studentName.value.trim() === ""
+    ){
+
+        alert(
+            "Please enter Student Name."
+        );
+
+        studentName.focus();
+
+        return;
+
+    }
+
+
+    if(
+        rollNumber.value.trim() === ""
+    ){
+
+        alert(
+            "Please enter Roll Number."
+        );
+
+        rollNumber.focus();
+
+        return;
+
+    }
+
+
+    isRunning = true;
+
+    isPaused = false;
+
+    typingInput.disabled = false;
+
+    typingInput.focus();
+
+
+    clearInterval(timerInterval);
+
+
+    timerInterval =
+    setInterval(function(){
+
+        if(!isPaused){
+
+            remainingSeconds--;
+
+            timer.textContent =
+                formatTime(
+                    remainingSeconds
+                );
+
+
+            updateStats();
+
+
+            if(
+                remainingSeconds <= 0
+            ){
+
+                finishTest();
+
+            }
+
+        }
+
+    },1000);
+
+}
+
+
+/* ================= PAUSE ================= */
+
+function pauseTest(){
+
+    if(!isRunning){
+        return;
+    }
+
+
+    isPaused =
+        !isPaused;
+
+
+    if(isPaused){
+
+        document.getElementById(
+            "pauseBtn"
+        ).textContent =
+            "▶ Resume";
+
+        typingInput.blur();
+
+    }else{
+
+        document.getElementById(
+            "pauseBtn"
+        ).textContent =
+            "⏸ Pause";
+
+        typingInput.focus();
+
+    }
+
+}
+
+
+/* ================= TYPING ================= */
+
+typingInput.addEventListener(
+    "input",
+    function(){
+
+        if(
+            !isRunning ||
+            isPaused
+        ){
+
+            return;
+
+        }
+
+
+        updateCharacterDisplay();
+
+        updateStats();
+
+    }
+);
+
+
+/* ================= CHARACTER DISPLAY ================= */
+
+function updateCharacterDisplay(){
+
+    const typedText =
+        typingInput.value;
+
+    const spans =
+        textDisplay.querySelectorAll("span");
+
+
+    spans.forEach(
+        function(span,index){
+
+            span.className = "";
+
+
+            if(
+                index < typedText.length
+            ){
+
+                if(
+                    typedText[index]
+                    ===
+                    currentText[index]
+                ){
+
+                    span.classList.add(
+                        "correct"
+                    );
+
+                }else{
+
+                    span.classList.add(
+                        "incorrect"
+                    );
+
+                }
+
+            }
+            else if(
+                index === typedText.length
+            ){
+
+                span.classList.add(
+                    "current"
+                );
+
+            }
+
+        }
+    );
+
+}
+
+
+/* ================= CALCULATE ================= */
+
+function calculateStats(){
+
+    const typed =
+        typingInput.value;
+
+
+    let correctChars = 0;
+
+    let errorChars = 0;
+
+
+    for(
+        let i=0;
+        i<typed.length;
+        i++
+    ){
+
+        if(
+            typed[i]
+            ===
+            currentText[i]
+        ){
+
+            correctChars++;
+
+        }else{
+
+            errorChars++;
+
+        }
+
+    }
+
+
+    const totalTyped =
+        typed.length;
+
+
+    const elapsedSeconds =
+        Math.max(
+            1,
+            timerSeconds -
+            remainingSeconds
+        );
+
+
+    const elapsedMinutes =
+        elapsedSeconds / 60;
+
+
+    /*
+       Standard WPM
+       5 characters = 1 word
+    */
+
+    const calculatedWPM =
+        correctChars > 0
+        ?
+        Math.round(
+            (correctChars / 5)
+            /
+            elapsedMinutes
+        )
+        :
+        0;
+
+
+    const calculatedCPM =
+        correctChars > 0
+        ?
+        Math.round(
+            correctChars
+            /
+            elapsedMinutes
+        )
+        :
+        0;
+
+
+    const calculatedAccuracy =
+        totalTyped > 0
+        ?
+        Math.round(
+            (
+                correctChars /
+                totalTyped
+            ) * 100
+        )
+        :
+        100;
+
+
+    return{
+
+        correct:correctChars,
+
+        errors:errorChars,
+
+        total:totalTyped,
+
+        wpm:calculatedWPM,
+
+        cpm:calculatedCPM,
+
+        accuracy:calculatedAccuracy
+
+    };
+
+}
+
+
+/* ================= UPDATE STATS ================= */
+
+function updateStats(){
+
+    const stats =
+        calculateStats();
+
+
+    wpm.textContent =
+        stats.wpm;
+
+
+    cpm.textContent =
+        stats.cpm;
+
+
+    accuracy.textContent =
+        stats.accuracy + "%";
+
+
+    correct.textContent =
+        stats.correct;
+
+
+    errors.textContent =
+        stats.errors;
+
+
+    const percent =
+        currentText.length > 0
+        ?
+        Math.min(
+            100,
+            (
+                stats.total /
+                currentText.length
+            ) * 100
+        )
+        :
+        0;
+
+
+    progress.style.width =
+        percent + "%";
+
+
+    progressText.textContent =
+        Math.round(percent) + "%";
+
+
+    /*
+       Complete passage
+    */
+
+    if(
+        typingInput.value.length
+        >=
+        currentText.length
+    ){
+
+        finishTest();
+
+    }
+
+}
+
+
+/* ================= FINISH ================= */
+
+function finishTest(){
+
+    if(!isRunning){
+        return;
+    }
+
+
+    clearInterval(timerInterval);
+
+    isRunning = false;
+
+    typingInput.disabled = true;
+
+
+    const stats =
+        calculateStats();
+
+
+    /* Student */
+
+    document.getElementById(
+        "resultName"
+    ).textContent =
+        studentName.value;
+
+
+    document.getElementById(
+        "resultRoll"
+    ).textContent =
+        rollNumber.value;
+
+
+    /* Result */
+
+    document.getElementById(
+        "finalWpm"
+    ).textContent =
+        stats.wpm;
+
+
+    document.getElementById(
+        "finalCpm"
+    ).textContent =
+        stats.cpm;
+
+
+    document.getElementById(
+        "finalAccuracy"
+    ).textContent =
+        stats.accuracy + "%";
+
+
+    document.getElementById(
+        "finalErrors"
+    ).textContent =
+        stats.errors;
+
+
+    /* Target */
+
+    const target =
+        Number(
+            targetSelect.value
+        );
+
+
+    document.getElementById(
+        "resultTarget"
+    ).textContent =
+        target + " WPM";
+
+
+    /* Language */
+
+    const language =
+        languageSelect.value ===
+        "hindi"
+        ?
+        "Hindi"
+        :
+        "English";
+
+
+    document.getElementById(
+        "resultLanguage"
+    ).textContent =
+        language;
+
+
+    /* Message */
+
+    let message = "";
+
+
+    if(
+        stats.wpm >= target &&
+        stats.accuracy >= 95
+    ){
+
+        message =
+        "🏆 Excellent! Target achieved with excellent accuracy.";
+
+    }
+
+    else if(
+        stats.wpm >= target
+    ){
+
+        message =
+        "🎉 Target WPM achieved! Improve accuracy further.";
+
+    }
+
+    else if(
+        stats.wpm >= target - 5
+    ){
+
+        message =
+        "👏 Very close! Keep practicing to achieve the target.";
+
+    }
+
+    else if(
+        stats.wpm >= 25
+    ){
+
+        message =
+        "👍 Good performance. Regular practice will improve your speed.";
+
+    }
+
+    else{
+
+        message =
+        "💪 Keep practicing. Focus on accuracy first.";
+
+    }
+
+
+    document.getElementById(
+        "resultMessage"
+    ).textContent =
+        message;
+
+
+    resultBox.style.display =
+        "block";
+
+
+    resultBox.scrollIntoView({
+        behavior:"smooth"
+    });
+
+}
+
+
+/* ================= EVENTS ================= */
+
+document.getElementById(
+    "startBtn"
+).addEventListener(
+    "click",
+    startTest
+);
+
+
+document.getElementById(
+    "pauseBtn"
+).addEventListener(
+    "click",
+    pauseTest
+);
+
+
+document.getElementById(
+    "restartBtn"
+).addEventListener(
+    "click",
+    resetTest
+);
+
+
+timeSelect.addEventListener(
+    "change",
+    resetTest
+);
+
+
+languageSelect.addEventListener(
+    "change",
+    resetTest
+);
+
+
+targetSelect.addEventListener(
+    "change",
+    function(){
+
+        targetDisplay.textContent =
+            targetSelect.value;
+
+    }
+);
+
+
+/* ================= INITIAL ================= */
+
+resetTest();
+
+</script>
+
+
+</body>
+
+</html>

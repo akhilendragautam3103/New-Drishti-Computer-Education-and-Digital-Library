@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEW DRISHTI - CCC Master Mock Test</title>
+    <style>
+        :root {
+            --primary-color: #1e3a8a;
+            --secondary-color: #0284c7;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-color: #1e293b;
+            --success-color: #16a34a;
+            --danger-color: #dc2626;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        header {
+            text-align: center;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        header h1 {
+            color: var(--primary-color);
+            margin: 0;
+            font-size: 26px;
+        }
+
+        header p {
+            color: #64748b;
+            margin: 5px 0 0 0;
+            font-weight: 600;
+        }
+
+        .stats-bar {
+            display: flex;
+            justify-content: space-between;
+            background: #f1f5f9;
+            padding: 12px 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .question-card {
+            margin-bottom: 25px;
+        }
+
+        .question-text {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .options-grid {
+            display: grid;
+            gap: 12px;
+        }
+
+        .option-btn {
+            background: #ffffff;
+            border: 2px solid #cbd5e1;
+            padding: 14px 18px;
+            border-radius: 8px;
+            text-align: left;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .option-btn:hover {
+            border-color: var(--secondary-color);
+            background: #f0f9ff;
+        }
+
+        .option-btn.correct {
+            background: #dcfce7;
+            border-color: var(--success-color);
+            color: #14532d;
+            font-weight: bold;
+        }
+
+        .option-btn.wrong {
+            background: #fee2e2;
+            border-color: var(--danger-color);
+            color: #7f1d1d;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 25px;
+        }
+
+        .btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+
+        .btn:disabled {
+            background: #94a3b8;
+            cursor: not-allowed;
+        }
+
+        .score-board {
+            text-align: center;
+            padding: 30px;
+        }
+
+        .score-board h2 {
+            color: var(--primary-color);
+            font-size: 28px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>NEW DRISHTI COMPUTER EDUCATION</h1>
+        <p>CCC Master Pool - 100 Important Practice Questions</p>
+    </header>
+
+    <div id="quiz-box">
+        <div class="stats-bar">
+            <span>प्रश्न: <span id="current-q">1</span> / <span id="total-q">100</span></span>
+            <span>स्कोर: <span id="score">0</span></span>
+        </div>
+
+        <div class="question-card">
+            <div class="question-text" id="question">प्रश्न लोड हो रहा है...</div>
+            <div class="options-grid" id="options"></div>
+        </div>
+
+        <div class="controls">
+            <button class="btn" id="next-btn" onclick="nextQuestion()" disabled>अगला प्रश्न (Next)</button>
+        </div>
+    </div>
+
+    <div id="result-box" class="score-board" style="display: none;">
+        <h2>मॉक टेस्ट पूर्ण हुआ!</h2>
+        <p id="final-score" style="font-size: 22px; margin: 20px 0;"></p>
+        <button class="btn" onclick="location.reload()">पुनः टेस्ट दें (Restart)</button>
+    </div>
+</div>
+
+<script>
+// NEW DRISHTI - Master Pool (100 CCC Questions Array)
+const extraCCCQuestions = [
+    // --- CHAPTER 1: Introduction to Computer & Hardware ---
+    { q: "कंप्यूटर की 5वीं पीढ़ी (5th Generation) में मुख्य घटकों (Components) का उपयोग किया जाता है?", options: ["ULSI (Ultra Large Scale Integration)", "VLSI", "Vacuum Tubes", "Transistors"], correct: 0 },
+    { q: "कंप्यूटर में डेटा दर्ज करने के लिए किस प्रकार की डिवाइस का उपयोग होता है?", options: ["Input Device", "Output Device", "Storage Device", "Processing Device"], correct: 0 },
+    { q: "निम्न में से कौन सी इम्पैक्ट प्रिंटर (Impact Printer) का उदाहरण है?", options: ["Dot Matrix Printer", "Inkjet Printer", "Laser Printer", "Thermal Printer"], correct: 0 },
+    { q: "कैश मेमोरी (Cache Memory) कहाँ स्थित होती है?", options: ["CPU और RAM के बीच", "RAM और Hard Disk के बीच", "ROM और Hard Disk के बीच", "CPU और ROM के बीच"], correct: 0 },
+    { q: "कंप्यूटर की गति (Speed) को किसमें मापा जाता है?", options: ["MIPS / GHz", "KB / MB", "DPI", "PPM"], correct: 0 },
+    { q: "1 Gigabyte (1 GB) किसके बराबर होता है?", options: ["1024 Megabytes (MB)", "1000 MB", "1024 Kilobytes (KB)", "1024 Terabytes (TB)"], correct: 0 },
+    { q: "GUI का पूर्ण रूप क्या है?", options: ["Graphical User Interface", "Global User Interface", "Graphical Utility Interface", "General User Interaction"], correct: 0 },
+    { q: "बायोस (BIOS) का पूर्ण रूप क्या है?", options: ["Basic Input Output System", "Basic Internal Output System", "Bus Input Output System", "Binary Input Output System"], correct: 0 },
+    { q: "POST का पूरा नाम क्या है?", options: ["Power On Self Test", "Program On System Test", "Power On System Test", "Power Option Self Test"], correct: 0 },
+    { q: "निम्न में से कौन सा नॉन-वोलैटाइल (Non-Volatile) मेमोरी है?", options: ["ROM", "RAM", "SRAM", "DRAM"], correct: 0 },
+
+    // --- CHAPTER 2: Operating System & Files ---
+    { q: "लिनक्स (Linux) किस प्रकार का ऑपरेटिंग सिस्टम है?", options: ["Open Source", "Commercial", "Shareware", "Single User"], correct: 0 },
+    { q: "विंडोज में किसी फाइल/फोल्डर को स्थायी रूप से (Permanently) डिलीट करने की शॉर्टकट कुंजी क्या है?", options: ["Shift + Delete", "Ctrl + Delete", "Alt + Delete", "Delete"], correct: 0 },
+    { q: "फाइल का नाम बदलने (Rename) के लिए किस शॉर्टकट कुंजी का उपयोग किया जाता है?", options: ["F2", "F1", "F3", "F5"], correct: 0 },
+    { q: "ऑपरेटिंग सिस्टम का मुख्य कार्य क्या है?", options: ["Hardware and Software Management", "Word Processing", "Internet Browsing", "Spreadsheet Management"], correct: 0 },
+    { q: "मल्टीटास्किंग ऑपरेटिंग सिस्टम का क्या अर्थ है?", options: ["एक साथ multiple कार्य चलाना", "एक समय में केवल एक कार्य करना", "बिना CPU के कार्य करना", "केवल प्रिंटिंग करना"], correct: 0 },
+    { q: "विंडोज 10/11 में टास्क मैनेजर खोलने की शॉर्टकट कुंजी क्या है?", options: ["Ctrl + Shift + Esc", "Ctrl + Alt + Delete", "Alt + F4", "Win + Tab"], correct: 0 },
+    { q: "ऑपरेटिंग सिस्टम में कर्नेल (Kernel) का क्या कार्य है?", options: ["Core part that manages hardware resources", "User Interface display", "File editing", "Web browsing"], correct: 0 },
+    { q: "नया फोल्डर बनाने की शॉर्टकट कुंजी क्या है?", options: ["Ctrl + Shift + N", "Ctrl + N", "Alt + N", "Shift + N"], correct: 0 },
+    { q: "OS का उदाहरण कौन सा नहीं है?", options: ["MS Office", "Ubuntu", "Windows 11", "macOS"], correct: 0 },
+    { q: "GUI पर आधारित पहला ऑपरेटिंग सिस्टम कौन सा था?", options: ["Xerox Alto / Macintosh", "MS-DOS", "Unix", "Windows 95"], correct: 0 },
+
+    // --- CHAPTER 3: LibreOffice Writer (Word Processing) ---
+    { q: "LibreOffice Writer में डिफ़ॉल्ट ज़ूम प्रतिशत कितना होता है?", options: ["100%", "50%", "150%", "200%"], correct: 0 },
+    { q: "LibreOffice Writer में अधिकतम ज़ूम (Maximum Zoom) कितना किया जा सकता है?", options: ["600%", "500%", "400%", "300%"], correct: 0 },
+    { q: "LibreOffice Writer में टेक्स्ट को केंद्र (Center) में अलाइन करने की शॉर्टकट कुंजी क्या है?", options: ["Ctrl + E", "Ctrl + C", "Ctrl + J", "Ctrl + R"], correct: 0 },
+    { q: "LibreOffice Writer में Save As करने की शॉर्टकट कुंजी क्या है?", options: ["Ctrl + Shift + S", "Ctrl + S", "F12", "Alt + S"], correct: 0 },
+    { q: "Double Underline की शॉर्टकट कुंजी LibreOffice Writer में क्या है?", options: ["Ctrl + D", "Ctrl + Shift + D", "Alt + D", "Ctrl + U"], correct: 0 },
+    { q: "Writer में स्पेलिंग चेक करने की शॉर्टकट कुंजी क्या है?", options: ["F7", "Shift + F7", "Ctrl + F7", "Alt + F7"], correct: 0 },
+    { q: "Superscript (x²) की शॉर्टकट कुंजी क्या है?", options: ["Ctrl + Shift + P", "Ctrl + Shift + B", "Ctrl + P", "Ctrl + Equal"], correct: 0 },
+    { q: "Subscript (x₂) की शॉर्टकट कुंजी क्या है?", options: ["Ctrl + Shift + B", "Ctrl + Shift + P", "Ctrl + B", "Ctrl + Shift + S"], correct: 0 },
+    { q: "LibreOffice Writer में टेबल इंसर्ट करने की शॉर्टकट कुंजी क्या है?", options: ["Ctrl + F12", "F12", "Ctrl + T", "Alt + F12"], correct: 0 },
+    { q: "Print Preview की शॉर्टकट कुंजी LibreOffice में क्या है?", options: ["Ctrl + Shift + O", "Ctrl + P", "Ctrl + Shift + P", "F12"], correct: 0 },
+    { q: "Writer में न्यू डॉक्यूमेंट खोलने की शॉर्टकट कुंजी क्या है?", options: ["Ctrl + N", "Ctrl + O", "Ctrl + Shift + N", "Alt + N"], correct: 0 },
+    { q: "फाइंड एंड रिप्लेस (Find & Replace) की शॉर्टकट कुंजी क्या है?", options: ["Ctrl + H", "Ctrl + F", "Ctrl + R", "Ctrl + K"], correct: 0 },
+
+    // --- CHAPTER 4: LibreOffice Calc (Spreadsheet) ---
+    { q: "LibreOffice Calc में अंतिम कॉलम का नाम क्या होता है?", options: ["AMJ", "XFD", "ZZZ", "AAA"], correct: 0 },
+    { q: "LibreOffice Calc में सेल को एडिट (Edit Cell) करने की शॉर्टकट कुंजी क्या है?", options: ["F2", "F4", "F7", "F11"], correct: 0 },
+    { q: "Calc में फ़ॉर्मूला हमेशा किस चिन्ह से शुरू होता है?", options: ["=", "+", "@", "#"], correct: 0 },
+    { q: "LibreOffice Calc का डिफ़ॉल्ट फाइल एक्सटेंशन क्या है?", options: [".ods", ".xlsx", ".odt", ".odp"], correct: 0 },
+    { q: "Calc में वर्तमान तारीख (Current Date) डालने की शॉर्टकट कुंजी क्या है?", options: ["Ctrl + ;", "Ctrl + Shift + ;", "Alt + Shift + D", "Ctrl + D"], correct: 0 },
+    { q: "Calc में सभी रो (Rows) की कुल संख्या कितनी होती है?", options: ["1048576", "1024", "65536", "16384"], correct: 0 },
+    { q: "Calc में कुल कॉलम (Columns) की संख्या कितनी होती है?", options: ["1024", "256", "16384", "4096"], correct: 0 },
+    { q: "सेल B2 से B10 का योग (Sum) निकालने का सही सूत्र क्या है?", options: ["=SUM(B2:B10)", "=ADD(B2:B10)", "=SUM(B2-B10)", "=TOTAL(B2:B10)"], correct: 0 },
+    { q: "Calc में चार्ट इंसर्ट करने की शॉर्टकट कुंजी या मेनू कौन सा है?", options: ["Insert -> Chart", "Ctrl + F11", "Alt + C", "Format -> Chart"], correct: 0 },
+    { q: "Calc में रो और कॉलम के प्रतिच्छेदन (Intersection) को क्या कहा जाता है?", options: ["Cell", "Block", "Box", "Grid"], correct: 0 },
+    { q: "Calc स्प्रेडशीट में कॉलम चौड़ाई बढ़ाने के लिए कौन सी कुंजी दबाते हैं?", options: ["Alt + Right Arrow", "Ctrl + Right Arrow", "Shift + Right Arrow", "Tab"], correct: 0 },
+
+    // --- CHAPTER 5: LibreOffice Impress (Presentation) ---
+    { q: "LibreOffice Impress में नई स्लाइड जोड़ने की शॉर्टकट कुंजी क्या है?", options: ["Ctrl + M", "Ctrl + N", "Ctrl + S", "Alt + N"], correct: 0 },
+    { q: "Impress में पहली स्लाइड से स्लाइड शो शुरू करने की शॉर्टकट कुंजी क्या है?", options: ["F5", "Shift + F5", "Ctrl + F5", "Alt + F5"], correct: 0 },
+    { q: "वर्तमान (Current) स्लाइड से स्लाइड शो शुरू करने की शॉर्टकट कुंजी क्या है?", options: ["Shift + F5", "F5", "Ctrl + F5", "Alt + F5"], correct: 0 },
+    { q: "LibreOffice Impress का डिफ़ॉल्ट फाइल एक्सटेंशन क्या है?", options: [".odp", ".ppt", ".odt", ".ods"], correct: 0 },
+    { q: "Impress स्लाइड में टेक्स्ट बॉक्स इंसर्ट करने की शॉर्टकट कुंजी क्या है?", options: ["F2", "F3", "F4", "F5"], correct: 0 },
+    { q: "स्लाइड शो को बीच में रोकने (Exit Slide Show) के लिए कौन सी कुंजी दबाई जाती है?", options: ["Esc", "Enter", "Spacebar", "Backspace"], correct: 0 },
+    { q: "Impress में डिफ़ॉल्ट पेज ओरिएंटेशन क्या होता है?", options: ["Landscape", "Portrait", "Vertical", "Custom"], correct: 0 },
+    { q: "स्लाइड ट्रांजेक्शन (Slide Transition) क्या है?", options: ["Effect when changing slides", "Text animation", "Sound effect", "Picture rotation"], correct: 0 },
+
+    // --- CHAPTER 6: Internet, WWW & Networking ---
+    { q: "WWW का पूर्ण रूप क्या है?", options: ["World Wide Web", "World Wide Webnet", "Wide World Web", "World Web Wide"], correct: 0 },
+    { q: "IPv4 एड्रेस कितने बिट्स (Bits) का होता है?", options: ["32 Bits", "64 Bits", "128 Bits", "16 Bits"], correct: 0 },
+    { q: "IPv6 एड्रेस कितने बिट्स (Bits) का होता है?", options: ["128 Bits", "32 Bits", "64 Bits", "256 Bits"], correct: 0 },
+    { q: "HTTP का पूर्ण रूप क्या है?", options: ["Hypertext Transfer Protocol", "Hypertext Translation Protocol", "Hyper Transfer Text Protocol", "Hyperlink Text Process"], correct: 0 },
+    { q: "MAC Address कितने बाइट्स / बिट्स का होता है?", options: ["48 Bits (6 Bytes)", "32 Bits", "64 Bits", "128 Bits"], correct: 0 },
+    { q: "पहला नेटवर्क कौन सा था जिसे इंटरनेट का आधार माना जाता है?", options: ["ARPANET", "NSFNET", "INTRANET", "ETHERNET"], correct: 0 },
+    { q: "वेब पेज किस भाषा में लिखे जाते हैं?", options: ["HTML", "C++", "Java", "Python"], correct: 0 },
+    { q: "FTP का पूर्ण रूप क्या है?", options: ["File Transfer Protocol", "Fast Text Transfer", "File Transport Process", "Format Transfer Protocol"], correct: 0 },
+    { q: "ISP का पूर्ण रूप क्या है?", options: ["Internet Service Provider", "International Service Provider", "Internet System Program", "Internet Server Protocol"], correct: 0 },
+    { q: "डोमेन नेम प्रणाली (DNS) का मुख्य कार्य क्या है?", options: ["Domain Name को IP Address में बदलना", "IP Address को MAC में बदलना", "File Transfer करना", "Emails भेजना"], correct: 0 },
+    { q: "Wi-Fi का पूर्ण रूप क्या है?", options: ["Wireless Fidelity", "Wired Fidelity", "Wireless Field", "Wire Fidelity"], correct: 0 },
+    { q: "सर्च इंजन (Search Engine) का उदाहरण कौन सा नहीं है?", options: ["Google Chrome", "Google", "Bing", "DuckDuckGo"], correct: 0 },
+
+    // --- CHAPTER 7: E-mail, Social Networking & E-Governance ---
+    { q: "ईमेल में Cc का पूर्ण रूप क्या है?", options: ["Carbon Copy", "Central Copy", "Computer Copy", "Common Copy"], correct: 0 },
+    { q: "SMTP का उपयोग किसके लिए किया जाता है?", options: ["Email भेजने (Sending Emails) के लिए", "Email प्राप्त करने के लिए", "File डाउनलोड के लिए", "Web Page लोड करने के लिए"], correct: 0 },
+    { q: "ईमेल प्राप्त (Receive) करने के लिए किस प्रोटोकॉल का उपयोग होता है?", options: ["POP3 / IMAP", "SMTP", "HTTP", "FTP"], correct: 0 },
+    { q: "Twitter / X पर पोस्ट किए गए संदेश को क्या कहते थे/हैं?", options: ["Tweet", "Post", "Blog", "Thread"], correct: 0 },
+    { q: "डिजिलॉकर (DigiLocker) में प्रत्येक नागरिक को कितनी स्टोरेज स्पेस मिलती है?", options: ["1 GB", "10 GB", "500 MB", "5 GB"], correct: 0 },
+    { q: "UMANG ऐप का पूर्ण रूप क्या है?", options: ["Unified Mobile Application for New-age Governance", "Universal Mobile App Governance", "United Mobile Application Governance", "Unified Management App Governance"], correct: 0 },
+    { q: "ईमेल आईडी में किस चिह्न द्वारा यूजरनेम और डोमेन नेम को अलग किया जाता है?", options: ["@", "#", "$", "&"], correct: 0 },
+    { q: "सोशल मीडिया पर हैशटैग (#) का मुख्य कार्य क्या है?", options: ["Trending topics & Categorization", "User tag", "Private message", "Password generation"], correct: 0 },
+    { q: "अनचाहे (Unwanted / Commercial) ईमेल को क्या कहा जाता है?", options: ["Spam / Junk Mail", "Draft", "Inbox", "Trash"], correct: 0 },
+
+    // --- CHAPTER 8: Digital Financial Tools & Banking ---
+    { q: "NEFT का पूर्ण रूप क्या है?", options: ["National Electronic Funds Transfer", "National Electrical Fund Transfer", "Nationwide Electronic Financial Transfer", "National Electronic Fast Transfer"], correct: 0 },
+    { q: "RTGS में न्यूनतम (Minimum) लेन-देन की सीमा कितनी होती है?", options: ["₹2,000,000 (2 Lakh)", "₹10,000", "₹50,000", "कोई सीमा नहीं"], correct: 0 },
+    { q: "ATM सह डेबिट कार्ड पर कितने अंकों का कार्ड नंबर होता है?", options: ["16 Digits", "12 Digits", "10 Digits", "15 Digits"], correct: 0 },
+    { q: "CVV नंबर का पूरा नाम क्या है और यह कितने अंक का होता है?", options: ["Card Verification Value (3 Digits)", "Card Verification Code (4 Digits)", "Customer Verification Value (3 Digits)", "Card Virtual Verification (2 Digits)"], correct: 0 },
+    { q: "USSD आधारित बैंकिंग सेवाओं के लिए कौन सा कोड डायल किया जाता है?", options: ["*99#", "*121#", "*100#", "*198#"], correct: 0 },
+    { q: "IFS Code में कुल कितने कैरेक्टर (Characters) होते हैं?", options: ["11 Characters", "10 Characters", "12 Characters", "16 Characters"], correct: 0 },
+    { q: "IFS Code में 5वाँ कैरेक्टर हमेशा क्या होता है?", options: ["0 (Zero)", "O (Letter)", "1 (One)", "Bank initial"], correct: 0 },
+    { q: "IMPS का पूर्ण रूप क्या है?", options: ["Immediate Payment Service", "Instant Money Payment System", "Immediate Money Transfer Service", "International Payment System"], correct: 0 },
+    { q: "NPCI का पूर्ण रूप क्या है?", options: ["National Payments Corporation of India", "National Payment Center of India", "National Public Card Institute", "National Financial Payment Council"], correct: 0 },
+    { q: "भीम (BHIM) का पूर्ण रूप क्या है?", options: ["Bharat Interface for Money", "Bharat Instant Money", "Bank Interface for Money", "Bharat Integrated Money"], correct: 0 },
+    { q: "OTP का पूर्ण रूप क्या है?", options: ["One Time Password", "One Time Passcode", "On Time Password", "Only Text Password"], correct: 0 },
+
+    // --- CHAPTER 9: Cybersecurity & FutureSkills ---
+    { q: "फ़िशिंग (Phishing) अटैक क्या है?", options: ["Fake links/emails to steal credentials", "Virus injection via USB", "Hard drive failure", "Slow Internet speed"], correct: 0 },
+    { q: "2FA का पूर्ण रूप क्या है?", options: ["Two-Factor Authentication", "Two-Fold Authority", "Second Fast Auth", "Two-Form Verification"], correct: 0 },
+    { q: "रैनसमवेयर (Ransomware) क्या करता है?", options: ["Encrypts files and demands ransom", "Deletes hardware", "Speeds up CPU", "Sends free emails"], correct: 0 },
+    { q: "AI का पूर्ण रूप क्या है?", options: ["Artificial Intelligence", "Automated Intelligence", "Advanced Integration", "Array Intelligence"], correct: 0 },
+    { q: "IoT का पूर्ण रूप क्या है?", options: ["Internet of Things", "Interconnection of Technology", "Internal Output Technology", "Information of Things"], correct: 0 },
+    { q: "ब्लॉकचेन (Blockchain) तकनीक किस पर आधारित है?", options: ["Decentralized Distributed Ledger", "Central Server", "Single Database", "Offline Files"], correct: 0 },
+    { q: "क्लाउड कंप्यूटिंग का मुख्य लाभ क्या है?", options: ["On-demand Internet data access & storage", "Offline data editing", "No hardware needed at all", "Free Internet access"], correct: 0 },
+    { q: "फायरवॉल (Firewall) का मुख्य कार्य क्या है?", options: ["Unauthorized network traffic filtering", "Virus removal", "Speeding up browser", "Hardware cooling"], correct: 0 },
+    { q: "कंप्यूटर नेटवर्क में ट्रोजन हॉर्स (Trojan Horse) क्या है?", options: ["Malware disguised as legitimate software", "Antivirus program", "Hardware device", "Network Cable"], correct: 0 },
+    { q: "डार्क वेब (Dark Web) तक पहुँचने के लिए किस ब्राउज़र का उपयोग होता है?", options: ["Tor Browser", "Google Chrome", "Mozilla Firefox", "Safari"], correct: 0 },
+    { q: "VR का पूर्ण रूप क्या है?", options: ["Virtual Reality", "Visual Reality", "Virtual Record", "Vast Realm"], correct: 0 },
+    { q: "डिजिटल सिग्नेचर (Digital Signature) का मुख्य उद्देश्य क्या है?", options: ["Authentication & Non-repudiation", "Styling text", "Encrypting full hard drive", "Fast printing"], correct: 0 }
+];
+
+// Existing masterPool linking logic
+let masterPool = {
+    fullTest: extraCCCQuestions
+};
+
+// Quiz Application Logic
+let currentIndex = 0;
+let score = 0;
+let answered = false;
+
+document.getElementById("total-q").innerText = extraCCCQuestions.length;
+
+function loadQuestion() {
+    answered = false;
+    document.getElementById("next-btn").disabled = true;
+    
+    const currentData = extraCCCQuestions[currentIndex];
+    document.getElementById("current-q").innerText = currentIndex + 1;
+    document.getElementById("question").innerText = (currentIndex + 1) + ". " + currentData.q;
+    
+    const optionsContainer = document.getElementById("options");
+    optionsContainer.innerHTML = "";
+
+    currentData.options.forEach((option, index) => {
+        const button = document.createElement("button");
+        button.className = "option-btn";
+        button.innerText = option;
+        button.onclick = () => selectOption(index, button);
+        optionsContainer.appendChild(button);
+    });
+}
+
+function selectOption(selectedIndex, btn) {
+    if (answered) return;
+    answered = true;
+    
+    const currentData = extraCCCQuestions[currentIndex];
+    const allOptions = document.querySelectorAll(".option-btn");
+
+    if (selectedIndex === currentData.correct) {
+        btn.classList.add("correct");
+        score++;
+        document.getElementById("score").innerText = score;
+    } else {
+        btn.classList.add("wrong");
+        allOptions[currentData.correct].classList.add("correct");
+    }
+
+    document.getElementById("next-btn").disabled = false;
+}
+
+function nextQuestion() {
+    currentIndex++;
+    if (currentIndex < extraCCCQuestions.length) {
+        loadQuestion();
+    } else {
+        showResults();
+    }
+}
+
+function showResults() {
+    document.getElementById("quiz-box").style.display = "none";
+    document.getElementById("result-box").style.display = "block";
+    document.getElementById("final-score").innerText = `आपका कुल स्कोर: ${score} / ${extraCCCQuestions.length}`;
+}
+
+// Start Quiz
+loadQuestion();
+</script>
+
+</body>
+</html>
