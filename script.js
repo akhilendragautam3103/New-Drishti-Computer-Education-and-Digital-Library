@@ -1,157 +1,434 @@
-// MOBILE MENU
-
-const menuBtn = document.getElementById("menuBtn");
-const navbar = document.getElementById("navbar");
-
-menuBtn.addEventListener("click", function () {
-
-    navbar.classList.toggle("active");
-
-});
+// ==========================================
+// NEW DRISHTI WEBSITE JAVASCRIPT
+// GOOGLE SHEET + EMAIL ENQUIRY
+// ==========================================
 
 
-// DARK MODE
+// ==========================================
+// GOOGLE APPS SCRIPT URL
+// ==========================================
 
-const darkBtn = document.getElementById("darkBtn");
-
-darkBtn.addEventListener("click", function () {
-
-    document.body.classList.toggle("dark");
-
-    if (document.body.classList.contains("dark")) {
-
-        darkBtn.innerHTML = "☀️";
-
-    } else {
-
-        darkBtn.innerHTML = "🌙";
-
-    }
-
-});
+const GOOGLE_SCRIPT_URL =
+"https://script.google.com/macros/s/AKfycbyWmz-3Yw0FQBHqJSPMKG--E_px-8qm5pm97tGc1bWFnY7eYi5ryhnAaoNWDKwCqGjT6A/exec";
 
 
-// COURSE POPUP
+// ==========================================
+// ELEMENTS
+// ==========================================
 
-function courseInfo(course) {
+const contactForm =
+    document.getElementById("contactForm");
 
-    let title = document.getElementById("popupTitle");
-    let text = document.getElementById("popupText");
+const submitBtn =
+    document.getElementById("submitBtn");
 
-    if (course === "DCA") {
+const formStatus =
+    document.getElementById("formStatus");
 
-        title.innerHTML = "DCA Course";
 
-        text.innerHTML =
-        "DCA में Computer Fundamentals, MS Word, Excel, PowerPoint, Internet, HTML आदि की practical training दी जाती है।";
+// ==========================================
+// FORM SUBMIT
+// ==========================================
 
-    }
+if (contactForm) {
 
-    else if (course === "ADCA") {
+    contactForm.addEventListener(
+        "submit",
+        async function (event) {
 
-        title.innerHTML = "ADCA Course";
+            event.preventDefault();
 
-        text.innerHTML =
-        "ADCA एक advanced computer course है जिसमें Office, Internet, HTML, CSS, JavaScript, Tally आदि topics शामिल किए जा सकते हैं।";
 
-    }
+            // ----------------------------------
+            // GET VALUES
+            // ----------------------------------
 
-    else if (course === "CCC") {
+            const name =
+                document.getElementById("name")
+                .value
+                .trim();
 
-        title.innerHTML = "CCC Course";
+            const phone =
+                document.getElementById("phone")
+                .value
+                .trim();
 
-        text.innerHTML =
-        "CCC course में Computer Fundamentals, Internet, Digital Services, MS Office आदि की basic जानकारी दी जाती है।";
+            const course =
+                document.getElementById("course")
+                .value;
 
-    }
+            const message =
+                document.getElementById("message")
+                .value
+                .trim();
 
-    else if (course === "Tally") {
 
-        title.innerHTML = "Tally Course";
+            // ----------------------------------
+            // VALIDATION
+            // ----------------------------------
 
-        text.innerHTML =
-        "Tally training में accounting, company creation, ledger, voucher, GST एवं reports का practical अभ्यास कराया जाता है।";
+            if (name === "") {
 
-    }
+                showStatus(
+                    "❌ कृपया अपना नाम दर्ज करें।",
+                    "error"
+                );
 
-    else if (course === "Typing") {
+                document
+                    .getElementById("name")
+                    .focus();
 
-        title.innerHTML = "Typing Course";
+                return;
+            }
 
-        text.innerHTML =
-        "Hindi और English typing की regular practice के साथ typing speed और accuracy बढ़ाने का अभ्यास कराया जाता है।";
 
-    }
+            if (phone === "") {
 
-    document.getElementById("popup").style.display = "flex";
+                showStatus(
+                    "❌ कृपया अपना Mobile Number दर्ज करें।",
+                    "error"
+                );
+
+                document
+                    .getElementById("phone")
+                    .focus();
+
+                return;
+            }
+
+
+            if (!/^[0-9]{10}$/.test(phone)) {
+
+                showStatus(
+                    "❌ कृपया 10 अंकों का सही Mobile Number दर्ज करें।",
+                    "error"
+                );
+
+                document
+                    .getElementById("phone")
+                    .focus();
+
+                return;
+            }
+
+
+            if (course === "") {
+
+                showStatus(
+                    "❌ कृपया Course Select करें।",
+                    "error"
+                );
+
+                document
+                    .getElementById("course")
+                    .focus();
+
+                return;
+            }
+
+
+            // ----------------------------------
+            // LOADING
+            // ----------------------------------
+
+            submitBtn.disabled = true;
+
+            submitBtn.innerHTML =
+                "⏳ Sending...";
+
+
+            showStatus(
+                "⏳ आपकी enquiry भेजी जा रही है...",
+                "loading"
+            );
+
+
+            // ----------------------------------
+            // FORM DATA
+            // ----------------------------------
+
+            const formData =
+                new FormData();
+
+
+            formData.append(
+                "name",
+                name
+            );
+
+            formData.append(
+                "phone",
+                phone
+            );
+
+            formData.append(
+                "course",
+                course
+            );
+
+            formData.append(
+                "message",
+                message
+            );
+
+
+            // ----------------------------------
+            // SEND TO GOOGLE APPS SCRIPT
+            // ----------------------------------
+
+            try {
+
+                await fetch(
+                    GOOGLE_SCRIPT_URL,
+                    {
+                        method: "POST",
+
+                        body: formData,
+
+                        mode: "no-cors"
+                    }
+                );
+
+
+                // ----------------------------------
+                // SUCCESS
+                // ----------------------------------
+
+                showStatus(
+                    "✅ Enquiry Successfully Submitted! आपको शीघ्र संपर्क किया जाएगा।",
+                    "success"
+                );
+
+
+                alert(
+                    "धन्यवाद " +
+                    name +
+                    "!\n\n" +
+                    "आपकी enquiry successfully submit हो गई है।\n\n" +
+                    "हम आपको शीघ्र संपर्क करेंगे।"
+                );
+
+
+                // ----------------------------------
+                // RESET FORM
+                // ----------------------------------
+
+                contactForm.reset();
+
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    "Enquiry Error:",
+                    error
+                );
+
+
+                showStatus(
+                    "❌ Enquiry भेजने में समस्या हुई। कृपया पुनः प्रयास करें।",
+                    "error"
+                );
+
+
+                alert(
+                    "Enquiry submit नहीं हो सकी।\n\n" +
+                    "कृपया Internet Connection check करें।"
+                );
+
+            }
+
+
+            // ----------------------------------
+            // RESET BUTTON
+            // ----------------------------------
+
+            submitBtn.disabled = false;
+
+            submitBtn.innerHTML =
+                "📩 Submit Enquiry";
+
+        });
 
 }
 
 
-// CLOSE POPUP
+// ==========================================
+// STATUS FUNCTION
+// ==========================================
 
-function closePopup() {
+function showStatus(
+    message,
+    type
+) {
 
-    document.getElementById("popup").style.display = "none";
-
-}
-
-
-// ABOUT MESSAGE
-
-function showMessage() {
-
-    alert(
-        "New Drishti Computer Education में Computer Education, CSC Services और Digital Library की सुविधाएं उपलब्ध हैं।"
-    );
-
-}
-
-
-// CONTACT FORM
-
-document.getElementById("contactForm")
-.addEventListener("submit", function(event) {
-
-    event.preventDefault();
-
-    let name =
-        document.getElementById("name").value;
-
-    let phone =
-        document.getElementById("phone").value;
-
-    let course =
-        document.getElementById("course").value;
-
-    if (name === "" || phone === "") {
-
-        alert("कृपया Name और Mobile Number भरें।");
-
+    if (!formStatus) {
         return;
-
     }
 
-    alert(
-        "धन्यवाद " + name +
-        "! आपकी enquiry प्राप्त हो गई है।" +
-        "\nCourse: " + course
+    formStatus.innerHTML =
+        message;
+
+    formStatus.className =
+        "";
+
+    formStatus.classList.add(
+        type
+    );
+}
+
+
+// ==========================================
+// MOBILE MENU
+// ==========================================
+
+const menuBtn =
+    document.getElementById("menuBtn");
+
+const navbar =
+    document.getElementById("navbar");
+
+
+if (menuBtn) {
+
+    menuBtn.addEventListener(
+        "click",
+        function () {
+
+            navbar.classList.toggle(
+                "active"
+            );
+
+        }
     );
 
-    this.reset();
-
-});
+}
 
 
-// CLOSE MOBILE MENU AFTER CLICK
+// ==========================================
+// CLOSE MOBILE MENU
+// ==========================================
 
-document.querySelectorAll("nav a")
-.forEach(function(link) {
+document
+    .querySelectorAll("#navbar a")
+    .forEach(function (link) {
 
-    link.addEventListener("click", function() {
+        link.addEventListener(
+            "click",
+            function () {
 
-        navbar.classList.remove("active");
+                navbar.classList.remove(
+                    "active"
+                );
+
+            }
+        );
 
     });
 
-});
+
+// ==========================================
+// DARK MODE
+// ==========================================
+
+const darkBtn =
+    document.getElementById("darkBtn");
+
+
+if (darkBtn) {
+
+    darkBtn.addEventListener(
+        "click",
+        function () {
+
+            document
+                .body
+                .classList
+                .toggle("dark");
+
+
+            if (
+                document.body.classList.contains(
+                    "dark"
+                )
+            ) {
+
+                darkBtn.innerHTML =
+                    "☀️";
+
+            }
+
+            else {
+
+                darkBtn.innerHTML =
+                    "🌙";
+
+            }
+
+        }
+    );
+
+}
+
+
+// ==========================================
+// COURSE DETAILS
+// ==========================================
+
+// ==========================================
+// COURSE DETAILS PAGE
+// ==========================================
+
+function courseInfo(course) {
+
+    const coursePages = {
+        DCA: "COURSES/DCA/index.html",
+        ADCA: "COURSES/ADCA/index.html",
+        CCC: "COURSES/CCC/index.html",
+        Tally: "COURSES/Tally/index.html",
+        Typing: "COURSES/Typing/index.html"
+    };
+
+    if (coursePages[course]) {
+        window.location.href = coursePages[course];
+    }
+}
+
+// ==========================================
+// CLOSE POPUP
+// ==========================================
+
+function closePopup() {
+
+    const popup =
+        document.getElementById("popup");
+
+    popup.style.display =
+        "none";
+
+}
+
+
+// ==========================================
+// CLOSE POPUP OUTSIDE
+// ==========================================
+
+window.addEventListener(
+    "click",
+    function (event) {
+
+        const popup =
+            document.getElementById("popup");
+
+        if (
+            event.target === popup
+        ) {
+
+            popup.style.display =
+                "none";
+
+        }
+
+    }
+);
