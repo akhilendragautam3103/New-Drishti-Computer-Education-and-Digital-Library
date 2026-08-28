@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="hi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NEW DRISHTI Gallery</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ==================================================
+         LOGIN PAGE
+    ================================================== -->
+
+    <div id="loginPage">
+
+        <div class="login-box">
+
+            <div class="login-icon">
+                📸
+            </div>
+
+            <h1>Gallery Login</h1>
+
+            <p>
+                NEW DRISHTI Gallery Management
+            </p>
+
+            <input
+                type="password"
+                id="password"
+                placeholder="Enter Gallery Password"
+                onkeydown="if(event.key==='Enter') login()"
+            >
+
+            <button
+                class="login-btn"
+                onclick="login()">
+
+                🔐 Login
+
+            </button>
+
+            <div id="loginMessage"></div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ==================================================
+         GALLERY APP
+    ================================================== -->
+
+    <div id="galleryApp">
+
+        <!-- HEADER -->
+
+        <header class="header">
+
+            <div class="header-title">
+
+                <div class="header-icon">
+                    📸
+                </div>
+
+                <div>
+
+                    <h1>NEW DRISHTI GALLERY</h1>
+
+                    <p>
+                        Events • Seminars • Festivals • Workshops
+                    </p>
+
+                </div>
+
+            </div>
+
+            <button
+                class="logout-btn"
+                onclick="logout()">
+
+                🚪 Logout
+
+            </button>
+
+        </header>
+
+
+        <!-- ==================================================
+             DASHBOARD
+        ================================================== -->
+
+        <div class="dashboard">
+
+            <div class="stat">
+
+                <strong id="totalCount">
+                    0
+                </strong>
+
+                <span>Total</span>
+
+            </div>
+
+
+            <div class="stat">
+
+                <strong id="imageCount">
+                    0
+                </strong>
+
+                <span>Images</span>
+
+            </div>
+
+
+            <div class="stat">
+
+                <strong id="videoCount">
+                    0
+                </strong>
+
+                <span>Videos</span>
+
+            </div>
+
+
+            <div class="stat">
+
+                <strong id="eventCount">
+                    0
+                </strong>
+
+                <span>Events</span>
+
+            </div>
+
+        </div>
+
+
+        <!-- ==================================================
+             TABS
+        ================================================== -->
+
+        <div class="tabs">
+
+            <button
+                class="tab-btn active"
+                onclick="showTab('viewTab',this)">
+
+                🖼️ View Gallery
+
+            </button>
+
+
+            <button
+                class="tab-btn"
+                onclick="showTab('addTab',this)">
+
+                ➕ Add Photo / Video
+
+            </button>
+
+        </div>
+
+
+        <!-- ==================================================
+             ADD TAB
+        ================================================== -->
+
+        <div
+            id="addTab"
+            class="panel"
+            style="display:none;">
+
+            <h2>
+                ➕ Add New Gallery Item
+            </h2>
+
+
+            <div class="form-grid">
+
+
+                <div class="form-group">
+
+                    <label>Date</label>
+
+                    <input
+                        type="date"
+                        id="itemDate">
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Category</label>
+
+                    <select id="itemCategory">
+
+                        <option value="">
+                            Select Category
+                        </option>
+
+                        <option value="Event">
+                            Event
+                        </option>
+
+                        <option value="Seminar">
+                            Seminar
+                        </option>
+
+                        <option value="Festival">
+                            Festival
+                        </option>
+
+                        <option value="Independence Day">
+                            Independence Day
+                        </option>
+
+                        <option value="Workshop">
+                            Workshop
+                        </option>
+
+                        <option value="Annual Function">
+                            Annual Function
+                        </option>
+
+                        <option value="Other">
+                            Other
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Media Type</label>
+
+                    <select
+                        id="mediaType"
+                        onchange="changeMediaType()">
+
+                        <option value="image">
+                            Image
+                        </option>
+
+                        <option value="video">
+                            Video
+                        </option>
+
+                        <option value="youtube">
+                            YouTube Video
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Title</label>
+
+                    <input
+                        type="text"
+                        id="itemTitle"
+                        placeholder="Event title">
+
+                </div>
+
+
+                <div class="form-group full">
+
+                    <label>
+                        Description
+                    </label>
+
+                    <textarea
+                        id="itemDescription"
+                        placeholder="Event description"></textarea>
+
+                </div>
+
+
+                <div
+                    id="fileBox"
+                    class="form-group full">
+
+                    <label>
+                        Select Image / Video
+                    </label>
+
+                    <input
+                        type="file"
+                        id="mediaFile"
+                        accept="image/*">
+
+                </div>
+
+
+                <div
+                    id="youtubeBox"
+                    class="form-group full"
+                    style="display:none;">
+
+                    <label>
+                        YouTube Video URL
+                    </label>
+
+                    <input
+                        type="url"
+                        id="youtubeUrl"
+                        placeholder="https://www.youtube.com/watch?v=...">
+
+                </div>
+
+
+            </div>
+
+
+            <button
+                class="upload-btn"
+                onclick="saveGallery()">
+
+                💾 Save Gallery Item
+
+            </button>
+
+
+            <div id="uploadProgress"></div>
+
+        </div>
+
+
+        <!-- ==================================================
+             VIEW TAB
+        ================================================== -->
+
+        <div id="viewTab">
+
+            <div class="filter-bar">
+
+                <button
+                    class="active"
+                    onclick="filterGallery('All',this)">
+
+                    All
+
+                </button>
+
+
+                <button
+                    onclick="filterGallery('Event',this)">
+
+                    Events
+
+                </button>
+
+
+                <button
+                    onclick="filterGallery('Seminar',this)">
+
+                    Seminar
+
+                </button>
+
+
+                <button
+                    onclick="filterGallery('Festival',this)">
+
+                    Festival
+
+                </button>
+
+
+                <button
+                    onclick="filterGallery('Independence Day',this)">
+
+                    Independence Day
+
+                </button>
+
+
+                <button
+                    onclick="filterGallery('Workshop',this)">
+
+                    Workshop
+
+                </button>
+
+            </div>
+
+
+            <div
+                id="gallery"
+                class="gallery">
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ==================================================
+         IMAGE MODAL
+    ================================================== -->
+
+    <div
+        id="imageModal"
+        onclick="closeModal()">
+
+        <span class="close">
+            &times;
+        </span>
+
+        <img
+            id="modalImage"
+            src="">
+
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
