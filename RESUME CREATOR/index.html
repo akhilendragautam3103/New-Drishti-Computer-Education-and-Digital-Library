@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NEW DRISHTI Resume Creator</title><link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+<div><h1>✨ NEW DRISHTI Resume Creator</h1><p>Build • Save • Edit • Print professional resumes</p></div>
+<div class="actions">
+<button class="btn ghost" onclick="newResume()">＋ New</button>
+<button class="btn green" onclick="saveResume()">💾 Save</button>
+<button class="btn white" onclick="printResume()">🖨️ PDF / Print</button>
+</div>
+</header>
+<div class="app">
+<section class="panel form">
+<div class="toolbar"><div><b>Resume Editor</b><small>All changes appear instantly</small></div>
+<div class="idbox"><input id="searchId" placeholder="Resume ID"><button onclick="loadResume()">🔎 Load</button></div></div>
+
+<section><h2>👤 Personal Information</h2>
+<div class="grid two">
+<label>Full Name<input id="name" placeholder="Rahul Kumar"></label>
+<label>Professional Title<input id="jobTitle" placeholder="Computer Instructor"></label>
+<label>Mobile<input id="mobile" placeholder="+91 9876543210"></label>
+<label>Email<input id="email" placeholder="name@email.com"></label>
+<label>Location<input id="location" placeholder="Sakaldiha, Chandauli, Uttar Pradesh"></label>
+<label>Website / LinkedIn<input id="website" placeholder="linkedin.com/in/yourname"></label>
+</div>
+<label>Profile Photo<input id="photo" type="file" accept="image/*"></label>
+<label>Professional Summary<textarea id="summary" placeholder="Write your professional profile..."></textarea></label>
+</section>
+
+<section><h2>🎓 Education</h2><div id="educationList"></div><button class="add" onclick="addEducation()">＋ Add Education</button></section>
+<section><h2>💼 Experience</h2><div id="experienceList"></div><button class="add" onclick="addExperience()">＋ Add Experience</button></section>
+<section><h2>🛠️ Skills</h2><div class="skillrow"><input id="skillInput" placeholder="MS Office"><button class="add" onclick="addSkill()">Add Skill</button></div><div id="skillsList" class="chips"></div></section>
+<section><h2>📁 Projects</h2><div id="projectList"></div><button class="add" onclick="addProject()">＋ Add Project</button></section>
+<section><h2>🏆 Certifications & Achievements</h2><textarea id="certifications" placeholder="One item per line"></textarea></section>
+<section><h2>🌐 Languages & Hobbies</h2><div class="grid two"><label>Languages<textarea id="languages"></textarea></label><label>Hobbies<textarea id="hobbies"></textarea></label></div></section>
+<section><h2>🎨 Templates</h2><div id="templates" class="templates"></div></section>
+
+<div class="bottom"><button class="btn red" onclick="clearAll()">🗑 Clear</button><button class="btn purple" onclick="saveResume()">☁️ Save to Google Sheet</button></div>
+</section>
+
+<section class="preview-area"><div class="previewbar"><b>LIVE PREVIEW</b><span id="resumeId">Resume ID: NEW</span></div><div id="resume" class="resume"></div></section>
+</div>
+<div id="toast"></div>
+<script src="script.js"></script>
+</body></html>
