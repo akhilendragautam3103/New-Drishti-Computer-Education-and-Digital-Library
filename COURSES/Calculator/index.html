@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Office Calculator</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="header">
+
+    <div>
+        <h1>🧮 MY OFFICE CALCULATOR</h1>
+        <small>Professional Office Calculation System</small>
+    </div>
+
+    <button class="theme-btn" onclick="toggleTheme()">
+        🌙 Theme
+    </button>
+
+</header>
+
+
+<div class="container">
+
+    <!-- =========================
+         TABS
+    ========================== -->
+
+    <div class="tabs">
+
+        <button class="tab active"
+                onclick="openTab('basic',this)">
+            🧮 Basic
+        </button>
+
+        <button class="tab"
+                onclick="openTab('gst',this)">
+            💰 GST
+        </button>
+
+        <button class="tab"
+                onclick="openTab('discount',this)">
+            🏷️ Discount
+        </button>
+
+        <button class="tab"
+                onclick="openTab('percentage',this)">
+            📊 Percentage
+        </button>
+
+        <button class="tab"
+                onclick="openTab('emi',this)">
+            🏦 EMI
+        </button>
+
+        <!-- NEW -->
+        <button class="tab"
+                onclick="openTab('denomination',this)">
+            💵 Denomination
+        </button>
+
+        <button class="tab"
+                onclick="openTab('history',this)">
+            📜 History
+        </button>
+
+    </div>
+
+
+    <!-- =========================
+         BASIC CALCULATOR
+    ========================== -->
+
+    <section id="basic" class="section active">
+
+        <div class="calculator">
+
+            <div class="card">
+
+                <div class="display">
+
+                    <div id="expression"
+                         class="expression"></div>
+
+                    <div id="result"
+                         class="result">
+                        0
+                    </div>
+
+                </div>
+
+
+                <div class="buttons">
+
+                    <button class="danger"
+                            onclick="clearCalc()">
+                        AC
+                    </button>
+
+                    <button onclick="backspace()">
+                        ⌫
+                    </button>
+
+                    <button onclick="percentage()">
+                        %
+                    </button>
+
+                    <button class="operator"
+                            onclick="addOperator('/')">
+                        ÷
+                    </button>
+
+
+                    <button onclick="addNumber('7')">
+                        7
+                    </button>
+
+                    <button onclick="addNumber('8')">
+                        8
+                    </button>
+
+                    <button onclick="addNumber('9')">
+                        9
+                    </button>
+
+                    <button class="operator"
+                            onclick="addOperator('*')">
+                        ×
+                    </button>
+
+
+                    <button onclick="addNumber('4')">
+                        4
+                    </button>
+
+                    <button onclick="addNumber('5')">
+                        5
+                    </button>
+
+                    <button onclick="addNumber('6')">
+                        6
+                    </button>
+
+                    <button class="operator"
+                            onclick="addOperator('-')">
+                        −
+                    </button>
+
+
+                    <button onclick="addNumber('1')">
+                        1
+                    </button>
+
+                    <button onclick="addNumber('2')">
+                        2
+                    </button>
+
+                    <button onclick="addNumber('3')">
+                        3
+                    </button>
+
+                    <button class="operator"
+                            onclick="addOperator('+')">
+                        +
+                    </button>
+
+
+                    <button class="wide"
+                            onclick="addNumber('0')">
+                        0
+                    </button>
+
+                    <button onclick="addNumber('.')">
+                        .
+                    </button>
+
+                    <button class="equal"
+                            onclick="calculate()">
+                        =
+                    </button>
+
+                </div>
+
+
+                <br>
+
+                <button class="action-btn"
+                        onclick="copyResult()">
+                    📋 Copy
+                </button>
+
+                <button class="action-btn secondary"
+                        onclick="printResult()">
+                    🖨️ Print
+                </button>
+
+            </div>
+
+
+            <div class="card">
+
+                <h2 class="calc-title">
+                    📌 Quick Office Calculations
+                </h2>
+
+                <p>
+                    इस calculator में आप keyboard से भी calculation कर सकते हैं।
+                </p>
+
+                <br>
+
+                <p><b>Keyboard:</b></p>
+
+                <p>0-9 → Number</p>
+                <p>+ - * / → Operators</p>
+                <p>Enter → Calculate</p>
+                <p>Backspace → Delete</p>
+                <p>Escape → Clear</p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         GST
+    ========================== -->
+
+    <section id="gst" class="section">
+
+        <div class="card">
+
+            <h2 class="calc-title">
+                💰 GST Calculator
+            </h2>
+
+            <label>Amount</label>
+
+            <input type="number"
+                   id="gstAmount"
+                   placeholder="Enter amount">
+
+
+            <label>GST Rate (%)</label>
+
+            <select id="gstRate">
+
+                <option value="5">5%</option>
+                <option value="12">12%</option>
+                <option value="18" selected>18%</option>
+                <option value="28">28%</option>
+
+            </select>
+
+
+            <button class="action-btn"
+                    onclick="calculateGST()">
+                Calculate GST
+            </button>
+
+
+            <div id="gstResult"
+                 class="result-box">
+                Result will appear here
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         DISCOUNT
+    ========================== -->
+
+    <section id="discount" class="section">
+
+        <div class="card">
+
+            <h2 class="calc-title">
+                🏷️ Discount Calculator
+            </h2>
+
+            <label>Original Price</label>
+
+            <input type="number"
+                   id="originalPrice"
+                   placeholder="Enter original price">
+
+
+            <label>Discount (%)</label>
+
+            <input type="number"
+                   id="discountRate"
+                   placeholder="Enter discount %">
+
+
+            <button class="action-btn"
+                    onclick="calculateDiscount()">
+                Calculate
+            </button>
+
+
+            <div id="discountResult"
+                 class="result-box">
+                Result will appear here
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         PERCENTAGE
+    ========================== -->
+
+    <section id="percentage" class="section">
+
+        <div class="card">
+
+            <h2 class="calc-title">
+                📊 Percentage Calculator
+            </h2>
+
+            <label>Value</label>
+
+            <input type="number"
+                   id="percentageValue"
+                   placeholder="Enter value">
+
+
+            <label>Total</label>
+
+            <input type="number"
+                   id="percentageTotal"
+                   placeholder="Enter total">
+
+
+            <button class="action-btn"
+                    onclick="calculatePercentage()">
+                Calculate Percentage
+            </button>
+
+
+            <div id="percentageResult"
+                 class="result-box">
+                Result will appear here
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         EMI
+    ========================== -->
+
+    <section id="emi" class="section">
+
+        <div class="card">
+
+            <h2 class="calc-title">
+                🏦 EMI Calculator
+            </h2>
+
+            <label>Loan Amount</label>
+
+            <input type="number"
+                   id="loanAmount"
+                   placeholder="Enter loan amount">
+
+
+            <label>Annual Interest Rate (%)</label>
+
+            <input type="number"
+                   id="interestRate"
+                   placeholder="Enter interest rate">
+
+
+            <label>Loan Tenure (Years)</label>
+
+            <input type="number"
+                   id="loanYears"
+                   placeholder="Enter years">
+
+
+            <button class="action-btn"
+                    onclick="calculateEMI()">
+                Calculate EMI
+            </button>
+
+
+            <div id="emiResult"
+                 class="result-box">
+                Result will appear here
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         DENOMINATION SYSTEM
+    ========================== -->
+
+    <section id="denomination"
+             class="section">
+
+        <div class="card">
+
+            <h2 class="calc-title">
+                💵 Cash Denomination System
+            </h2>
+
+            <p class="denomination-info">
+                नोट/सिक्कों की संख्या डालें। Total Cash
+                अपने-आप calculate होगा।
+            </p>
+
+
+            <div class="denomination-grid">
+
+                <div class="denomination-item">
+
+                    <label>₹500</label>
+
+                    <input type="number"
+                           id="note500"
+                           min="0"
+                           value="0"
+                           oninput="calculateDenomination()">
+
+                </div>
+
+
+                <div class="denomination-item">
+
+                    <label>₹200</label>
+
+                    <input type="number"
+                           id="note200"
+                           min="0"
+                           value="0"
+                           oninput="calculateDenomination()">
+
+                </div>
+
+
+                <div class="denomination-item">
+
+                    <label>₹100</label>
+
+                    <input type="number"
+                           id="note100"
+                           min="0"
+                           value="0"
+                           oninput="calculateDenomination()">
+
+                </div>
+
+
+                <div class="denomination-item">
+
+                    <label>₹50</label>
+
+                    <input type="number"
+                           id="note50"
+                           min="0"
+                           value="0"
+                           oninput="calculateDenomination()">
+
+                </div>
+
+
+                <div class="denomination-item">
+
+                    <label>₹20</label>
+
+                    <input type="number"
+                           id="note20"
+                           min="0"
+                           value="0"
+                           oninput="calculateDenomination()">
+
+                </div>
+
+
+                <div class="denomination-item">
+
+                    <label>₹10</label>
+
+                    <input type="number"
+                           id="note10"
+                           min="0"
+                           value="0"
+                           oninput="calculateDenomination()">
+
+                </div>
+
+
+                <div class="denomination-item">
+
+                    <label>₹5</label>
+
+                    <input type="number"
+                           id="note5"
+                           min="0"
+                           value="0"
+                           oninput="calculateDenomination()">
+
+                </div>
+
+
+                <div class="denomination-item">
+
+                    <label>₹2</label>
+
+                    <input type="number"
+                           id="note2"
+                           min="0"
+                           value="0"
+                           oninput="calculateDenomination()">
+
+                </div>
+
+
+                <div class="denomination-item">
+
+                    <label>₹1</label>
+
+                    <input type="number"
+                           id="note1"
+                           min="0"
+                           value="0"
+                           oninput="calculateDenomination()">
+
+                </div>
+
+            </div>
+
+
+            <div id="denominationResult"
+                 class="result-box denomination-result">
+
+                <div>
+                    <b>Total Notes/Coins:</b>
+                    <span id="totalCount">0</span>
+                </div>
+
+                <div>
+                    <b>Total Cash:</b>
+                    ₹<span id="totalCash">0</span>
+                </div>
+
+            </div>
+
+
+            <div class="denomination-buttons">
+
+                <button class="action-btn"
+                        onclick="saveDenomination()">
+                    💾 Save
+                </button>
+
+                <button class="action-btn secondary"
+                        onclick="clearDenomination()">
+                    🔄 Reset
+                </button>
+
+                <button class="action-btn"
+                        onclick="printDenomination()">
+                    🖨️ Print
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         HISTORY
+    ========================== -->
+
+    <section id="history"
+             class="section">
+
+        <div class="card">
+
+            <h2 class="calc-title">
+                📜 Calculation History
+            </h2>
+
+
+            <div id="historyList"
+                 class="history">
+
+                No calculations yet.
+
+            </div>
+
+
+            <button class="action-btn secondary clear-history"
+                    onclick="clearHistory()">
+
+                Clear History
+
+            </button>
+
+        </div>
+
+    </section>
+
+</div>
+
+
+<footer class="footer">
+
+    MY OFFICE CALCULATOR © 2026
+
+</footer>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
