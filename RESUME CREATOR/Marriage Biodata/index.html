@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Marriage Biodata Creator | New Drishti</title>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+
+<header class="top-header">
+
+    <div class="brand">
+        <div class="brand-icon">
+            💍
+        </div>
+
+        <div>
+            <h1>Marriage Biodata Creator</h1>
+            <p>NEW DRISHTI COMPUTER EDUCATION</p>
+        </div>
+    </div>
+
+    <div class="header-actions">
+
+        <button class="theme-btn" onclick="toggleDarkMode()">
+            <i class="fa-solid fa-moon"></i>
+        </button>
+
+        <button class="reset-btn" onclick="resetForm()">
+            <i class="fa-solid fa-rotate-left"></i>
+            Reset
+        </button>
+
+    </div>
+
+</header>
+
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="navbar">
+
+    <button class="nav-btn active" onclick="showSection('formSection',this)">
+        <i class="fa-solid fa-user"></i>
+        Biodata
+    </button>
+
+    <button class="nav-btn" onclick="showSection('recordsSection',this)">
+        <i class="fa-solid fa-folder-open"></i>
+        Saved Biodata
+    </button>
+
+    <button class="nav-btn" onclick="showSection('templateSection',this)">
+        <i class="fa-solid fa-palette"></i>
+        Templates
+    </button>
+
+    <button class="nav-btn" onclick="printBiodata()">
+        <i class="fa-solid fa-print"></i>
+        Print / PDF
+    </button>
+
+</nav>
+
+
+<!-- ================= MAIN ================= -->
+
+<main class="container">
+
+
+<!-- ================= STATUS ================= -->
+
+<div id="messageBox" class="message-box"></div>
+
+
+<!-- ================= FORM SECTION ================= -->
+
+<section id="formSection" class="page-section active">
+
+    <div class="section-heading">
+        <div>
+            <h2>
+                <i class="fa-solid fa-heart"></i>
+                Create Marriage Biodata
+            </h2>
+
+            <p>Enter the details carefully to create a beautiful marriage profile.</p>
+        </div>
+
+        <div class="id-display">
+            <span>Biodata ID</span>
+            <strong id="biodataId">Generating...</strong>
+        </div>
+    </div>
+
+
+<!-- ================= PERSONAL DETAILS ================= -->
+
+<div class="card">
+
+    <div class="card-title">
+        <i class="fa-solid fa-user"></i>
+        Personal Details
+    </div>
+
+    <div class="form-grid">
+
+        <div class="form-group">
+            <label>Full Name *</label>
+            <input type="text" id="fullName"
+                   placeholder="Enter full name">
+        </div>
+
+        <div class="form-group">
+            <label>Gender</label>
+            <select id="gender">
+                <option value="">Select Gender</option>
+                <option>Male</option>
+                <option>Female</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Date of Birth</label>
+            <input type="date" id="dob" onchange="calculateAge()">
+        </div>
+
+        <div class="form-group">
+            <label>Age</label>
+            <input type="number" id="age"
+                   placeholder="Auto calculated">
+        </div>
+
+        <div class="form-group">
+            <label>Height</label>
+            <input type="text" id="height"
+                   placeholder="Example: 5' 7&quot;">
+        </div>
+
+        <div class="form-group">
+            <label>Complexion</label>
+            <select id="complexion">
+                <option value="">Select</option>
+                <option>Fair</option>
+                <option>Wheatish</option>
+                <option>Medium</option>
+                <option>Other</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Religion</label>
+            <input type="text" id="religion"
+                   placeholder="Religion">
+        </div>
+
+        <div class="form-group">
+            <label>Caste</label>
+            <input type="text" id="caste"
+                   placeholder="Caste">
+        </div>
+
+        <div class="form-group">
+            <label>Mother Tongue</label>
+            <input type="text" id="motherTongue"
+                   placeholder="Hindi">
+        </div>
+
+        <div class="form-group">
+            <label>Manglik</label>
+            <select id="manglik">
+                <option value="">Select</option>
+                <option>Yes</option>
+                <option>No</option>
+                <option>Don't Know</option>
+            </select>
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ================= PHOTO ================= -->
+
+<div class="card">
+
+    <div class="card-title">
+        <i class="fa-solid fa-camera"></i>
+        Profile Photo
+    </div>
+
+    <div class="photo-upload">
+
+        <div class="photo-preview">
+
+            <img id="photoPreview"
+                 src=""
+                 alt="Profile Photo">
+
+            <div id="photoPlaceholder">
+                <i class="fa-solid fa-user"></i>
+                <span>No Photo</span>
+            </div>
+
+        </div>
+
+        <div class="photo-controls">
+
+            <label class="upload-btn">
+                <i class="fa-solid fa-upload"></i>
+                Select Photo
+
+                <input type="file"
+                       id="photo"
+                       accept="image/*"
+                       onchange="previewPhoto(event)">
+            </label>
+
+            <button class="remove-photo"
+                    onclick="removePhoto()">
+                <i class="fa-solid fa-trash"></i>
+                Remove
+            </button>
+
+            <p>
+                Recommended: JPG / PNG
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ================= EDUCATION & CAREER ================= -->
+
+<div class="card">
+
+    <div class="card-title">
+        <i class="fa-solid fa-graduation-cap"></i>
+        Education & Career
+    </div>
+
+    <div class="form-grid">
+
+        <div class="form-group">
+            <label>Highest Qualification</label>
+            <input type="text" id="education"
+                   placeholder="B.A., B.Tech, MBA etc.">
+        </div>
+
+        <div class="form-group">
+            <label>College / University</label>
+            <input type="text" id="university"
+                   placeholder="College / University">
+        </div>
+
+        <div class="form-group">
+            <label>Profession / Occupation</label>
+            <input type="text" id="profession"
+                   placeholder="Software Engineer / Teacher etc.">
+        </div>
+
+        <div class="form-group">
+            <label>Company / Organization</label>
+            <input type="text" id="company"
+                   placeholder="Company name">
+        </div>
+
+        <div class="form-group">
+            <label>Annual Income</label>
+            <input type="text" id="income"
+                   placeholder="₹ 5,00,000">
+        </div>
+
+        <div class="form-group">
+            <label>Work Location</label>
+            <input type="text" id="workLocation"
+                   placeholder="City / State">
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ================= FAMILY ================= -->
+
+<div class="card">
+
+    <div class="card-title">
+        <i class="fa-solid fa-people-roof"></i>
+        Family Details
+    </div>
+
+    <div class="form-grid">
+
+        <div class="form-group">
+            <label>Father's Name</label>
+            <input type="text" id="fatherName">
+        </div>
+
+        <div class="form-group">
+            <label>Father's Occupation</label>
+            <input type="text" id="fatherOccupation">
+        </div>
+
+        <div class="form-group">
+            <label>Mother's Name</label>
+            <input type="text" id="motherName">
+        </div>
+
+        <div class="form-group">
+            <label>Mother's Occupation</label>
+            <input type="text" id="motherOccupation">
+        </div>
+
+        <div class="form-group">
+            <label>Brothers</label>
+            <input type="text" id="brothers"
+                   placeholder="Example: 1">
+        </div>
+
+        <div class="form-group">
+            <label>Sisters</label>
+            <input type="text" id="sisters"
+                   placeholder="Example: 2">
+        </div>
+
+        <div class="form-group">
+            <label>Family Type</label>
+            <select id="familyType">
+                <option value="">Select</option>
+                <option>Joint Family</option>
+                <option>Nuclear Family</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Family Status</label>
+            <select id="familyStatus">
+                <option value="">Select</option>
+                <option>Middle Class</option>
+                <option>Upper Middle Class</option>
+                <option>Affluent</option>
+                <option>Other</option>
+            </select>
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ================= ADDRESS ================= -->
+
+<div class="card">
+
+    <div class="card-title">
+        <i class="fa-solid fa-location-dot"></i>
+        Address Details
+    </div>
+
+    <div class="form-grid">
+
+        <div class="form-group full">
+            <label>Full Address</label>
+            <textarea id="address"
+                      rows="3"
+                      placeholder="House No, Village, Street, etc."></textarea>
+        </div>
+
+        <div class="form-group">
+            <label>City</label>
+            <input type="text" id="city">
+        </div>
+
+        <div class="form-group">
+            <label>District</label>
+            <input type="text" id="district">
+        </div>
+
+        <div class="form-group">
+            <label>State</label>
+            <input type="text" id="state">
+        </div>
+
+        <div class="form-group">
+            <label>PIN Code</label>
+            <input type="text" id="pincode">
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ================= PARTNER PREFERENCE ================= -->
+
+<div class="card">
+
+    <div class="card-title">
+        <i class="fa-solid fa-heart-circle-check"></i>
+        Partner Preference
+    </div>
+
+    <div class="form-grid">
+
+        <div class="form-group">
+            <label>Preferred Age</label>
+            <input type="text" id="partnerAge"
+                   placeholder="Example: 24 - 30">
+        </div>
+
+        <div class="form-group">
+            <label>Preferred Height</label>
+            <input type="text" id="partnerHeight">
+        </div>
+
+        <div class="form-group">
+            <label>Preferred Education</label>
+            <input type="text" id="partnerEducation">
+        </div>
+
+        <div class="form-group">
+            <label>Preferred Profession</label>
+            <input type="text" id="partnerProfession">
+        </div>
+
+        <div class="form-group">
+            <label>Preferred Location</label>
+            <input type="text" id="partnerLocation">
+        </div>
+
+        <div class="form-group full">
+            <label>Other Preference</label>
+            <textarea id="partnerOther"
+                      rows="3"
+                      placeholder="Write any other preference..."></textarea>
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ================= OTHER DETAILS ================= -->
+
+<div class="card">
+
+    <div class="card-title">
+        <i class="fa-solid fa-star"></i>
+        Other Details
+    </div>
+
+    <div class="form-grid">
+
+        <div class="form-group full">
+            <label>Hobbies & Interests</label>
+            <textarea id="hobbies"
+                      rows="3"
+                      placeholder="Reading, Travelling, Music..."></textarea>
+        </div>
+
+        <div class="form-group full">
+            <label>About Me</label>
+            <textarea id="aboutMe"
+                      rows="4"
+                      placeholder="Write a short profile..."></textarea>
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ================= CONTACT ================= -->
+
+<div class="card">
+
+    <div class="card-title">
+        <i class="fa-solid fa-phone"></i>
+        Contact Details
+    </div>
+
+    <div class="form-grid">
+
+        <div class="form-group">
+            <label>Contact Person</label>
+            <input type="text" id="contactPerson">
+        </div>
+
+        <div class="form-group">
+            <label>Mobile Number *</label>
+            <input type="tel" id="mobile"
+                   maxlength="10"
+                   placeholder="10 digit mobile">
+        </div>
+
+        <div class="form-group">
+            <label>Alternate Number</label>
+            <input type="tel" id="alternateMobile"
+                   maxlength="10">
+        </div>
+
+        <div class="form-group">
+            <label>Email</label>
+            <input type="email" id="email">
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ================= TEMPLATE SELECT ================= -->
+
+<div class="card">
+
+    <div class="card-title">
+        <i class="fa-solid fa-palette"></i>
+        Select Biodata Template
+    </div>
+
+    <div class="template-grid">
+
+        <label class="template-option">
+            <input type="radio"
+                   name="template"
+                   value="template1"
+                   checked>
+            <span class="template-box t1">Royal</span>
+        </label>
+
+        <label class="template-option">
+            <input type="radio"
+                   name="template"
+                   value="template2">
+            <span class="template-box t2">Elegant</span>
+        </label>
+
+        <label class="template-option">
+            <input type="radio"
+                   name="template"
+                   value="template3">
+            <span class="template-box t3">Floral</span>
+        </label>
+
+        <label class="template-option">
+            <input type="radio"
+                   name="template"
+                   value="template4">
+            <span class="template-box t4">Classic</span>
+        </label>
+
+        <label class="template-option">
+            <input type="radio"
+                   name="template"
+                   value="template5">
+            <span class="template-box t5">Modern</span>
+        </label>
+
+        <label class="template-option">
+            <input type="radio"
+                   name="template"
+                   value="template6">
+            <span class="template-box t6">Pink</span>
+        </label>
+
+        <label class="template-option">
+            <input type="radio"
+                   name="template"
+                   value="template7">
+            <span class="template-box t7">Nature</span>
+        </label>
+
+        <label class="template-option">
+            <input type="radio"
+                   name="template"
+                   value="template8">
+            <span class="template-box t8">Premium</span>
+        </label>
+
+    </div>
+
+</div>
+
+
+<!-- ================= BUTTONS ================= -->
+
+<div class="action-bar">
+
+    <button class="btn save"
+            onclick="saveBiodata()">
+        <i class="fa-solid fa-cloud-arrow-up"></i>
+        Save Biodata
+    </button>
+
+    <button class="btn preview"
+            onclick="previewBiodata()">
+        <i class="fa-solid fa-eye"></i>
+        Preview
+    </button>
+
+    <button class="btn print"
+            onclick="printBiodata()">
+        <i class="fa-solid fa-print"></i>
+        Print / PDF
+    </button>
+
+</div>
+
+</section>
+
+
+<!-- ================= RECORDS SECTION ================= -->
+
+<section id="recordsSection" class="page-section">
+
+    <div class="section-heading">
+
+        <div>
+            <h2>
+                <i class="fa-solid fa-folder-open"></i>
+                Saved Biodata
+            </h2>
+
+            <p>Search, load and edit saved marriage profiles.</p>
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="record-toolbar">
+
+            <div class="form-group">
+                <label>Biodata ID + Name</label>
+
+                <select id="biodataDropdown"
+                        onchange="loadSelectedBiodata()">
+
+                    <option value="">
+                        -- Select Biodata ID + Name --
+                    </option>
+
+                </select>
+            </div>
+
+            <button class="btn refresh"
+                    onclick="loadRecords()">
+                <i class="fa-solid fa-arrows-rotate"></i>
+                Refresh
+            </button>
+
+        </div>
+
+        <div id="recordsList"
+             class="records-list">
+
+            <div class="loading">
+                Click Refresh to load records.
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= TEMPLATE SECTION ================= -->
+
+<section id="templateSection" class="page-section">
+
+    <div class="section-heading">
+
+        <div>
+            <h2>
+                <i class="fa-solid fa-palette"></i>
+                Biodata Templates
+            </h2>
+
+            <p>Choose your favourite colorful design.</p>
+        </div>
+
+    </div>
+
+
+    <div class="template-showcase">
+
+        <div class="show-card t1">
+            <span>01</span>
+            <h3>Royal</h3>
+            <p>Elegant royal marriage profile</p>
+        </div>
+
+        <div class="show-card t2">
+            <span>02</span>
+            <h3>Elegant</h3>
+            <p>Clean and professional</p>
+        </div>
+
+        <div class="show-card t3">
+            <span>03</span>
+            <h3>Floral</h3>
+            <p>Beautiful floral style</p>
+        </div>
+
+        <div class="show-card t4">
+            <span>04</span>
+            <h3>Classic</h3>
+            <p>Traditional biodata design</p>
+        </div>
+
+        <div class="show-card t5">
+            <span>05</span>
+            <h3>Modern</h3>
+            <p>Modern profile layout</p>
+        </div>
+
+        <div class="show-card t6">
+            <span>06</span>
+            <h3>Pink</h3>
+            <p>Soft romantic design</p>
+        </div>
+
+        <div class="show-card t7">
+            <span>07</span>
+            <h3>Nature</h3>
+            <p>Fresh green theme</p>
+        </div>
+
+        <div class="show-card t8">
+            <span>08</span>
+            <h3>Premium</h3>
+            <p>Premium profile design</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= PREVIEW ================= -->
+
+<div id="previewModal" class="modal">
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+
+            <h2>
+                <i class="fa-solid fa-eye"></i>
+                Biodata Preview
+            </h2>
+
+            <button onclick="closePreview()">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+        </div>
+
+        <div id="biodataPreview"></div>
+
+        <div class="modal-actions">
+
+            <button class="btn print"
+                    onclick="printBiodata()">
+                <i class="fa-solid fa-print"></i>
+                Print
+            </button>
+
+            <button class="btn"
+                    onclick="closePreview()">
+                Close
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+</main>
+
+
+<footer>
+
+    <div>
+        💍 <strong>Marriage Biodata Creator</strong>
+    </div>
+
+    <p>
+        Developed for NEW DRISHTI COMPUTER EDUCATION
+    </p>
+
+</footer>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
