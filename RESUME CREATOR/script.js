@@ -128,6 +128,7 @@ async function saveResume(){
 
  if(!GAS_API_URL){
    toast("✅ Saved locally. Add GAS_API_URL for Google Sheet.");
+   refreshResumeList();
    return;
  }
 
@@ -141,7 +142,7 @@ async function saveResume(){
    const text=await response.text();
    let result;
    try{result=JSON.parse(text)}catch(e){throw new Error("Server returned non-JSON response");}
-   if(result.success)toast("✅ Saved to Google Sheet | "+currentId);
+   if(result.success){toast("✅ Saved to Google Sheet | "+currentId);refreshResumeList();}
    else toast("❌ "+(result.message||"Save failed"));
  }catch(err){
    console.error(err);
@@ -149,9 +150,24 @@ async function saveResume(){
  }
 }
 
+function setResumeDropdown(list){
+ const select=$("resumeSelect"); if(!select)return; const current=currentId;
+ select.innerHTML='<option value="">📋 Select Resume ID + Name</option>';
+ (list||[]).forEach(r=>{const opt=document.createElement("option"); opt.value=r.resumeId||""; opt.textContent=(r.resumeId||"NO-ID")+" — "+(r.name||"Unnamed"); select.appendChild(opt);});
+ if(current)select.value=current;
+}
+function selectResumeFromDropdown(id){if(id)$("searchId").value=id;}
+async function refreshResumeList(){
+ let list=[];
+ if(GAS_API_URL){try{const r=await fetch(GAS_API_URL+"?action=list");const out=await r.json();if(out.success&&Array.isArray(out.data))list=out.data;}catch(e){console.error(e);}}
+ const local=[]; for(let i=0;i<localStorage.length;i++){const key=localStorage.key(i);if(key&&key.startsWith("ND_RESUME_")){try{const d=JSON.parse(localStorage.getItem(key));if(d&&d.resumeId)local.push({resumeId:d.resumeId,name:d.name||"Unnamed"});}catch(e){}}}
+ const map=new Map(); [...list,...local].forEach(r=>{if(r.resumeId)map.set(String(r.resumeId),r)}); setResumeDropdown([...map.values()]);
+}
+
 async function loadResume(){
- const id=$("searchId").value.trim();
- if(!id){toast("Enter Resume ID.");return;}
+ const id=($("resumeSelect").value || $("searchId").value).trim();
+ if(!id){toast("Select Resume ID + Name.");return;}
+ $("searchId").value=id;
  let d=null;
 
  if(GAS_API_URL){
@@ -184,4 +200,5 @@ function fillData(d){
 
 addEducation({degree:"Bachelor / Graduation",institute:"Your College / University",year:"2026",grade:""});
 addExperience({title:"Your Job Title",company:"Company Name",duration:"2024 – Present",description:"Describe your responsibilities and achievements."});
+refreshResumeList();
 update();
