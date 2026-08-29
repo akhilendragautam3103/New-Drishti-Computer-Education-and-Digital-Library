@@ -16,7 +16,7 @@
 <div class="app">
 <section class="panel form">
 <div class="toolbar"><div><b>Resume Editor</b><small>All changes appear instantly</small></div>
-<div class="idbox"><input id="searchId" placeholder="Resume ID"><button onclick="loadResume()">🔎 Load</button></div></div>
+<div class="idbox"><select id="resumeSelect" onchange="selectResumeFromDropdown(this.value)"><option value="">📋 Select Resume ID + Name</option></select><input id="searchId" placeholder="Resume ID"><button onclick="loadResume()">🔎 Load</button></div></div>
 
 <section><h2>👤 Personal Information</h2>
 <div class="grid two">
