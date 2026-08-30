@@ -1,0 +1,1154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>NDCE Admission Form</title>
+
+<link rel="stylesheet" href="style.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+</head>
+
+<body>
+
+<header class="top-header">
+
+    <div class="header-left">
+
+        <h1>NEW DRISHTI COMPUTER EDUCATION</h1>
+
+        <p>Admission & Registration System</p>
+
+    </div>
+
+    <div class="header-actions">
+
+        <div class="theme-control">
+
+            <label for="themeSelect">🎨 Theme</label>
+
+            <select id="themeSelect" onchange="changeTheme(this.value)">
+
+                <option value="ocean">Ocean Blue</option>
+                <option value="purple">Purple</option>
+                <option value="green">Green</option>
+                <option value="orange">Orange</option>
+                <option value="rose">Rose</option>
+                <option value="dark">Dark</option>
+
+            </select>
+
+        </div>
+
+        <button
+            class="admin-btn"
+            onclick="openAdminLogin()">
+
+            🔐 Admin
+
+        </button>
+
+    </div>
+
+</header>
+
+
+<nav class="navbar">
+
+    <div class="nav-brand">
+        NDCE
+    </div>
+
+    <div class="dropdown">
+
+        <button class="dropbtn">
+            JOIN US ▾
+        </button>
+
+        <div class="dropdown-content">
+
+            <a href="#admissionForm"
+               onclick="selectCourse('DCA')">
+                DCA
+            </a>
+
+            <a href="#admissionForm"
+               onclick="selectCourse('ADCA')">
+                ADCA
+            </a>
+
+            <a href="#admissionForm"
+               onclick="selectCourse('Tally')">
+                Tally
+            </a>
+
+            <a href="#admissionForm"
+               onclick="selectCourse('CCC')">
+                CCC
+            </a>
+
+            <a href="#admissionForm"
+               onclick="selectCourse('O Level')">
+                O Level
+            </a>
+
+            <a href="#admissionForm"
+               onclick="selectCourse('Typing Hindi')">
+                Typing Hindi
+            </a>
+
+            <a href="#admissionForm"
+               onclick="selectCourse('Typing English')">
+                Typing English
+            </a>
+
+            <a href="#admissionForm"
+               onclick="selectCourse('Other')">
+                Other Course
+            </a>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+<main>
+
+<section class="hero">
+
+    <h2>ONLINE ADMISSION FORM</h2>
+
+    <p>
+        Fill the form carefully. Your Registration Number,
+        Receipt Number, Application Form PDF and Payment
+        Receipt PDF will be sent to your valid Gmail ID.
+    </p>
+
+</section>
+
+
+<div class="notice">
+
+    ⚠️ <b>IMPORTANT:</b>
+
+    Valid Gmail ID is compulsory.
+    Registration Number, Receipt Number,
+    Application Form PDF and Payment Receipt PDF
+    will be sent to this email address.
+
+</div>
+
+
+<section class="form-card">
+
+<form
+    id="admissionForm"
+    enctype="multipart/form-data"
+    onsubmit="submitAdmission(event)">
+
+
+<h2>👨‍🎓 Student Information</h2>
+
+<div class="grid">
+
+    <div class="field">
+
+        <label>Student Full Name *</label>
+
+        <input
+            type="text"
+            id="studentName"
+            required>
+
+    </div>
+
+
+    <div class="field">
+
+        <label>Father's Name *</label>
+
+        <input
+            type="text"
+            id="fatherName"
+            required>
+
+    </div>
+
+
+    <div class="field">
+
+        <label>Mother's Name</label>
+
+        <input
+            type="text"
+            id="motherName">
+
+    </div>
+
+
+    <div class="field">
+
+        <label>Date of Birth *</label>
+
+        <input
+            type="date"
+            id="dob"
+            required>
+
+    </div>
+
+
+    <div class="field">
+
+        <label>Gender *</label>
+
+        <select id="gender" required>
+
+            <option value="">
+                Select Gender
+            </option>
+
+            <option>Male</option>
+            <option>Female</option>
+            <option>Other</option>
+
+        </select>
+
+    </div>
+
+
+    <div class="field">
+
+        <label>Mobile Number *</label>
+
+        <input
+            type="tel"
+            id="mobile"
+            maxlength="10"
+            pattern="[0-9]{10}"
+            required>
+
+    </div>
+
+
+    <div class="field">
+
+        <label>WhatsApp Number</label>
+
+        <input
+            type="tel"
+            id="whatsapp"
+            maxlength="10"
+            pattern="[0-9]{10}">
+
+    </div>
+
+
+    <div class="field email-field">
+
+        <label>Gmail ID *</label>
+
+        <input
+            type="email"
+            id="email"
+            placeholder="example@gmail.com"
+            required
+            oninput="validateGmail()">
+
+        <small
+            id="emailMessage"
+            class="email-message">
+
+            ⚠️ Valid Gmail ID डालें।
+
+        </small>
+
+    </div>
+
+</div>
+
+
+<h2>🏠 Address</h2>
+
+<div class="grid">
+
+    <div class="field">
+
+        <label>Address *</label>
+
+        <textarea
+            id="address"
+            required></textarea>
+
+    </div>
+
+
+    <div class="field">
+
+        <label>Village / Town *</label>
+
+        <input
+            type="text"
+            id="village"
+            required>
+
+    </div>
+
+
+    <div class="field">
+
+        <label>District *</label>
+
+        <input
+            type="text"
+            id="district"
+            value="Chandauli"
+            required>
+
+    </div>
+
+
+    <div class="field">
+
+        <label>State *</label>
+
+        <input
+            type="text"
+            id="state"
+            value="Uttar Pradesh"
+            required>
+
+    </div>
+
+
+    <div class="field">
+
+        <label>PIN Code *</label>
+
+        <input
+            type="text"
+            id="pincode"
+            maxlength="6"
+            pattern="[0-9]{6}"
+            required>
+
+    </div>
+
+</div>
+
+
+<h2>🎓 Course Information</h2>
+
+<div class="grid">
+
+    <div class="field">
+
+        <label>Select Course *</label>
+
+        <select
+            id="course"
+            required
+            onchange="updateFee()">
+
+            <option value="">
+                Select Course
+            </option>
+
+            <option value="DCA" data-fee="6000">
+                DCA
+            </option>
+
+            <option value="ADCA" data-fee="10000">
+                ADCA
+            </option>
+
+            <option value="Tally" data-fee="5000">
+                Tally
+            </option>
+
+            <option value="CCC" data-fee="3000">
+                CCC
+            </option>
+
+            <option value="O Level" data-fee="15000">
+                O Level
+            </option>
+
+            <option value="Typing Hindi" data-fee="2000">
+                Typing Hindi
+            </option>
+
+            <option value="Typing English" data-fee="2000">
+                Typing English
+            </option>
+
+            <option value="Other" data-fee="0">
+                Other Course
+            </option>
+
+        </select>
+
+    </div>
+
+
+    <div class="field">
+
+        <label>Batch / Timing</label>
+
+        <select id="batch">
+
+            <option value="">
+                Select Batch
+            </option>
+
+            <option>Morning</option>
+            <option>Afternoon</option>
+            <option>Evening</option>
+
+        </select>
+
+    </div>
+
+
+    <div class="field">
+
+        <label>Admission Fee</label>
+
+        <input
+            type="number"
+            id="courseFee"
+            readonly>
+
+    </div>
+
+</div>
+
+
+<h2>📷 Upload Documents</h2>
+
+<div class="grid">
+
+    <div class="field">
+
+        <label>Student Photo *</label>
+
+        <input
+            type="file"
+            id="studentPhoto"
+            accept="image/*"
+            required
+            onchange="previewPhoto(event)">
+
+        <img
+            id="photoPreview"
+            class="photo-preview"
+            alt="Photo Preview">
+
+    </div>
+
+
+    <div class="field">
+
+        <label>Aadhaar / Other Document</label>
+
+        <input
+            type="file"
+            id="documentFile"
+            accept="image/*,.pdf">
+
+    </div>
+
+</div>
+
+
+<h2>💳 Payment Method</h2>
+
+<div class="payment-box">
+
+    <label>
+
+        <input
+            type="radio"
+            name="paymentMethod"
+            value="UPI"
+            onchange="showUPI()">
+
+        UPI Payment
+
+    </label>
+
+
+    <label>
+
+        <input
+            type="radio"
+            name="paymentMethod"
+            value="Offline"
+            checked
+            onchange="hideUPI()">
+
+        Offline Payment
+
+    </label>
+
+</div>
+
+
+<div id="upiBox" class="upi-box hidden">
+
+    <h3>📱 Scan & Pay</h3>
+
+    <div id="upiQRCode"></div>
+
+    <p>
+        UPI ID:
+        <b id="displayUPI"></b>
+    </p>
+
+    <p>
+        After payment, enter your UPI Transaction ID below.
+    </p>
+
+</div>
+
+
+<div class="grid">
+
+    <div class="field">
+
+        <label>Payment Status *</label>
+
+        <select
+            id="paymentStatus"
+            required>
+
+            <option value="Unpaid">
+                Unpaid
+            </option>
+
+            <option value="Paid">
+                Paid
+            </option>
+
+        </select>
+
+    </div>
+
+
+    <div class="field">
+
+        <label>Transaction ID / Receipt No.</label>
+
+        <input
+            type="text"
+            id="transactionId"
+            placeholder="UPI Transaction ID / Offline Receipt No.">
+
+    </div>
+
+</div>
+
+
+<div class="declaration">
+
+    <label>
+
+        <input
+            type="checkbox"
+            id="declaration"
+            required>
+
+        I declare that the information provided by me is
+        correct and complete.
+
+    </label>
+
+</div>
+
+
+<div class="button-row">
+
+    <button
+        type="button"
+        class="secondary"
+        onclick="history.back()">
+
+        ← Back
+
+    </button>
+
+
+    <button
+        type="button"
+        class="warning"
+        onclick="resetForm()">
+
+        ↻ Reset
+
+    </button>
+
+
+    <button
+        type="submit"
+        class="primary"
+        id="submitBtn">
+
+        Submit Admission
+
+    </button>
+
+</div>
+
+</form>
+
+</section>
+
+
+<!-- SUCCESS -->
+
+<section
+    id="successSection"
+    class="success-card hidden">
+
+    <h2>
+        🎉 Admission Submitted Successfully
+    </h2>
+
+
+    <div class="registration-box">
+
+        <p>
+            Registration Number
+        </p>
+
+        <strong id="registrationNumber"></strong>
+
+
+        <p class="receipt-number-label">
+            Receipt Number
+        </p>
+
+        <strong
+            id="receiptNumber"
+            class="receipt-number">
+        </strong>
+
+    </div>
+
+
+    <p id="successMessage"></p>
+
+
+    <div class="button-row">
+
+        <button
+            class="primary"
+            onclick="printApplication()">
+
+            🖨 Print Form
+
+        </button>
+
+
+        <button
+            class="success"
+            onclick="printReceipt()">
+
+            🧾 Print Receipt
+
+        </button>
+
+
+        <button
+            class="secondary"
+            onclick="editApplication()">
+
+            ✏ Edit Application
+
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- PRINT FORM -->
+
+<section
+    id="printFormSection"
+    class="print-section">
+
+    <div class="print-page">
+
+        <h1>
+            NEW DRISHTI COMPUTER EDUCATION
+        </h1>
+
+        <h3>
+            ADMISSION APPLICATION FORM
+        </h3>
+
+        <hr>
+
+
+        <div class="print-registration">
+
+            Registration No:
+            <b id="printRegNo"></b>
+
+        </div>
+
+
+        <table>
+
+            <tr>
+
+                <th>Student Name</th>
+
+                <td id="pStudentName"></td>
+
+                <td
+                    rowspan="4"
+                    class="photo-cell">
+
+                    <img
+                        id="pPhoto"
+                        alt="Student Photo">
+
+                </td>
+
+            </tr>
+
+
+            <tr>
+
+                <th>Father's Name</th>
+
+                <td id="pFatherName"></td>
+
+            </tr>
+
+
+            <tr>
+
+                <th>Mother's Name</th>
+
+                <td id="pMotherName"></td>
+
+            </tr>
+
+
+            <tr>
+
+                <th>Date of Birth</th>
+
+                <td id="pDOB"></td>
+
+            </tr>
+
+
+            <tr>
+
+                <th>Gender</th>
+
+                <td id="pGender"></td>
+
+            </tr>
+
+
+            <tr>
+
+                <th>Mobile</th>
+
+                <td id="pMobile"></td>
+
+            </tr>
+
+
+            <tr>
+
+                <th>Gmail</th>
+
+                <td id="pEmail"></td>
+
+            </tr>
+
+
+            <tr>
+
+                <th>Address</th>
+
+                <td id="pAddress"></td>
+
+            </tr>
+
+
+            <tr>
+
+                <th>Course</th>
+
+                <td id="pCourse"></td>
+
+            </tr>
+
+
+            <tr>
+
+                <th>Batch</th>
+
+                <td id="pBatch"></td>
+
+            </tr>
+
+
+            <tr>
+
+                <th>Fee</th>
+
+                <td id="pFee"></td>
+
+            </tr>
+
+
+            <tr>
+
+                <th>Payment Status</th>
+
+                <td id="pPayment"></td>
+
+            </tr>
+
+        </table>
+
+
+        <br>
+
+        <p>
+            I declare that the information given above is correct.
+        </p>
+
+
+        <div class="signature-row">
+
+            <span>
+                Student Signature
+            </span>
+
+            <span>
+                Authorized Signature
+            </span>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- PRINT RECEIPT -->
+
+<section
+    id="printReceiptSection"
+    class="print-section">
+
+    <div class="receipt-page">
+
+        <h1>
+            NEW DRISHTI COMPUTER EDUCATION
+        </h1>
+
+        <h3>
+            ADMISSION PAYMENT RECEIPT
+        </h3>
+
+        <hr>
+
+
+        <div class="receipt-reg">
+
+            Registration No:
+            <b id="rRegNo"></b>
+
+            <br>
+
+            Receipt No:
+            <b id="rReceiptNo"></b>
+
+        </div>
+
+
+        <div class="receipt-info">
+
+            <p>
+                <b>Student:</b>
+                <span id="rStudent"></span>
+            </p>
+
+
+            <p>
+                <b>Course:</b>
+                <span id="rCourse"></span>
+            </p>
+
+
+            <p>
+                <b>Mobile:</b>
+                <span id="rMobile"></span>
+            </p>
+
+
+            <p>
+                <b>Email:</b>
+                <span id="rEmail"></span>
+            </p>
+
+
+            <p>
+                <b>Amount:</b>
+                ₹<span id="rAmount"></span>
+            </p>
+
+
+            <p>
+                <b>Payment Mode:</b>
+                <span id="rPaymentMode"></span>
+            </p>
+
+
+            <p>
+                <b>Payment Status:</b>
+                <span id="rPaymentStatus"></span>
+            </p>
+
+
+            <p>
+                <b>Transaction ID:</b>
+                <span id="rTransaction"></span>
+            </p>
+
+
+            <p>
+                <b>Date:</b>
+                <span id="rDate"></span>
+            </p>
+
+        </div>
+
+
+        <div class="receipt-qr">
+
+            <div id="receiptQR"></div>
+
+        </div>
+
+
+        <p class="receipt-note">
+
+            This is a computer generated admission receipt.
+
+        </p>
+
+
+        <div class="signature-row">
+
+            <span>Student</span>
+
+            <span>Authorized Signature</span>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ADMIN LOGIN -->
+
+<div
+    id="adminLoginModal"
+    class="modal hidden">
+
+    <div class="modal-content">
+
+        <span
+            class="close"
+            onclick="closeAdminLogin()">
+
+            ×
+
+        </span>
+
+
+        <h2>
+            🔐 Admin Login
+        </h2>
+
+
+        <input
+            type="text"
+            id="adminUser"
+            placeholder="Username">
+
+
+        <input
+            type="password"
+            id="adminPassword"
+            placeholder="Password">
+
+
+        <button
+            class="primary"
+            onclick="adminLogin()">
+
+            Login
+
+        </button>
+
+
+        <p id="adminLoginMessage"></p>
+
+    </div>
+
+</div>
+
+
+<!-- ADMIN DASHBOARD -->
+
+<section
+    id="adminDashboard"
+    class="admin-dashboard hidden">
+
+    <div class="admin-head">
+
+        <h2>
+            📊 NDCE ADMIN DASHBOARD
+        </h2>
+
+
+        <button
+            class="danger"
+            onclick="adminLogout()">
+
+            Logout
+
+        </button>
+
+    </div>
+
+
+    <div class="stats">
+
+        <div>
+            <span>Total</span>
+            <b id="totalAdmissions">0</b>
+        </div>
+
+
+        <div>
+            <span>Paid</span>
+            <b id="paidAdmissions">0</b>
+        </div>
+
+
+        <div>
+            <span>Unpaid</span>
+            <b id="unpaidAdmissions">0</b>
+        </div>
+
+
+        <div>
+            <span>Approved</span>
+            <b id="approvedAdmissions">0</b>
+        </div>
+
+    </div>
+
+
+    <div class="filter-row">
+
+        <input
+            type="text"
+            id="adminSearch"
+            placeholder="Search Registration / Name / Mobile"
+            oninput="filterAdmissions()">
+
+
+        <select
+            id="adminCourseFilter"
+            onchange="filterAdmissions()">
+
+            <option value="">
+                All Courses
+            </option>
+
+            <option>DCA</option>
+            <option>ADCA</option>
+            <option>Tally</option>
+            <option>CCC</option>
+            <option>O Level</option>
+            <option>Typing Hindi</option>
+            <option>Typing English</option>
+            <option>Other</option>
+
+        </select>
+
+
+        <select
+            id="adminPaymentFilter"
+            onchange="filterAdmissions()">
+
+            <option value="">
+                All Payment
+            </option>
+
+            <option>Paid</option>
+            <option>Unpaid</option>
+
+        </select>
+
+    </div>
+
+
+    <div class="table-container">
+
+        <table id="adminTable">
+
+            <thead>
+
+                <tr>
+
+                    <th>Registration</th>
+                    <th>Receipt</th>
+                    <th>Date</th>
+                    <th>Name</th>
+                    <th>Course</th>
+                    <th>Mobile</th>
+                    <th>Payment</th>
+                    <th>Status</th>
+                    <th>Action</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody id="adminTableBody"></tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+</main>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
