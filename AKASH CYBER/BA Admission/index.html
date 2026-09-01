@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AKASH CYBER - BA Fee Management</title>
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="top-header">
+
+    <div>
+        <h1>AKASH CYBER</h1>
+        <p>BA Fee & Accounting Management System</p>
+    </div>
+
+    <div class="date-box">
+        <div id="liveTime">--:--:--</div>
+        <div id="liveDay">---</div>
+        <div id="liveDate">---</div>
+    </div>
+
+</header>
+
+
+<div class="theme-bar">
+
+    <button onclick="changeTheme('blue')">Blue</button>
+    <button onclick="changeTheme('green')">Green</button>
+    <button onclick="changeTheme('purple')">Purple</button>
+    <button onclick="changeTheme('dark')">Dark</button>
+    <button onclick="changeTheme('default')">Default</button>
+
+</div>
+
+
+<nav class="navbar">
+
+    <button onclick="showSection('dashboardSection')">
+        Dashboard
+    </button>
+
+    <button onclick="showSection('firstYearSection')">
+        Ist Year
+    </button>
+
+    <button onclick="showSection('otherYearSection')">
+        IInd / IIIrd Year
+    </button>
+
+    <button onclick="showSection('expenseSection')">
+        Expense
+    </button>
+
+    <button onclick="showSection('recordsSection')">
+        Records
+    </button>
+
+    <button onclick="showSection('reportSection')">
+        Reports
+    </button>
+
+</nav>
+
+
+<main>
+
+
+<!-- =====================================================
+     DASHBOARD
+===================================================== -->
+
+<section id="dashboardSection" class="content-section active">
+
+    <h2>Dashboard</h2>
+
+    <div class="dashboard-grid">
+
+        <div class="card">
+            <h3>Total Collection</h3>
+            <strong id="totalCollection">₹0</strong>
+        </div>
+
+        <div class="card">
+            <h3>Total Fees</h3>
+            <strong id="totalFees">₹0</strong>
+        </div>
+
+        <div class="card profit-card">
+            <h3>Total Charges / Net Profit</h3>
+            <strong id="totalProfit">₹0</strong>
+        </div>
+
+        <div class="card expense-card">
+            <h3>Total Expense</h3>
+            <strong id="totalExpense">₹0</strong>
+        </div>
+
+        <div class="card refund-card">
+            <h3>Total Refundable Amount</h3>
+            <strong id="totalRefundable">₹0</strong>
+        </div>
+
+        <div class="card">
+            <h3>Today Collection</h3>
+            <strong id="todayCollection">₹0</strong>
+        </div>
+
+        <div class="card">
+            <h3>Ist Year Registration</h3>
+            <strong id="firstRegistrationCount">0</strong>
+        </div>
+
+        <div class="card">
+            <h3>Ist Year Counseling</h3>
+            <strong id="counselingCount">0</strong>
+        </div>
+
+        <div class="card">
+            <h3>IInd / IIIrd Year</h3>
+            <strong id="otherYearCount">0</strong>
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     IST YEAR
+===================================================== -->
+
+<section id="firstYearSection" class="content-section">
+
+    <h2>BA Ist Year Registration</h2>
+
+    <form id="firstYearRegistrationForm"
+          onsubmit="saveFirstYearRegistration(event)">
+
+        <input type="hidden" id="firstEditId">
+
+        <div class="form-grid">
+
+            <div>
+                <label>Candidate Name</label>
+                <input id="firstCandidateName" required>
+            </div>
+
+            <div>
+                <label>Father Name</label>
+                <input id="firstFatherName" required>
+            </div>
+
+            <div>
+                <label>Village Name</label>
+                <input id="firstVillageName" required>
+            </div>
+
+            <div>
+                <label>Candidate Mobile Number</label>
+                <input id="firstMobile"
+                       type="tel"
+                       maxlength="10"
+                       required>
+            </div>
+
+            <div>
+                <label>Registration Fees</label>
+                <input id="registrationFees"
+                       type="number"
+                       min="0"
+                       oninput="calculateFirstRegistration()"
+                       required>
+            </div>
+
+            <div>
+                <label>Charge / Profit</label>
+                <input id="registrationCharge"
+                       type="number"
+                       min="0"
+                       oninput="calculateFirstRegistration()"
+                       required>
+            </div>
+
+            <div>
+                <label>Collected Amount</label>
+                <input id="registrationCollected"
+                       readonly>
+            </div>
+
+        </div>
+
+        <div class="form-buttons">
+
+            <button class="save-btn" type="submit">
+                Save Registration
+            </button>
+
+            <button type="button"
+                    onclick="resetFirstRegistration()">
+                Reset
+            </button>
+
+            <button type="button"
+                    onclick="printCurrentFirstRegistration()">
+                Print
+            </button>
+
+        </div>
+
+    </form>
+
+
+
+    <hr>
+
+
+
+    <h2>BA Ist Year Counseling</h2>
+
+    <form id="counselingForm"
+          onsubmit="saveCounseling(event)">
+
+        <input type="hidden" id="counselingEditId">
+
+        <div class="form-grid">
+
+            <div>
+                <label>Candidate Name</label>
+                <input id="counselingCandidateName" required>
+            </div>
+
+            <div>
+                <label>Father Name</label>
+                <input id="counselingFatherName" required>
+            </div>
+
+            <div>
+                <label>Candidate Mobile</label>
+                <input id="counselingMobile"
+                       maxlength="10"
+                       required>
+            </div>
+
+            <div>
+                <label>1st Year Fees</label>
+                <input id="firstYearFees"
+                       type="number"
+                       min="0"
+                       oninput="calculateCounseling()"
+                       required>
+            </div>
+
+            <div>
+                <label>Charge / Profit</label>
+                <input id="counselingCharge"
+                       type="number"
+                       min="0"
+                       oninput="calculateCounseling()"
+                       required>
+            </div>
+
+            <div>
+                <label>Collected Amount</label>
+                <input id="counselingCollected"
+                       readonly>
+            </div>
+
+        </div>
+
+        <div class="form-buttons">
+
+            <button class="save-btn" type="submit">
+                Save Counseling
+            </button>
+
+            <button type="button"
+                    onclick="resetCounseling()">
+                Reset
+            </button>
+
+        </div>
+
+    </form>
+
+</section>
+
+
+
+<!-- =====================================================
+     II / III YEAR
+===================================================== -->
+
+<section id="otherYearSection" class="content-section">
+
+    <h2>BA IInd & IIIrd Year Registration</h2>
+
+    <form id="otherYearForm"
+          onsubmit="saveOtherYear(event)">
+
+        <input type="hidden" id="otherEditId">
+
+        <div class="form-grid">
+
+            <div>
+                <label>Candidate Name</label>
+                <input id="otherCandidateName" required>
+            </div>
+
+            <div>
+                <label>Father Name</label>
+                <input id="otherFatherName" required>
+            </div>
+
+            <div>
+                <label>Village Name</label>
+                <input id="otherVillageName" required>
+            </div>
+
+            <div>
+                <label>Candidate Mobile Number</label>
+                <input id="otherMobile"
+                       type="tel"
+                       maxlength="10"
+                       required>
+            </div>
+
+            <div>
+                <label>Select Year</label>
+
+                <select id="otherYear"
+                        onchange="loadYearFees()"
+                        required>
+
+                    <option value="">
+                        Select Year
+                    </option>
+
+                    <option value="1st Year">
+                        1st Year
+                    </option>
+
+                    <option value="2nd Year">
+                        2nd Year
+                    </option>
+
+                    <option value="3rd Year">
+                        3rd Year
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div>
+                <label>Year Fees</label>
+
+                <input id="otherYearFees"
+                       type="number"
+                       min="0"
+                       oninput="calculateOtherYear()"
+                       required>
+
+            </div>
+
+
+            <div>
+                <label>Charge / Profit</label>
+
+                <input id="otherCharge"
+                       type="number"
+                       min="0"
+                       oninput="calculateOtherYear()"
+                       required>
+
+            </div>
+
+
+            <div>
+                <label>Deposit Amount</label>
+
+                <input id="otherDepositAmount"
+                       readonly>
+
+            </div>
+
+
+            <div>
+                <label>Actual Deposit Amount</label>
+
+                <input id="otherActualDepositAmount"
+                       type="number"
+                       min="0"
+                       oninput="calculateOtherYear()"
+                       required>
+
+            </div>
+
+
+            <div>
+                <label>Refundable Amount</label>
+
+                <input id="otherRefundableAmount"
+                       readonly>
+
+            </div>
+
+
+            <div>
+                <label>Collected Amount</label>
+
+                <input id="otherCollected"
+                       readonly>
+
+            </div>
+
+        </div>
+
+
+        <div class="formula-box">
+
+            <p>
+                <b>Deposit Amount</b>
+                =
+                Year Fees − Charge
+            </p>
+
+            <p>
+                <b>Refundable Amount</b>
+                =
+                Deposit Amount − Actual Deposit Amount
+            </p>
+
+            <p>
+                <b>Net Profit</b>
+                =
+                Total Charges
+            </p>
+
+        </div>
+
+
+        <div class="form-buttons">
+
+            <button class="save-btn" type="submit">
+                Save Registration
+            </button>
+
+            <button type="button"
+                    onclick="resetOtherYear()">
+                Reset
+            </button>
+
+            <button type="button"
+                    onclick="printCurrentOtherYear()">
+                Print
+            </button>
+
+        </div>
+
+    </form>
+
+</section>
+
+
+
+<!-- =====================================================
+     EXPENSE
+===================================================== -->
+
+<section id="expenseSection" class="content-section">
+
+    <h2>Expense Entry</h2>
+
+    <form id="expenseForm"
+          onsubmit="saveExpense(event)">
+
+        <input type="hidden" id="expenseEditId">
+
+        <div class="form-grid">
+
+            <div>
+                <label>Date</label>
+                <input id="expenseDate"
+                       type="date"
+                       required>
+            </div>
+
+            <div>
+                <label>Expense Category</label>
+                <input id="expenseCategory" required>
+            </div>
+
+            <div>
+                <label>Description</label>
+                <input id="expenseDescription" required>
+            </div>
+
+            <div>
+                <label>Expense Amount</label>
+                <input id="expenseAmount"
+                       type="number"
+                       min="0"
+                       required>
+            </div>
+
+        </div>
+
+        <div class="form-buttons">
+
+            <button class="save-btn" type="submit">
+                Save Expense
+            </button>
+
+            <button type="button"
+                    onclick="resetExpense()">
+                Reset
+            </button>
+
+        </div>
+
+    </form>
+
+</section>
+
+
+
+<!-- =====================================================
+     RECORDS
+===================================================== -->
+
+<section id="recordsSection" class="content-section">
+
+    <h2>All Records</h2>
+
+    <div class="filter-box">
+
+        <input id="recordSearch"
+               placeholder="Search Name / Mobile / Village"
+               oninput="renderRecords()">
+
+        <select id="recordTypeFilter"
+                onchange="renderRecords()">
+
+            <option value="">All Types</option>
+
+            <option value="BA Ist Year Registration">
+                Ist Year Registration
+            </option>
+
+            <option value="BA Ist Year Counseling">
+                Ist Year Counseling
+            </option>
+
+            <option value="BA IInd / IIIrd Year">
+                IInd / IIIrd Year
+            </option>
+
+            <option value="Expense">
+                Expense
+            </option>
+
+        </select>
+
+        <input id="recordDateFilter"
+               type="date"
+               onchange="renderRecords()">
+
+        <button onclick="clearRecordFilters()">
+            Clear
+        </button>
+
+        <button onclick="printRecords()">
+            Print
+        </button>
+
+    </div>
+
+
+    <div class="table-container">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>Date</th>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Father</th>
+                    <th>Village</th>
+                    <th>Year</th>
+                    <th>Mobile</th>
+                    <th>Fees</th>
+                    <th>Charge</th>
+                    <th>Deposit</th>
+                    <th>Actual Deposit</th>
+                    <th>Refundable</th>
+                    <th>Collection</th>
+                    <th>Action</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody id="recordsTableBody"></tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     REPORT
+===================================================== -->
+
+<section id="reportSection" class="content-section">
+
+    <h2>Accounting Reports</h2>
+
+    <div class="report-filter">
+
+        <label>From</label>
+
+        <input id="reportFrom"
+               type="date"
+               onchange="generateReport()">
+
+        <label>To</label>
+
+        <input id="reportTo"
+               type="date"
+               onchange="generateReport()">
+
+        <button onclick="todayReport()">
+            Today
+        </button>
+
+        <button onclick="monthReport()">
+            This Month
+        </button>
+
+        <button onclick="generateReport()">
+            Generate
+        </button>
+
+        <button onclick="printReport()">
+            Print Report
+        </button>
+
+    </div>
+
+
+    <div class="report-summary">
+
+        <div>
+            <span>Total Students</span>
+            <strong id="reportStudents">0</strong>
+        </div>
+
+        <div>
+            <span>Total Fees</span>
+            <strong id="reportFees">₹0</strong>
+        </div>
+
+        <div>
+            <span>Total Collection</span>
+            <strong id="reportCollection">₹0</strong>
+        </div>
+
+        <div>
+            <span>Total Expense</span>
+            <strong id="reportExpense">₹0</strong>
+        </div>
+
+        <div>
+            <span>Total Charges / Net Profit</span>
+            <strong id="reportProfit">₹0</strong>
+        </div>
+
+        <div>
+            <span>Total Refundable</span>
+            <strong id="reportRefundable">₹0</strong>
+        </div>
+
+    </div>
+
+
+    <h3>Day-wise Accounting Report</h3>
+
+    <div class="table-container">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>Date</th>
+                    <th>Registration</th>
+                    <th>Counseling</th>
+                    <th>IInd / IIIrd</th>
+                    <th>Total Collection</th>
+                    <th>Actual Deposit</th>
+                    <th>Refundable</th>
+                    <th>Expense</th>
+                    <th>Profit / Charges</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody id="dailyReportBody"></tbody>
+
+        </table>
+
+    </div>
+
+
+    <h3>Year-wise Summary</h3>
+
+    <div class="table-container">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>Year</th>
+                    <th>Records</th>
+                    <th>Fees</th>
+                    <th>Charges</th>
+                    <th>Deposit</th>
+                    <th>Actual Deposit</th>
+                    <th>Refundable</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody id="yearReportBody"></tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+</main>
+
+
+<div id="toast"></div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
