@@ -1,0 +1,2237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Online Examination System</title>
+
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- =========================================================
+     LOADING
+========================================================= -->
+<div id="loadingScreen" class="loading-screen">
+    <div class="loader"></div>
+    <div>Loading Examination System...</div>
+</div>
+
+
+<!-- =========================================================
+     LOGIN PAGE
+========================================================= -->
+<section id="loginPage" class="page active">
+
+    <div class="login-wrapper">
+
+        <div class="login-brand">
+            <div class="brand-logo">
+                <img id="loginLogo"
+                     src=""
+                     alt="Center Logo"
+                     onerror="this.style.display='none'">
+                <i class="fa-solid fa-graduation-cap default-logo"></i>
+            </div>
+
+            <h1 id="centerName">ONLINE EXAMINATION SYSTEM</h1>
+            <p>Computer Education & Online Examination Portal</p>
+        </div>
+
+
+        <div class="login-card">
+
+            <div class="login-tabs">
+                <button class="login-tab active"
+                        onclick="showLoginType('candidate')">
+                    <i class="fa-solid fa-user-graduate"></i>
+                    Candidate Login
+                </button>
+
+                <button class="login-tab"
+                        onclick="showLoginType('admin')">
+                    <i class="fa-solid fa-user-shield"></i>
+                    Admin Login
+                </button>
+            </div>
+
+
+            <!-- Candidate Login -->
+            <div id="candidateLoginBox" class="login-box">
+
+                <h2>Candidate Login</h2>
+                <p class="login-help">
+                    Login using Registration Number and Date of Birth.
+                </p>
+
+                <div class="form-group">
+                    <label>Registration Number</label>
+
+                    <div class="input-icon">
+                        <i class="fa-solid fa-id-card"></i>
+                        <input type="text"
+                               id="candidateRegNo"
+                               placeholder="Enter Registration Number"
+                               autocomplete="off">
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label>Date of Birth</label>
+
+                    <div class="input-icon">
+                        <i class="fa-solid fa-calendar"></i>
+                        <input type="date"
+                               id="candidateDOB">
+                    </div>
+                </div>
+
+
+                <button class="primary-btn full-btn"
+                        onclick="candidateLogin()">
+
+                    <i class="fa-solid fa-right-to-bracket"></i>
+                    Candidate Login
+
+                </button>
+
+            </div>
+
+
+            <!-- Admin Login -->
+            <div id="adminLoginBox"
+                 class="login-box hidden">
+
+                <h2>Administrator Login</h2>
+                <p class="login-help">
+                    Authorized administrators only.
+                </p>
+
+
+                <div class="form-group">
+                    <label>Admin User ID</label>
+
+                    <div class="input-icon">
+                        <i class="fa-solid fa-user-shield"></i>
+                        <input type="text"
+                               id="adminUsername"
+                               placeholder="Admin User ID">
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label>Password</label>
+
+                    <div class="input-icon">
+                        <i class="fa-solid fa-lock"></i>
+
+                        <input type="password"
+                               id="adminPassword"
+                               placeholder="Password">
+
+                        <button class="password-toggle"
+                                onclick="togglePassword('adminPassword')">
+                            <i class="fa-solid fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+
+                <button class="primary-btn full-btn"
+                        onclick="adminLogin()">
+
+                    <i class="fa-solid fa-right-to-bracket"></i>
+                    Admin Login
+
+                </button>
+
+            </div>
+
+        </div>
+
+        <div class="login-footer">
+            © <span id="loginYear"></span>
+            Online Examination System
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     CANDIDATE EXAM SELECTION
+========================================================= -->
+<section id="candidateHomePage" class="page">
+
+    <header class="top-header">
+
+        <div class="header-left">
+            <button class="mobile-menu-btn"
+                    onclick="toggleSidebar()">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <div class="header-title">
+                <i class="fa-solid fa-laptop-code"></i>
+                Candidate Dashboard
+            </div>
+        </div>
+
+        <div class="header-right">
+
+            <span id="candidateHeaderName"
+                  class="header-user-name"></span>
+
+            <button class="logout-btn"
+                    onclick="logout()">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Logout
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <div class="candidate-container">
+
+        <div class="welcome-card">
+
+            <div class="candidate-mini-profile">
+
+                <img id="candidateHomePhoto"
+                     src=""
+                     alt="Candidate Photo"
+                     class="candidate-photo">
+
+                <div>
+                    <h2>
+                        Welcome,
+                        <span id="candidateWelcomeName"></span>
+                    </h2>
+
+                    <p>
+                        Registration No:
+                        <strong id="candidateWelcomeReg"></strong>
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="section-title">
+            <i class="fa-solid fa-file-lines"></i>
+            Select Examination
+        </div>
+
+
+        <div id="candidateExamList"
+             class="exam-selection-grid">
+
+            <div class="empty-state">
+                Loading examinations...
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     EXAM INSTRUCTIONS
+========================================================= -->
+<section id="instructionPage" class="page">
+
+    <header class="top-header">
+
+        <div class="header-title">
+            <i class="fa-solid fa-circle-info"></i>
+            Examination Instructions
+        </div>
+
+        <button class="logout-btn"
+                onclick="backToCandidateHome()">
+            <i class="fa-solid fa-arrow-left"></i>
+            Back
+        </button>
+
+    </header>
+
+
+    <div class="instruction-container">
+
+        <div class="instruction-header">
+
+            <div>
+                <h1 id="instructionExamName"></h1>
+
+                <div class="exam-meta">
+                    <span>
+                        <i class="fa-solid fa-layer-group"></i>
+                        <b id="instructionExamType"></b>
+                    </span>
+
+                    <span>
+                        <i class="fa-solid fa-clock"></i>
+                        <b id="instructionDuration"></b>
+                    </span>
+
+                    <span>
+                        <i class="fa-solid fa-list-ol"></i>
+                        <b id="instructionQuestionCount"></b>
+                    </span>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="candidate-exam-preview">
+
+            <img id="instructionCandidatePhoto"
+                 src=""
+                 class="instruction-photo"
+                 alt="Candidate Photo">
+
+            <div>
+                <h3 id="instructionCandidateName"></h3>
+
+                <p>
+                    Registration No:
+                    <strong id="instructionCandidateReg"></strong>
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="instructions-box">
+
+            <h3>
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                Instructions
+            </h3>
+
+            <div id="instructionContent"
+                 class="instruction-content">
+            </div>
+
+        </div>
+
+
+        <div class="agreement-box">
+
+            <label>
+                <input type="checkbox"
+                       id="instructionAgree">
+
+                I have read and understood all the examination
+                instructions and agree to follow them.
+            </label>
+
+        </div>
+
+
+        <div class="instruction-actions">
+
+            <button class="secondary-btn"
+                    onclick="backToCandidateHome()">
+                <i class="fa-solid fa-arrow-left"></i>
+                Back
+            </button>
+
+            <button class="primary-btn"
+                    onclick="startExam()">
+
+                <i class="fa-solid fa-play"></i>
+                Start Exam
+
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     CANDIDATE EXAM PAGE
+========================================================= -->
+<section id="examPage" class="page exam-page">
+
+    <!-- Exam Header -->
+    <header class="exam-header">
+
+        <div class="exam-header-left">
+
+            <div class="exam-candidate">
+
+                <img id="examCandidatePhoto"
+                     src=""
+                     class="exam-candidate-photo"
+                     alt="Candidate">
+
+                <div>
+                    <div class="exam-candidate-name"
+                         id="examCandidateName">
+                    </div>
+
+                    <div class="exam-candidate-reg"
+                         id="examCandidateReg">
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="exam-header-center">
+
+            <div class="exam-title"
+                 id="liveExamName">
+            </div>
+
+            <div class="exam-type"
+                 id="liveExamType">
+            </div>
+
+        </div>
+
+
+        <div class="exam-header-right">
+
+            <div class="center-logo-box">
+
+                <img id="examCenterLogo"
+                     src=""
+                     alt="Center Logo"
+                     class="center-logo">
+
+            </div>
+
+            <div class="timer-box"
+                 id="timerBox">
+
+                <i class="fa-solid fa-clock"></i>
+
+                <span id="examTimer">
+                    00:00:00
+                </span>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- Exam Body -->
+    <div class="exam-layout">
+
+
+        <!-- Question Area -->
+        <main class="question-area">
+
+            <div class="question-toolbar">
+
+                <div>
+                    Question
+                    <strong>
+                        <span id="currentQuestionNo">1</span>
+                    </strong>
+                    of
+                    <strong>
+                        <span id="totalQuestionNo">0</span>
+                    </strong>
+                </div>
+
+                <div class="question-status">
+                    <span id="questionStatusText">
+                        Not Answered
+                    </span>
+                </div>
+
+            </div>
+
+
+            <div class="question-card">
+
+                <div id="questionText"
+                     class="question-text">
+                </div>
+
+
+                <div id="questionImageContainer"
+                     class="question-image-container hidden">
+
+                    <img id="questionImage"
+                         src=""
+                         alt="Question Image">
+
+                </div>
+
+
+                <div id="optionsContainer"
+                     class="options-container">
+                </div>
+
+            </div>
+
+
+            <div class="question-navigation">
+
+                <button class="secondary-btn"
+                        onclick="previousQuestion()">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    Previous
+                </button>
+
+
+                <button class="reset-btn"
+                        onclick="resetAnswer()">
+                    <i class="fa-solid fa-rotate-left"></i>
+                    Reset
+                </button>
+
+
+                <button class="review-btn"
+                        onclick="markForReview()">
+                    <i class="fa-solid fa-flag"></i>
+                    Mark for Review
+                </button>
+
+
+                <button class="primary-btn"
+                        onclick="nextQuestion()">
+
+                    Next
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </button>
+
+            </div>
+
+
+            <div class="submit-exam-container">
+
+                <button class="submit-exam-btn"
+                        onclick="confirmSubmitExam()">
+
+                    <i class="fa-solid fa-paper-plane"></i>
+                    Submit Examination
+
+                </button>
+
+            </div>
+
+        </main>
+
+
+
+        <!-- Palette -->
+        <aside class="question-palette">
+
+            <div class="palette-header">
+
+                <h3>
+                    <i class="fa-solid fa-table-cells"></i>
+                    Question Palette
+                </h3>
+
+            </div>
+
+
+            <div class="palette-summary">
+
+                <div>
+                    <span class="palette-dot answered"></span>
+                    Answered
+                    <b id="answeredCount">0</b>
+                </div>
+
+                <div>
+                    <span class="palette-dot unanswered"></span>
+                    Not Answered
+                    <b id="unansweredCount">0</b>
+                </div>
+
+                <div>
+                    <span class="palette-dot review"></span>
+                    Review
+                    <b id="reviewCount">0</b>
+                </div>
+
+                <div>
+                    <span class="palette-dot current"></span>
+                    Current
+                </div>
+
+            </div>
+
+
+            <div id="questionPalette"
+                 class="palette-grid">
+            </div>
+
+
+            <div class="palette-footer">
+
+                <button class="submit-exam-btn"
+                        onclick="confirmSubmitExam()">
+
+                    <i class="fa-solid fa-paper-plane"></i>
+                    Submit Exam
+
+                </button>
+
+            </div>
+
+        </aside>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     EXAM SUBMITTED PAGE
+========================================================= -->
+<section id="submittedPage"
+         class="page">
+
+    <div class="submitted-wrapper">
+
+        <div class="submitted-card">
+
+            <div class="success-icon">
+                <i class="fa-solid fa-check"></i>
+            </div>
+
+            <h1>Examination Submitted</h1>
+
+            <p>
+                Your examination has been successfully submitted.
+            </p>
+
+            <p class="important-message">
+                Your result is not displayed on this portal.
+                Please contact the examination authority for your result.
+            </p>
+
+            <div class="submission-details">
+
+                <div>
+                    <span>Candidate</span>
+                    <strong id="submittedCandidateName"></strong>
+                </div>
+
+                <div>
+                    <span>Registration No.</span>
+                    <strong id="submittedCandidateReg"></strong>
+                </div>
+
+                <div>
+                    <span>Examination</span>
+                    <strong id="submittedExamName"></strong>
+                </div>
+
+            </div>
+
+            <button class="primary-btn"
+                    onclick="logout()">
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Exit
+
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     ADMIN DASHBOARD
+========================================================= -->
+<section id="adminPage"
+         class="page admin-page">
+
+    <header class="admin-header">
+
+        <div class="admin-brand">
+
+            <button class="mobile-menu-btn"
+                    onclick="toggleAdminSidebar()">
+
+                <i class="fa-solid fa-bars"></i>
+
+            </button>
+
+            <div>
+                <h2>
+                    <i class="fa-solid fa-user-shield"></i>
+                    Admin Dashboard
+                </h2>
+
+                <small id="adminHeaderName">
+                    Administrator
+                </small>
+            </div>
+
+        </div>
+
+
+        <div>
+
+            <button class="logout-btn"
+                    onclick="logout()">
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Logout
+
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <div class="admin-layout">
+
+
+        <!-- Admin Sidebar -->
+        <aside id="adminSidebar"
+               class="admin-sidebar">
+
+            <button class="admin-nav active"
+                    data-section="dashboardSection"
+                    onclick="showAdminSection('dashboardSection')">
+
+                <i class="fa-solid fa-gauge-high"></i>
+                Dashboard
+
+            </button>
+
+
+            <button class="admin-nav"
+                    data-section="batchSection"
+                    onclick="showAdminSection('batchSection')">
+
+                <i class="fa-solid fa-layer-group"></i>
+                Batches
+
+            </button>
+
+
+            <button class="admin-nav"
+                    data-section="folderSection"
+                    onclick="showAdminSection('folderSection')">
+
+                <i class="fa-solid fa-folder-tree"></i>
+                Exam Folders
+
+            </button>
+
+
+            <button class="admin-nav"
+                    data-section="examSection"
+                    onclick="showAdminSection('examSection')">
+
+                <i class="fa-solid fa-file-circle-check"></i>
+                Exams
+
+            </button>
+
+
+            <button class="admin-nav"
+                    data-section="questionSection"
+                    onclick="showAdminSection('questionSection')">
+
+                <i class="fa-solid fa-circle-question"></i>
+                Questions
+
+            </button>
+
+
+            <button class="admin-nav"
+                    data-section="candidateSection"
+                    onclick="showAdminSection('candidateSection')">
+
+                <i class="fa-solid fa-users"></i>
+                Candidates
+
+            </button>
+
+
+            <button class="admin-nav"
+                    data-section="resultSection"
+                    onclick="showAdminSection('resultSection')">
+
+                <i class="fa-solid fa-square-poll-vertical"></i>
+                Results
+
+            </button>
+
+
+            <button class="admin-nav"
+                    data-section="settingSection"
+                    onclick="showAdminSection('settingSection')">
+
+                <i class="fa-solid fa-gear"></i>
+                Settings
+
+            </button>
+
+        </aside>
+
+
+
+        <!-- Admin Content -->
+        <main class="admin-content">
+
+
+            <!-- Dashboard -->
+            <section id="dashboardSection"
+                     class="admin-section active">
+
+                <div class="section-heading">
+
+                    <div>
+                        <h1>Dashboard</h1>
+                        <p>Examination system overview</p>
+                    </div>
+
+                    <button class="secondary-btn"
+                            onclick="loadAdminDashboard()">
+
+                        <i class="fa-solid fa-arrows-rotate"></i>
+                        Refresh
+
+                    </button>
+
+                </div>
+
+
+                <div class="stats-grid">
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fa-solid fa-layer-group"></i>
+                        </div>
+                        <div>
+                            <span>Total Batches</span>
+                            <strong id="statBatches">0</strong>
+                        </div>
+                    </div>
+
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fa-solid fa-folder"></i>
+                        </div>
+                        <div>
+                            <span>Exam Folders</span>
+                            <strong id="statFolders">0</strong>
+                        </div>
+                    </div>
+
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fa-solid fa-file-lines"></i>
+                        </div>
+                        <div>
+                            <span>Total Exams</span>
+                            <strong id="statExams">0</strong>
+                        </div>
+                    </div>
+
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fa-solid fa-circle-question"></i>
+                        </div>
+                        <div>
+                            <span>Total Questions</span>
+                            <strong id="statQuestions">0</strong>
+                        </div>
+                    </div>
+
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fa-solid fa-users"></i>
+                        </div>
+                        <div>
+                            <span>Candidates</span>
+                            <strong id="statCandidates">0</strong>
+                        </div>
+                    </div>
+
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fa-solid fa-square-poll-vertical"></i>
+                        </div>
+                        <div>
+                            <span>Results</span>
+                            <strong id="statResults">0</strong>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="dashboard-panel">
+
+                    <h3>
+                        <i class="fa-solid fa-bolt"></i>
+                        Quick Actions
+                    </h3>
+
+                    <div class="quick-actions">
+
+                        <button onclick="showAdminSection('batchSection')">
+                            <i class="fa-solid fa-plus"></i>
+                            Create Batch
+                        </button>
+
+                        <button onclick="showAdminSection('folderSection')">
+                            <i class="fa-solid fa-folder-plus"></i>
+                            Create Exam Folder
+                        </button>
+
+                        <button onclick="showAdminSection('examSection')">
+                            <i class="fa-solid fa-file-circle-plus"></i>
+                            Create Exam
+                        </button>
+
+                        <button onclick="showAdminSection('questionSection')">
+                            <i class="fa-solid fa-circle-plus"></i>
+                            Add Question
+                        </button>
+
+                        <button onclick="showAdminSection('candidateSection')">
+                            <i class="fa-solid fa-user-plus"></i>
+                            Add Candidate
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- Batch Section -->
+            <section id="batchSection"
+                     class="admin-section">
+
+                <div class="section-heading">
+
+                    <div>
+                        <h1>Batch Management</h1>
+                        <p>Create and manage examination batches.</p>
+                    </div>
+
+                    <button class="primary-btn"
+                            onclick="openBatchModal()">
+
+                        <i class="fa-solid fa-plus"></i>
+                        Add Batch
+
+                    </button>
+
+                </div>
+
+
+                <div class="table-card">
+
+                    <div class="table-toolbar">
+
+                        <input type="text"
+                               id="batchSearch"
+                               placeholder="Search batch..."
+                               oninput="filterTable('batchTable', this.value)">
+
+                    </div>
+
+                    <div class="table-responsive">
+
+                        <table id="batchTable">
+
+                            <thead>
+                            <tr>
+                                <th>Batch ID</th>
+                                <th>Batch Name</th>
+                                <th>Session</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                            </thead>
+
+                            <tbody id="batchTableBody">
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- Folder Section -->
+            <section id="folderSection"
+                     class="admin-section">
+
+                <div class="section-heading">
+
+                    <div>
+                        <h1>Exam Folder Management</h1>
+                        <p>Create folders such as DCA, ADCA, Tally, CCC etc.</p>
+                    </div>
+
+                    <button class="primary-btn"
+                            onclick="openFolderModal()">
+
+                        <i class="fa-solid fa-folder-plus"></i>
+                        Add Folder
+
+                    </button>
+
+                </div>
+
+
+                <div class="table-card">
+
+                    <div class="table-responsive">
+
+                        <table>
+
+                            <thead>
+                            <tr>
+                                <th>Folder ID</th>
+                                <th>Folder Name</th>
+                                <th>Description</th>
+                                <th>Drive Folder</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                            </thead>
+
+                            <tbody id="folderTableBody">
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- Exam Section -->
+            <section id="examSection"
+                     class="admin-section">
+
+                <div class="section-heading">
+
+                    <div>
+                        <h1>Exam Management</h1>
+                        <p>Create and configure examinations.</p>
+                    </div>
+
+                    <button class="primary-btn"
+                            onclick="openExamModal()">
+
+                        <i class="fa-solid fa-file-circle-plus"></i>
+                        Add Exam
+
+                    </button>
+
+                </div>
+
+
+                <div class="filter-row">
+
+                    <select id="examFolderFilter"
+                            onchange="loadExamTable()">
+
+                        <option value="">All Folders</option>
+
+                    </select>
+
+
+                    <select id="examStatusFilter"
+                            onchange="loadExamTable()">
+
+                        <option value="">All Status</option>
+                        <option value="Active">Active</option>
+                        <option value="Inactive">Inactive</option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="table-card">
+
+                    <div class="table-responsive">
+
+                        <table>
+
+                            <thead>
+                            <tr>
+                                <th>Exam ID</th>
+                                <th>Exam Name</th>
+                                <th>Folder</th>
+                                <th>Duration</th>
+                                <th>Questions</th>
+                                <th>Marks</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                            </thead>
+
+                            <tbody id="examTableBody">
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- Question Section -->
+            <section id="questionSection"
+                     class="admin-section">
+
+                <div class="section-heading">
+
+                    <div>
+                        <h1>Question Management</h1>
+                        <p>Add, edit and delete examination questions.</p>
+                    </div>
+
+                    <button class="primary-btn"
+                            onclick="openQuestionModal()">
+
+                        <i class="fa-solid fa-circle-plus"></i>
+                        Add Question
+
+                    </button>
+
+                </div>
+
+
+                <div class="filter-row">
+
+                    <select id="questionExamFilter"
+                            onchange="loadQuestionTable()">
+
+                        <option value="">Select Exam</option>
+
+                    </select>
+
+
+                    <input type="text"
+                           id="questionSearch"
+                           placeholder="Search question..."
+                           oninput="loadQuestionTable()">
+
+                </div>
+
+
+                <div class="table-card">
+
+                    <div class="table-responsive">
+
+                        <table>
+
+                            <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>Question</th>
+                                <th>Option A</th>
+                                <th>Option B</th>
+                                <th>Option C</th>
+                                <th>Option D</th>
+                                <th>Correct</th>
+                                <th>Marks</th>
+                                <th>Actions</th>
+                            </tr>
+                            </thead>
+
+                            <tbody id="questionTableBody">
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- Candidate Section -->
+            <section id="candidateSection"
+                     class="admin-section">
+
+                <div class="section-heading">
+
+                    <div>
+                        <h1>Candidate Management</h1>
+                        <p>Manage candidate registration, DOB, photo and exam assignment.</p>
+                    </div>
+
+                    <button class="primary-btn"
+                            onclick="openCandidateModal()">
+
+                        <i class="fa-solid fa-user-plus"></i>
+                        Add Candidate
+
+                    </button>
+
+                </div>
+
+
+                <div class="filter-row">
+
+                    <input type="text"
+                           id="candidateSearch"
+                           placeholder="Search candidate..."
+                           oninput="loadCandidateTable()">
+
+
+                    <select id="candidateBatchFilter"
+                            onchange="loadCandidateTable()">
+
+                        <option value="">All Batches</option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="table-card">
+
+                    <div class="table-responsive">
+
+                        <table>
+
+                            <thead>
+                            <tr>
+                                <th>Photo</th>
+                                <th>Registration No.</th>
+                                <th>Name</th>
+                                <th>DOB</th>
+                                <th>Batch</th>
+                                <th>Exam</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                            </thead>
+
+                            <tbody id="candidateTableBody">
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- Result Section -->
+            <section id="resultSection"
+                     class="admin-section">
+
+                <div class="section-heading">
+
+                    <div>
+                        <h1>Result Management</h1>
+                        <p>Generate, edit, print and manage examination results.</p>
+                    </div>
+
+                </div>
+
+
+                <div class="filter-row">
+
+                    <input type="text"
+                           id="resultSearch"
+                           placeholder="Registration No. / Candidate Name"
+                           oninput="loadResultTable()">
+
+
+                    <select id="resultExamFilter"
+                            onchange="loadResultTable()">
+
+                        <option value="">All Exams</option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="table-card">
+
+                    <div class="table-responsive">
+
+                        <table>
+
+                            <thead>
+                            <tr>
+                                <th>Registration No.</th>
+                                <th>Candidate</th>
+                                <th>Exam</th>
+                                <th>Total</th>
+                                <th>Obtained</th>
+                                <th>Percentage</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                            </thead>
+
+                            <tbody id="resultTableBody">
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- Settings -->
+            <section id="settingSection"
+                     class="admin-section">
+
+                <div class="section-heading">
+
+                    <div>
+                        <h1>System Settings</h1>
+                        <p>Manage center name, logo and examination defaults.</p>
+                    </div>
+
+                </div>
+
+
+                <div class="settings-card">
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+
+                            <label>Center Name</label>
+
+                            <input type="text"
+                                   id="settingCenterName">
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>Center Logo URL</label>
+
+                            <input type="url"
+                                   id="settingLogoUrl"
+                                   placeholder="https://...">
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="logo-preview">
+
+                        <img id="settingLogoPreview"
+                             src=""
+                             alt="Logo Preview">
+
+                    </div>
+
+
+                    <button class="primary-btn"
+                            onclick="saveSettings()">
+
+                        <i class="fa-solid fa-save"></i>
+                        Save Settings
+
+                    </button>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     MODALS
+========================================================= -->
+
+<!-- Batch Modal -->
+<div id="batchModal"
+     class="modal">
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+            <h2 id="batchModalTitle">Add Batch</h2>
+
+            <button onclick="closeModal('batchModal')">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <form onsubmit="saveBatch(event)">
+
+            <input type="hidden"
+                   id="batchId">
+
+            <div class="form-group">
+                <label>Batch Name *</label>
+                <input type="text"
+                       id="batchName"
+                       required>
+            </div>
+
+            <div class="form-group">
+                <label>Session</label>
+                <input type="text"
+                       id="batchSession"
+                       placeholder="2026-27">
+            </div>
+
+            <div class="form-group">
+                <label>Status</label>
+
+                <select id="batchStatus">
+                    <option value="Active">Active</option>
+                    <option value="Inactive">Inactive</option>
+                </select>
+
+            </div>
+
+            <div class="modal-actions">
+
+                <button type="button"
+                        class="secondary-btn"
+                        onclick="closeModal('batchModal')">
+                    Cancel
+                </button>
+
+                <button type="submit"
+                        class="primary-btn">
+                    Save Batch
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+
+<!-- Folder Modal -->
+<div id="folderModal"
+     class="modal">
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+
+            <h2 id="folderModalTitle">
+                Add Exam Folder
+            </h2>
+
+            <button onclick="closeModal('folderModal')">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+        </div>
+
+        <form onsubmit="saveFolder(event)">
+
+            <input type="hidden"
+                   id="folderId">
+
+            <div class="form-group">
+
+                <label>Folder Name *</label>
+
+                <input type="text"
+                       id="folderName"
+                       placeholder="DCA"
+                       required>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Description</label>
+
+                <textarea id="folderDescription"
+                          rows="3"></textarea>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Status</label>
+
+                <select id="folderStatus">
+
+                    <option value="Active">Active</option>
+                    <option value="Inactive">Inactive</option>
+
+                </select>
+
+            </div>
+
+
+            <div class="modal-actions">
+
+                <button type="button"
+                        class="secondary-btn"
+                        onclick="closeModal('folderModal')">
+                    Cancel
+                </button>
+
+                <button type="submit"
+                        class="primary-btn">
+                    Save Folder
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+
+<!-- Exam Modal -->
+<div id="examModal"
+     class="modal">
+
+    <div class="modal-content large-modal">
+
+        <div class="modal-header">
+
+            <h2 id="examModalTitle">
+                Add Exam
+            </h2>
+
+            <button onclick="closeModal('examModal')">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+        </div>
+
+
+        <form onsubmit="saveExam(event)">
+
+            <input type="hidden"
+                   id="examId">
+
+
+            <div class="form-grid">
+
+                <div class="form-group">
+
+                    <label>Exam Folder *</label>
+
+                    <select id="examFolder"
+                            required>
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Exam Name *</label>
+
+                    <input type="text"
+                           id="examName"
+                           placeholder="DCA Final Examination"
+                           required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Duration (Minutes) *</label>
+
+                    <input type="number"
+                           id="examDuration"
+                           min="1"
+                           value="60"
+                           required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Total Questions *</label>
+
+                    <input type="number"
+                           id="examTotalQuestions"
+                           min="1"
+                           value="50"
+                           required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Marks Per Question</label>
+
+                    <input type="number"
+                           id="examMarksPerQuestion"
+                           min="0"
+                           step="0.01"
+                           value="1">
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Negative Marking</label>
+
+                    <input type="number"
+                           id="examNegativeMarks"
+                           min="0"
+                           step="0.01"
+                           value="0">
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Passing Marks</label>
+
+                    <input type="number"
+                           id="examPassingMarks"
+                           min="0"
+                           step="0.01"
+                           value="40">
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Status</label>
+
+                    <select id="examStatus">
+
+                        <option value="Active">Active</option>
+                        <option value="Inactive">Inactive</option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Instructions</label>
+
+                <textarea id="examInstructions"
+                          rows="8"
+                          placeholder="Enter examination instructions..."></textarea>
+
+            </div>
+
+
+            <div class="modal-actions">
+
+                <button type="button"
+                        class="secondary-btn"
+                        onclick="closeModal('examModal')">
+                    Cancel
+                </button>
+
+                <button type="submit"
+                        class="primary-btn">
+                    Save Exam
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+
+<!-- Question Modal -->
+<div id="questionModal"
+     class="modal">
+
+    <div class="modal-content large-modal">
+
+        <div class="modal-header">
+
+            <h2 id="questionModalTitle">
+                Add Question
+            </h2>
+
+            <button onclick="closeModal('questionModal')">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+        </div>
+
+
+        <form onsubmit="saveQuestion(event)">
+
+            <input type="hidden"
+                   id="questionId">
+
+
+            <div class="form-grid">
+
+                <div class="form-group">
+
+                    <label>Exam *</label>
+
+                    <select id="questionExam"
+                            required>
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Question Number *</label>
+
+                    <input type="number"
+                           id="questionNumber"
+                           min="1"
+                           required>
+
+                </div>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Question *</label>
+
+                <textarea id="questionTextInput"
+                          rows="5"
+                          required></textarea>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Question Image URL</label>
+
+                <input type="url"
+                       id="questionImageUrl"
+                       placeholder="Optional">
+
+            </div>
+
+
+            <div class="form-grid">
+
+                <div class="form-group">
+
+                    <label>Option A *</label>
+
+                    <input type="text"
+                           id="optionA"
+                           required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Option B *</label>
+
+                    <input type="text"
+                           id="optionB"
+                           required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Option C *</label>
+
+                    <input type="text"
+                           id="optionC"
+                           required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Option D *</label>
+
+                    <input type="text"
+                           id="optionD"
+                           required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Correct Answer *</label>
+
+                    <select id="correctAnswer"
+                            required>
+
+                        <option value="">Select</option>
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                        <option value="D">D</option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Marks</label>
+
+                    <input type="number"
+                           id="questionMarks"
+                           min="0"
+                           step="0.01"
+                           value="1">
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Negative Marks</label>
+
+                    <input type="number"
+                           id="questionNegativeMarks"
+                           min="0"
+                           step="0.01"
+                           value="0">
+
+                </div>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Explanation</label>
+
+                <textarea id="questionExplanation"
+                          rows="4"></textarea>
+
+            </div>
+
+
+            <div class="modal-actions">
+
+                <button type="button"
+                        class="secondary-btn"
+                        onclick="closeModal('questionModal')">
+                    Cancel
+                </button>
+
+                <button type="submit"
+                        class="primary-btn">
+                    Save Question
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+
+<!-- Candidate Modal -->
+<div id="candidateModal"
+     class="modal">
+
+    <div class="modal-content large-modal">
+
+        <div class="modal-header">
+
+            <h2 id="candidateModalTitle">
+                Add Candidate
+            </h2>
+
+            <button onclick="closeModal('candidateModal')">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+        </div>
+
+
+        <form onsubmit="saveCandidate(event)">
+
+            <input type="hidden"
+                   id="candidateId">
+
+
+            <div class="form-grid">
+
+                <div class="form-group">
+
+                    <label>Registration Number *</label>
+
+                    <input type="text"
+                           id="candidateRegNumber"
+                           required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Candidate Name *</label>
+
+                    <input type="text"
+                           id="candidateName"
+                           required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Date of Birth *</label>
+
+                    <input type="date"
+                           id="candidateDobInput"
+                           required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Batch *</label>
+
+                    <select id="candidateBatch"
+                            required>
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Exam</label>
+
+                    <select id="candidateExam">
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Status</label>
+
+                    <select id="candidateStatus">
+
+                        <option value="Active">Active</option>
+                        <option value="Inactive">Inactive</option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Photo URL</label>
+
+                <input type="url"
+                       id="candidatePhotoUrl"
+                       placeholder="Google Drive/public image URL">
+
+            </div>
+
+
+            <div class="photo-preview">
+
+                <img id="candidatePhotoPreview"
+                     src=""
+                     alt="Candidate Photo">
+
+            </div>
+
+
+            <div class="modal-actions">
+
+                <button type="button"
+                        class="secondary-btn"
+                        onclick="closeModal('candidateModal')">
+                    Cancel
+                </button>
+
+                <button type="submit"
+                        class="primary-btn">
+                    Save Candidate
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+
+<!-- Result Edit Modal -->
+<div id="resultModal"
+     class="modal">
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+
+            <h2>Edit Result</h2>
+
+            <button onclick="closeModal('resultModal')">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+        </div>
+
+
+        <form onsubmit="saveResult(event)">
+
+            <input type="hidden"
+                   id="resultId">
+
+
+            <div class="form-group">
+
+                <label>Candidate</label>
+
+                <input type="text"
+                       id="resultCandidateName"
+                       readonly>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Exam</label>
+
+                <input type="text"
+                       id="resultExamName"
+                       readonly>
+
+            </div>
+
+
+            <div class="form-grid">
+
+                <div class="form-group">
+
+                    <label>Total Marks</label>
+
+                    <input type="number"
+                           id="resultTotalMarks"
+                           readonly>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Obtained Marks</label>
+
+                    <input type="number"
+                           id="resultObtainedMarks"
+                           step="0.01">
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Result Status</label>
+
+                    <select id="resultStatus">
+
+                        <option value="PASS">PASS</option>
+                        <option value="FAIL">FAIL</option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <div class="modal-actions">
+
+                <button type="button"
+                        class="secondary-btn"
+                        onclick="closeModal('resultModal')">
+                    Cancel
+                </button>
+
+                <button type="submit"
+                        class="primary-btn">
+                    Update Result
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================================================
+     TOAST
+========================================================= -->
+<div id="toast"
+     class="toast">
+
+    <i id="toastIcon"
+       class="fa-solid fa-circle-check"></i>
+
+    <span id="toastMessage"></span>
+
+</div>
+
+
+
+<!-- =========================================================
+     CONFIRMATION
+========================================================= -->
+<div id="confirmModal"
+     class="modal">
+
+    <div class="modal-content confirm-content">
+
+        <div class="confirm-icon">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+        </div>
+
+        <h2 id="confirmTitle">
+            Confirm Action
+        </h2>
+
+        <p id="confirmMessage">
+            Are you sure?
+        </p>
+
+        <div class="modal-actions">
+
+            <button class="secondary-btn"
+                    onclick="closeModal('confirmModal')">
+                Cancel
+            </button>
+
+            <button class="danger-btn"
+                    id="confirmButton">
+                Confirm
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
