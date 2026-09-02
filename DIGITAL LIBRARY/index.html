@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>NEW DRISHTI Digital Library Management System</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="main-header">
+  <div class="brand"><div class="logo">📚</div><div><h1>NEW DRISHTI</h1><h2>COMPUTER EDUCATION & DIGITAL LIBRARY</h2><p>Complete Library Management Dashboard</p></div></div>
+  <div class="clock"><b id="liveTime">00:00:00</b><span id="currentDate">Loading...</span></div>
+</header>
+
+<nav class="main-nav">
+<button class="nav-btn active" onclick="showSection('dashboardSection',this)">🏠 Dashboard</button>
+<button class="nav-btn" onclick="showSection('studentSection',this)">👨‍🎓 Students</button>
+<button class="nav-btn" onclick="showSection('feesSection',this)">💰 Fees</button>
+<button class="nav-btn" onclick="showSection('reportsSection',this)">📊 Reports</button>
+<button class="nav-btn" onclick="showSection('shiftSection',this)">🕐 Shift Students</button>
+<button class="nav-btn" onclick="showSection('seatSection',this)">🪑 Seat Management</button>
+</nav>
+
+<main class="container">
+<section id="dashboardSection" class="page-section active-section">
+<div class="connection-box"><span><span id="statusDot" class="status-dot"></span><b>System Status:</b> <span id="systemStatus">Connecting...</span></span>
+<div class="actions"><button class="btn blue" onclick="openStudentModal()">➕ New Student</button><button class="btn green" onclick="openDashboardFeeEntry()">💰 Fees Entry</button><button class="btn orange" onclick="exportCSV()">📥 CSV</button><button class="btn dark" onclick="window.print()">🖨 Print</button><button class="btn green" onclick="loadAllData()">🔄 Refresh</button></div></div>
+
+<div class="stats-grid">
+<div class="stat-card"><span>🪑 Total Seats</span><strong id="totalSeats">0</strong></div>
+<div class="stat-card"><span>🔴 Vacant Seats</span><strong id="vacantSeats">0</strong></div>
+<div class="stat-card"><span>🟢 Full Seats</span><strong id="occupiedSeats">0</strong></div>
+<div class="stat-card"><span>📊 Occupancy</span><strong id="occupancyPercent">0%</strong></div>
+<div class="stat-card"><span>📝 Today's Entries</span><strong id="todayEntries">0</strong></div>
+<div class="stat-card"><span>💰 Total Fees</span><strong id="totalFees">₹0</strong></div>
+<div class="stat-card"><span>💵 Fees Received</span><strong id="paidFees">₹0</strong></div>
+<div class="stat-card"><span>⚠️ Pending Fees</span><strong id="pendingFees">₹0</strong></div>
+</div>
+
+<div class="control-panel">
+<input id="mainSearch" placeholder="🔎 Seat / Name / Mobile / Roll Number..." oninput="renderDashboard()">
+<select id="shiftFilter" onchange="renderDashboard()"><option value="ALL">सभी Shift</option><option>1st Shift</option><option>2nd Shift</option><option>Full Shift</option></select>
+<select id="seatStatusFilter" onchange="renderDashboard()"><option value="ALL">सभी Seats</option><option value="VACANT">🔴 Vacant</option><option value="FULL">🟢 Full</option><option value="PARTIAL">🟡 Partial</option></select>
+<button class="btn blue" onclick="openSeatModal()">➕ Add Seat</button><button class="btn blue" onclick="openStudentModal()">➕ Student Entry</button>
+</div>
+
+<div class="legend"><span>🔴 VACANT</span><span>🟢 FULL</span><span>🟡 OCCUPIED</span><span>Seat के 3 भाग: 1st Shift / 2nd Shift / Full Shift</span></div>
+<div class="panel"><div class="panel-title"><div><h2>🪑 Live Seat Dashboard</h2><p>हर seat में तीन अलग shift slots दिखाई देंगे</p></div><b><span id="visibleSeats">0</span> Seats</b></div><div id="seatGrid" class="seat-grid"></div></div>
+
+<div class="panel"><div class="panel-title"><h2>👨‍🎓 Current Students</h2><button class="btn green" onclick="openDashboardFeeEntry()">💰 Fees Entry</button></div>
+<div class="table-wrapper"><table><thead><tr><th>Seat</th><th>Name</th><th>Roll</th><th>Mobile</th><th>Shift</th><th>Admission</th><th>Fees</th><th>Action</th></tr></thead><tbody id="studentTable"></tbody></table></div></div>
+</section>
+
+<section id="studentSection" class="page-section"><div class="page-heading"><div><h2>👨‍🎓 Student Management</h2><p>सभी registered students</p></div><button class="btn blue" onclick="openStudentModal()">➕ Add Student</button></div>
+<div class="panel"><input id="studentSearch" class="search-large" placeholder="Student / Roll / Mobile / Seat" oninput="renderStudentPage()"><div class="table-wrapper"><table><thead><tr><th>Seat</th><th>Name</th><th>Roll</th><th>Mobile</th><th>Shift</th><th>Total</th><th>Paid</th><th>Pending</th><th>Status</th><th>Action</th></tr></thead><tbody id="allStudentTable"></tbody></table></div></div></section>
+
+<section id="feesSection" class="page-section"><div class="page-heading"><h2>💰 Fees Management</h2></div>
+<div class="fees-search-panel"><h3>🔎 Student Fees Search</h3><div class="fees-search-row"><input id="feesSeatSearch" placeholder="Seat Number" oninput="searchFeesBySeat()"><button class="btn blue" onclick="searchFeesBySeat()">Search</button><button class="btn dark" onclick="clearFeesSearch()">Clear</button></div></div>
+<div id="feesStudentReport" class="panel"></div>
+<div class="fees-summary"><div><span>Total Fees</span><strong id="feesTotalReport">₹0</strong></div><div><span>Received</span><strong id="feesPaidReport">₹0</strong></div><div><span>Pending</span><strong id="feesPendingReport">₹0</strong></div></div>
+<div class="panel"><h2>💰 All Students Fees</h2><div class="table-wrapper"><table><thead><tr><th>Seat</th><th>Student</th><th>Shift</th><th>Total</th><th>Paid</th><th>Pending</th><th>Status</th><th>Action</th></tr></thead><tbody id="feesTable"></tbody></table></div></div>
+</section>
+
+<section id="reportsSection" class="page-section"><div class="page-heading"><h2>📊 Library Reports</h2></div><div class="report-grid">
+<div class="report-card"><h3>🪑 Seat Report</h3><p>सभी seats और तीनों shift slots</p><button class="btn blue" onclick="printSeatReport()">View / Print</button></div>
+<div class="report-card"><h3>👨‍🎓 Student Report</h3><p>सभी students</p><button class="btn blue" onclick="printStudentReport()">View / Print</button></div>
+<div class="report-card"><h3>💰 Fees Report</h3><p>Fees summary</p><button class="btn blue" onclick="printFeesReport()">View / Print</button></div>
+<div class="report-card"><h3>📝 Today's Entry</h3><p>आज की entries</p><button class="btn blue" onclick="printTodayReport()">View / Print</button></div>
+</div>
+<div class="panel"><div class="daily-grid"><div><span>Today's Entries</span><strong id="reportTodayEntries">0</strong></div><div><span>Current Students</span><strong id="reportCurrent">0</strong></div><div><span>Fee Transactions Today</span><strong id="reportCheckout">0</strong></div><div><span>Total Seats</span><strong id="reportPeak">0</strong></div></div></div></section>
+
+<section id="shiftSection" class="page-section"><div class="page-heading"><h2>🕐 Shift Wise Students</h2></div><div class="shift-report-grid">
+<div class="shift-panel"><h2>🕐 1st Shift <span id="firstShiftCount">0</span></h2><div id="firstShiftStudents"></div></div>
+<div class="shift-panel"><h2>🕑 2nd Shift <span id="secondShiftCount">0</span></h2><div id="secondShiftStudents"></div></div>
+<div class="shift-panel"><h2>🕒 Full Shift <span id="fullShiftCount">0</span></h2><div id="fullShiftStudents"></div></div></div></section>
+
+<section id="seatSection" class="page-section"><div class="page-heading"><div><h2>🪑 Seat Management</h2><p>अब 50 तक सीमित नहीं — जितनी चाहें seats add करें</p></div><button class="btn blue" onclick="openSeatModal()">➕ Add New Seat</button></div>
+<div class="panel"><div class="seat-management-help">Seat number आप 51, 52, 100, 101... कुछ भी add कर सकते हैं। Duplicate seat नहीं बनेगी।</div><div class="table-wrapper"><table><thead><tr><th>Seat</th><th>1st Shift</th><th>2nd Shift</th><th>Full Shift</th><th>Status</th><th>Action</th></tr></thead><tbody id="seatManagementTable"></tbody></table></div></div></section>
+</main>
+
+<div id="studentModal" class="modal"><div class="modal-content"><div class="modal-header"><h2 id="studentModalTitle">👨‍🎓 Student Registration</h2><button class="close-btn" onclick="closeStudentModal()">×</button></div>
+<form id="studentForm" onsubmit="saveStudent(event)"><input type="hidden" id="editStudentId"><div class="form-grid">
+<label>Seat Number *<select id="studentSeat" required></select></label><label>Student Name *<input id="studentName" required></label><label>Father Name<input id="fatherName"></label><label>Roll Number<input id="rollNumber"></label><label>Mobile<input id="studentMobile" maxlength="10"></label><label>Alternate Mobile<input id="alternateMobile" maxlength="10"></label>
+<label>Shift *<select id="studentShift" required><option>1st Shift</option><option>2nd Shift</option><option>Full Shift</option></select></label><label>Admission Date<input id="admissionDate" type="date"></label><label>Total Fees ₹<input id="totalFeesInput" type="number" min="0" value="0"></label><label>Initial Paid Fees ₹<input id="paidFeesInput" type="number" min="0" value="0"></label>
+<label class="wide">Address<textarea id="studentAddress"></textarea></label><label class="wide">Remark<textarea id="studentRemark"></textarea></label>
+</div><div class="modal-buttons"><button class="btn green" id="saveStudentBtn">💾 Save Student</button><button type="button" class="btn red" onclick="closeStudentModal()">Cancel</button></div></form></div></div>
+
+<div id="seatModal" class="modal"><div class="modal-content small-modal"><div class="modal-header"><h2>➕ Add Seat</h2><button class="close-btn" onclick="closeSeatModal()">×</button></div>
+<form onsubmit="saveSeat(event)"><label>New Seat Number *<input id="newSeatNumber" type="number" min="1" required placeholder="जैसे 51"></label><p class="hint">आप कोई भी positive seat number add कर सकते हैं।</p><div class="modal-buttons"><button class="btn blue">💾 Add Seat</button><button type="button" class="btn red" onclick="closeSeatModal()">Cancel</button></div></form></div></div>
+
+<div id="detailModal" class="modal"><div class="modal-content"><div class="modal-header"><h2>👤 Student Details</h2><button class="close-btn" onclick="closeDetailModal()">×</button></div><div id="studentDetails"></div><div class="modal-buttons"><button class="btn blue" onclick="editStudent(currentDetailId)">✏️ Edit</button><button class="btn green" onclick="openFeeModal(currentDetailId)">💰 Fees</button><button class="btn red" onclick="closeDetailModal()">Close</button></div></div></div>
+
+<div id="feeModal" class="modal"><div class="modal-content"><div class="modal-header"><h2>💰 Fees Deposit</h2><button class="close-btn" onclick="closeFeeModal()">×</button></div><div id="feeStudentInfo"></div>
+<form onsubmit="depositFees(event)"><div class="form-grid"><label>Month<input id="feeMonth" type="month" required></label><label>Amount ₹<input id="depositAmount" type="number" min="1" required></label><label>Payment Mode<select id="paymentMode"><option>Cash</option><option>UPI</option><option>Bank Transfer</option><option>Other</option></select></label><label>Payment Date<input id="paymentDate" type="date" required></label><label class="wide">Remark<textarea id="paymentRemark"></textarea></label></div><div class="modal-buttons"><button class="btn green">💾 Deposit</button><button type="button" class="btn red" onclick="closeFeeModal()">Cancel</button></div></form></div></div>
+<div id="printArea"></div><footer><h3>NEW DRISHTI COMPUTER EDUCATION & DIGITAL LIBRARY</h3><p>P.G. College Road, Nagepur, Chandauli</p><p>© 2026 NEW DRISHTI</p></footer>
+<script src="script.js"></script>
+</body></html>
