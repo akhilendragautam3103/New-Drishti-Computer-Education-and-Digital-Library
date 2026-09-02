@@ -20,12 +20,146 @@ body{
     min-height:100vh;
 }
 
+/* =========================================================
+   LOGIN SCREEN
+========================================================= */
+
+.login-screen{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    background:linear-gradient(135deg,#0f172a,#1d4ed8);
+}
+
+.login-box{
+    width:min(420px,100%);
+    background:white;
+    border-radius:22px;
+    padding:32px;
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.login-logo{
+    width:75px;
+    height:75px;
+    margin:0 auto 15px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#dbeafe;
+    font-size:38px;
+}
+
+.login-box h1{
+    text-align:center;
+    font-size:24px;
+    color:#0f172a;
+    margin-bottom:6px;
+}
+
+.login-box .subtitle{
+    text-align:center;
+    color:#64748b;
+    font-size:14px;
+    margin-bottom:25px;
+}
+
+.login-field{
+    margin-bottom:16px;
+}
+
+.login-field label{
+    display:block;
+    font-size:14px;
+    font-weight:700;
+    margin-bottom:7px;
+}
+
+.password-wrap{
+    position:relative;
+}
+
+.login-field input{
+    width:100%;
+    height:48px;
+    border:1px solid #cbd5e1;
+    border-radius:10px;
+    padding:0 45px 0 14px;
+    font-size:15px;
+    outline:none;
+}
+
+.login-field input:focus{
+    border-color:#2563eb;
+    box-shadow:0 0 0 3px rgba(37,99,235,.12);
+}
+
+.toggle-password{
+    position:absolute;
+    right:12px;
+    top:50%;
+    transform:translateY(-50%);
+    border:0;
+    background:none;
+    cursor:pointer;
+    font-size:19px;
+}
+
+.login-btn{
+    width:100%;
+    height:48px;
+    border:0;
+    border-radius:10px;
+    background:#2563eb;
+    color:white;
+    font-size:16px;
+    font-weight:700;
+    cursor:pointer;
+    margin-top:5px;
+}
+
+.login-btn:hover{
+    background:#1d4ed8;
+}
+
+.login-error{
+    display:none;
+    background:#fef2f2;
+    color:#b91c1c;
+    border:1px solid #fecaca;
+    padding:11px;
+    border-radius:9px;
+    font-size:14px;
+    margin-bottom:15px;
+    text-align:center;
+}
+
+.login-info{
+    text-align:center;
+    margin-top:18px;
+    font-size:12px;
+    color:#94a3b8;
+}
+
+
+/* =========================================================
+   MAIN APP
+========================================================= */
+
+#mainApp{
+    display:none;
+}
+
 .header{
     background:linear-gradient(135deg,#0f172a,#1d4ed8);
     color:white;
-    padding:22px 15px;
+    padding:20px 15px;
     text-align:center;
     box-shadow:0 4px 15px rgba(0,0,0,.15);
+    position:relative;
 }
 
 .header h1{
@@ -38,10 +172,38 @@ body{
     opacity:.9;
 }
 
+.header-actions{
+    position:absolute;
+    right:18px;
+    top:18px;
+    display:flex;
+    gap:8px;
+}
+
+.header-btn{
+    border:1px solid rgba(255,255,255,.35);
+    background:rgba(255,255,255,.12);
+    color:white;
+    padding:8px 12px;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:13px;
+    font-weight:600;
+}
+
+.header-btn:hover{
+    background:rgba(255,255,255,.22);
+}
+
 .container{
     width:min(1100px,94%);
     margin:25px auto;
 }
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
 
 .search-card{
     background:white;
@@ -88,17 +250,26 @@ body{
     box-shadow:0 0 0 3px rgba(37,99,235,.1);
 }
 
-.search-btn{
+.buttons{
+    display:flex;
+    gap:10px;
+}
+
+.search-btn,
+.clear-btn{
     height:46px;
     align-self:end;
     border:0;
     border-radius:10px;
-    padding:0 25px;
-    background:#2563eb;
+    padding:0 20px;
     color:white;
     font-size:15px;
     font-weight:700;
     cursor:pointer;
+}
+
+.search-btn{
+    background:#2563eb;
 }
 
 .search-btn:hover{
@@ -106,22 +277,17 @@ body{
 }
 
 .clear-btn{
-    height:46px;
-    align-self:end;
-    border:0;
-    border-radius:10px;
-    padding:0 20px;
     background:#64748b;
-    color:white;
-    font-size:15px;
-    font-weight:700;
-    cursor:pointer;
 }
 
-.buttons{
-    display:flex;
-    gap:10px;
+.clear-btn:hover{
+    background:#475569;
 }
+
+
+/* =========================================================
+   STATUS
+========================================================= */
 
 .status{
     text-align:center;
@@ -149,6 +315,11 @@ body{
     background:#f0fdf4;
     color:#15803d;
 }
+
+
+/* =========================================================
+   RESULT
+========================================================= */
 
 .result-area{
     display:none;
@@ -310,6 +481,11 @@ body{
     color:#64748b;
 }
 
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
 .footer{
     text-align:center;
     color:#64748b;
@@ -327,7 +503,128 @@ body{
     font-weight:600;
 }
 
+
+/* =========================================================
+   CHANGE PASSWORD MODAL
+========================================================= */
+
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(15,23,42,.65);
+    z-index:9999;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+
+.modal-box{
+    width:min(430px,100%);
+    background:white;
+    border-radius:18px;
+    padding:25px;
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.modal-box h2{
+    margin-bottom:5px;
+}
+
+.modal-box p{
+    color:#64748b;
+    font-size:13px;
+    margin-bottom:20px;
+}
+
+.modal-field{
+    margin-bottom:14px;
+}
+
+.modal-field label{
+    display:block;
+    font-size:13px;
+    font-weight:700;
+    margin-bottom:6px;
+}
+
+.modal-field input{
+    width:100%;
+    height:44px;
+    border:1px solid #cbd5e1;
+    border-radius:9px;
+    padding:0 12px;
+    outline:none;
+}
+
+.modal-field input:focus{
+    border-color:#2563eb;
+}
+
+.modal-buttons{
+    display:flex;
+    gap:10px;
+    margin-top:18px;
+}
+
+.modal-buttons button{
+    flex:1;
+    height:44px;
+    border:0;
+    border-radius:9px;
+    cursor:pointer;
+    font-weight:700;
+}
+
+.save-password{
+    background:#2563eb;
+    color:white;
+}
+
+.cancel-password{
+    background:#e2e8f0;
+    color:#334155;
+}
+
+.password-message{
+    display:none;
+    padding:10px;
+    border-radius:8px;
+    font-size:13px;
+    margin-bottom:12px;
+}
+
+.password-success{
+    display:block;
+    background:#f0fdf4;
+    color:#15803d;
+}
+
+.password-error{
+    display:block;
+    background:#fef2f2;
+    color:#b91c1c;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
 @media(max-width:750px){
+
+    .header{
+        padding-top:65px;
+    }
+
+    .header h1{
+        font-size:23px;
+    }
+
+    .header-actions{
+        top:15px;
+        right:15px;
+    }
 
     .search-grid{
         grid-template-columns:1fr;
@@ -360,10 +657,15 @@ body{
         font-size:21px;
     }
 
-    .header h1{
-        font-size:23px;
+    .login-box{
+        padding:25px 20px;
     }
 }
+
+
+/* =========================================================
+   PRINT
+========================================================= */
 
 @media print{
 
@@ -376,11 +678,15 @@ body{
         color:black;
         box-shadow:none;
         border-bottom:2px solid #000;
+        padding-top:20px;
     }
 
+    .header-actions,
     .search-card,
-    .footer{
-        display:none;
+    .footer,
+    .status,
+    .print-btn{
+        display:none !important;
     }
 
     .container{
@@ -396,83 +702,280 @@ body{
 </style>
 </head>
 
+
 <body>
 
+
+<!-- =========================================================
+     LOGIN SCREEN
+========================================================= -->
+
+<div id="loginScreen" class="login-screen">
+
+    <div class="login-box">
+
+        <div class="login-logo">
+            🔐
+        </div>
+
+        <h1>New Drishti Digital Library</h1>
+
+        <div class="subtitle">
+            Candidate View Login
+        </div>
+
+        <div id="loginError" class="login-error"></div>
+
+
+        <div class="login-field">
+
+            <label>
+                👤 Username
+            </label>
+
+            <input
+                type="text"
+                id="loginUsername"
+                placeholder="Username"
+                autocomplete="username"
+            >
+
+        </div>
+
+
+        <div class="login-field">
+
+            <label>
+                🔑 Password
+            </label>
+
+            <div class="password-wrap">
+
+                <input
+                    type="password"
+                    id="loginPassword"
+                    placeholder="Password"
+                    autocomplete="current-password"
+                >
+
+                <button
+                    type="button"
+                    class="toggle-password"
+                    onclick="toggleLoginPassword()"
+                >
+                    👁️
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <button
+            class="login-btn"
+            onclick="login()"
+        >
+            🔓 Login
+        </button>
+
+
+        <div class="login-info">
+            Candidate View Dashboard
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================================================
+     MAIN APPLICATION
+========================================================= -->
+
+<div id="mainApp">
+
+
 <header class="header">
-    <h1>📚 New Drishti Digital Library</h1>
-    <p>Candidate View Dashboard</p>
+
+    <h1>
+        📚 New Drishti Digital Library
+    </h1>
+
+    <p>
+        Candidate View Dashboard
+    </p>
+
+
+    <div class="header-actions">
+
+        <button
+            class="header-btn"
+            onclick="openChangePassword()"
+        >
+            🔑 Change Password
+        </button>
+
+        <button
+            class="header-btn"
+            onclick="logout()"
+        >
+            🚪 Logout
+        </button>
+
+    </div>
+
 </header>
+
+
 
 <div class="container">
 
-    <!-- SEARCH -->
+
+    <!-- =====================================================
+         SEARCH
+    ====================================================== -->
+
     <div class="search-card">
 
         <div class="search-title">
             🔎 Seat & Shift से Candidate Search करें
         </div>
 
+
         <div class="search-grid">
 
+
             <div class="field">
-                <label>Seat Number</label>
+
+                <label>
+                    Seat Number
+                </label>
+
                 <input
                     type="text"
                     id="seatNumber"
                     placeholder="जैसे 1, 2, 10..."
                     autocomplete="off"
                 >
+
             </div>
+
 
             <div class="field">
-                <label>Shift</label>
+
+                <label>
+                    Shift
+                </label>
+
                 <select id="shift">
-                    <option value="">-- Shift Select करें --</option>
-                    <option value="1st Shift">1st Shift</option>
-                    <option value="2nd Shift">2nd Shift</option>
-                    <option value="Full Shift">Full Shift</option>
+
+                    <option value="">
+                        -- Shift Select करें --
+                    </option>
+
+                    <option value="1st Shift">
+                        1st Shift
+                    </option>
+
+                    <option value="2nd Shift">
+                        2nd Shift
+                    </option>
+
+                    <option value="Full Shift">
+                        Full Shift
+                    </option>
+
                 </select>
+
             </div>
 
+
             <div class="buttons">
-                <button class="search-btn" onclick="searchCandidate()">
+
+                <button
+                    class="search-btn"
+                    onclick="searchCandidate()"
+                >
                     🔍 Search
                 </button>
 
-                <button class="clear-btn" onclick="clearSearch()">
+
+                <button
+                    class="clear-btn"
+                    onclick="clearSearch()"
+                >
                     ✕ Clear
                 </button>
+
             </div>
+
 
         </div>
 
     </div>
 
-    <!-- STATUS -->
-    <div id="status" class="status"></div>
 
-    <!-- RESULT -->
-    <div id="resultArea" class="result-area">
+
+    <!-- =====================================================
+         STATUS
+    ====================================================== -->
+
+    <div
+        id="status"
+        class="status"
+    ></div>
+
+
+
+    <!-- =====================================================
+         RESULT
+    ====================================================== -->
+
+    <div
+        id="resultArea"
+        class="result-area"
+    >
 
         <div class="result-header">
+
             <h2>
+
                 Candidate Details —
+
                 <span id="resultSeat"></span>
+
                 /
+
                 <span id="resultShift"></span>
+
             </h2>
+
         </div>
+
 
         <div id="studentContainer"></div>
 
     </div>
 
-    <!-- NO RESULT -->
-    <div id="noResult" class="no-result">
 
-        <div class="icon">🔍</div>
 
-        <h3>Candidate नहीं मिला</h3>
+    <!-- =====================================================
+         NO RESULT
+    ====================================================== -->
+
+    <div
+        id="noResult"
+        class="no-result"
+    >
+
+        <div class="icon">
+            🔍
+        </div>
+
+        <h3>
+            Candidate नहीं मिला
+        </h3>
 
         <p>
             कृपया Seat Number और Shift सही से चुनें।
@@ -480,23 +983,149 @@ body{
 
     </div>
 
+
 </div>
 
+
+
 <div class="footer">
+
     New Drishti Computer Education & Digital Library
+
     <br>
+
     Candidate View Dashboard
+
 </div>
+
+</div>
+
+
+
+<!-- =========================================================
+     CHANGE PASSWORD MODAL
+========================================================= -->
+
+<div
+    id="passwordModal"
+    class="modal"
+>
+
+    <div class="modal-box">
+
+        <h2>
+            🔑 Change Password
+        </h2>
+
+        <p>
+            नया password कम से कम 6 characters का रखें।
+        </p>
+
+
+        <div
+            id="passwordMessage"
+            class="password-message"
+        ></div>
+
+
+        <div class="modal-field">
+
+            <label>
+                Current Password
+            </label>
+
+            <input
+                type="password"
+                id="currentPassword"
+                placeholder="Current password"
+            >
+
+        </div>
+
+
+        <div class="modal-field">
+
+            <label>
+                New Password
+            </label>
+
+            <input
+                type="password"
+                id="newPassword"
+                placeholder="New password"
+            >
+
+        </div>
+
+
+        <div class="modal-field">
+
+            <label>
+                Confirm New Password
+            </label>
+
+            <input
+                type="password"
+                id="confirmPassword"
+                placeholder="Confirm new password"
+            >
+
+        </div>
+
+
+        <div class="modal-buttons">
+
+            <button
+                class="save-password"
+                onclick="changePassword()"
+            >
+                💾 Save Password
+            </button>
+
+            <button
+                class="cancel-password"
+                onclick="closeChangePassword()"
+            >
+                Cancel
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
 
 
 <script>
 
 /* =========================================================
-   SAME GAS API URL AS YOUR EXISTING SCRIPT.JS
+   GAS API
 ========================================================= */
 
 const GAS_API_URL =
 "https://script.google.com/macros/s/AKfycbwiOywF3tKpCYmirbpiHxuiuj92VGxCMbuY3vTXMiiABChleqNIeTXgcsV5pU2ZhYkr/exec";
+
+
+/* =========================================================
+   LOGIN SETTINGS
+========================================================= */
+
+const LOGIN_USERNAME_KEY =
+    "NDL_CANDIDATE_USERNAME";
+
+const LOGIN_PASSWORD_KEY =
+    "NDL_CANDIDATE_PASSWORD";
+
+const LOGIN_SESSION_KEY =
+    "NDL_CANDIDATE_LOGGED_IN";
+
+
+const DEFAULT_USERNAME =
+    "admin";
+
+const DEFAULT_PASSWORD =
+    "123456";
 
 
 let students = [];
@@ -504,75 +1133,528 @@ let fees = [];
 
 
 /* =========================================================
-   PAGE LOAD
+   INITIALIZATION
 ========================================================= */
 
-document.addEventListener("DOMContentLoaded", function(){
+document.addEventListener(
+    "DOMContentLoaded",
+    function(){
+
+        initializeLogin();
+
+    }
+);
+
+
+/* =========================================================
+   LOGIN INITIALIZE
+========================================================= */
+
+function initializeLogin(){
+
+    if(
+        !localStorage.getItem(
+            LOGIN_USERNAME_KEY
+        )
+    ){
+
+        localStorage.setItem(
+            LOGIN_USERNAME_KEY,
+            DEFAULT_USERNAME
+        );
+
+    }
+
+
+    if(
+        !localStorage.getItem(
+            LOGIN_PASSWORD_KEY
+        )
+    ){
+
+        localStorage.setItem(
+            LOGIN_PASSWORD_KEY,
+            DEFAULT_PASSWORD
+        );
+
+    }
+
+
+    const loggedIn =
+        sessionStorage.getItem(
+            LOGIN_SESSION_KEY
+        );
+
+
+    if(loggedIn === "true"){
+
+        showMainApp();
+
+    }else{
+
+        showLogin();
+
+    }
+
+
+    document
+        .getElementById("loginPassword")
+        .addEventListener(
+            "keydown",
+            function(e){
+
+                if(e.key === "Enter"){
+                    login();
+                }
+
+            }
+        );
+
+
+    document
+        .getElementById("loginUsername")
+        .addEventListener(
+            "keydown",
+            function(e){
+
+                if(e.key === "Enter"){
+                    login();
+                }
+
+            }
+        );
+
+}
+
+
+/* =========================================================
+   LOGIN
+========================================================= */
+
+function login(){
+
+    const username =
+        document
+        .getElementById("loginUsername")
+        .value
+        .trim();
+
+    const password =
+        document
+        .getElementById("loginPassword")
+        .value;
+
+
+    const savedUsername =
+        localStorage.getItem(
+            LOGIN_USERNAME_KEY
+        );
+
+    const savedPassword =
+        localStorage.getItem(
+            LOGIN_PASSWORD_KEY
+        );
+
+
+    if(
+        username === savedUsername &&
+        password === savedPassword
+    ){
+
+        sessionStorage.setItem(
+            LOGIN_SESSION_KEY,
+            "true"
+        );
+
+
+        document
+            .getElementById("loginError")
+            .style.display = "none";
+
+
+        showMainApp();
+
+    }else{
+
+        showLoginError(
+            "❌ Username या Password गलत है।"
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   SHOW LOGIN
+========================================================= */
+
+function showLogin(){
+
+    document
+        .getElementById("loginScreen")
+        .style.display = "flex";
+
+    document
+        .getElementById("mainApp")
+        .style.display = "none";
+
+}
+
+
+/* =========================================================
+   SHOW MAIN APP
+========================================================= */
+
+function showMainApp(){
+
+    document
+        .getElementById("loginScreen")
+        .style.display = "none";
+
+    document
+        .getElementById("mainApp")
+        .style.display = "block";
+
 
     loadAllData();
 
+
     document
         .getElementById("seatNumber")
-        .addEventListener("keydown", function(e){
+        .addEventListener(
+            "keydown",
+            function(e){
 
-            if(e.key === "Enter"){
-                searchCandidate();
+                if(e.key === "Enter"){
+                    searchCandidate();
+                }
+
             }
+        );
 
-        });
 
     document
         .getElementById("shift")
-        .addEventListener("keydown", function(e){
+        .addEventListener(
+            "keydown",
+            function(e){
 
-            if(e.key === "Enter"){
-                searchCandidate();
+                if(e.key === "Enter"){
+                    searchCandidate();
+                }
+
             }
+        );
 
-        });
+}
 
-});
+
+/* =========================================================
+   LOGIN ERROR
+========================================================= */
+
+function showLoginError(message){
+
+    const box =
+        document.getElementById(
+            "loginError"
+        );
+
+    box.textContent = message;
+
+    box.style.display = "block";
+
+}
+
+
+/* =========================================================
+   TOGGLE PASSWORD
+========================================================= */
+
+function toggleLoginPassword(){
+
+    const input =
+        document.getElementById(
+            "loginPassword"
+        );
+
+    if(input.type === "password"){
+
+        input.type = "text";
+
+    }else{
+
+        input.type = "password";
+
+    }
+
+}
+
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+function logout(){
+
+    sessionStorage.removeItem(
+        LOGIN_SESSION_KEY
+    );
+
+    students = [];
+    fees = [];
+
+    hideResult();
+    hideNoResult();
+    hideStatus();
+
+    document
+        .getElementById("loginUsername")
+        .value = "";
+
+    document
+        .getElementById("loginPassword")
+        .value = "";
+
+    showLogin();
+
+}
+
+
+/* =========================================================
+   CHANGE PASSWORD MODAL
+========================================================= */
+
+function openChangePassword(){
+
+    document
+        .getElementById("passwordModal")
+        .style.display = "flex";
+
+
+    document
+        .getElementById("currentPassword")
+        .value = "";
+
+    document
+        .getElementById("newPassword")
+        .value = "";
+
+    document
+        .getElementById("confirmPassword")
+        .value = "";
+
+
+    hidePasswordMessage();
+
+}
+
+
+function closeChangePassword(){
+
+    document
+        .getElementById("passwordModal")
+        .style.display = "none";
+
+}
+
+
+/* =========================================================
+   CHANGE PASSWORD
+========================================================= */
+
+function changePassword(){
+
+    const current =
+        document
+        .getElementById("currentPassword")
+        .value;
+
+    const newPassword =
+        document
+        .getElementById("newPassword")
+        .value;
+
+    const confirmPassword =
+        document
+        .getElementById("confirmPassword")
+        .value;
+
+
+    const savedPassword =
+        localStorage.getItem(
+            LOGIN_PASSWORD_KEY
+        );
+
+
+    if(current !== savedPassword){
+
+        showPasswordMessage(
+            "❌ Current password गलत है।",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    if(newPassword.length < 6){
+
+        showPasswordMessage(
+            "⚠️ नया password कम से कम 6 characters का होना चाहिए।",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    if(newPassword !== confirmPassword){
+
+        showPasswordMessage(
+            "❌ New password और Confirm password अलग हैं।",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    if(newPassword === current){
+
+        showPasswordMessage(
+            "⚠️ नया password पुराने password से अलग रखें।",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    localStorage.setItem(
+        LOGIN_PASSWORD_KEY,
+        newPassword
+    );
+
+
+    showPasswordMessage(
+        "✅ Password successfully change हो गया।",
+        "success"
+    );
+
+
+    setTimeout(
+        function(){
+
+            closeChangePassword();
+
+        },
+        1200
+    );
+
+}
+
+
+/* =========================================================
+   PASSWORD MESSAGE
+========================================================= */
+
+function showPasswordMessage(
+    message,
+    type
+){
+
+    const box =
+        document.getElementById(
+            "passwordMessage"
+        );
+
+    box.textContent = message;
+
+    box.className =
+        "password-message " +
+        (
+            type === "success"
+            ? "password-success"
+            : "password-error"
+        );
+
+}
+
+
+function hidePasswordMessage(){
+
+    const box =
+        document.getElementById(
+            "passwordMessage"
+        );
+
+    box.className =
+        "password-message";
+
+    box.textContent = "";
+
+}
 
 
 /* =========================================================
    API REQUEST
-   Same API system as existing script.js
 ========================================================= */
 
-async function apiRequest(action, payload = {}){
+async function apiRequest(
+    action,
+    payload = {}
+){
 
     const body = {
         action: action,
         ...payload
     };
 
-    const response = await fetch(
-        GAS_API_URL,
-        {
-            method:"POST",
-            headers:{
-                "Content-Type":
-                    "text/plain;charset=utf-8"
-            },
-            body:JSON.stringify(body)
-        }
-    );
+
+    const response =
+        await fetch(
+            GAS_API_URL,
+            {
+                method:"POST",
+
+                headers:{
+                    "Content-Type":
+                        "text/plain;charset=utf-8"
+                },
+
+                body:
+                    JSON.stringify(body)
+            }
+        );
+
 
     if(!response.ok){
 
         throw new Error(
-            "Server error: " + response.status
+            "Server error: " +
+            response.status
         );
 
     }
 
-    const text = await response.text();
+
+    const text =
+        await response.text();
+
 
     let result;
 
+
     try{
 
-        result = JSON.parse(text);
+        result =
+            JSON.parse(text);
 
     }catch(error){
 
@@ -587,6 +1669,7 @@ async function apiRequest(action, payload = {}){
 
     }
 
+
     if(
         result &&
         result.ok === false
@@ -599,6 +1682,7 @@ async function apiRequest(action, payload = {}){
 
     }
 
+
     if(
         result &&
         result.success === false
@@ -610,6 +1694,7 @@ async function apiRequest(action, payload = {}){
         );
 
     }
+
 
     return result;
 
@@ -627,14 +1712,20 @@ async function loadAllData(){
         "loading"
     );
 
+
     try{
 
         const result =
-            await apiRequest("getAllData");
+            await apiRequest(
+                "getAllData"
+            );
+
 
         if(
             result &&
-            Array.isArray(result.students)
+            Array.isArray(
+                result.students
+            )
         ){
 
             students =
@@ -646,9 +1737,12 @@ async function loadAllData(){
 
         }
 
+
         if(
             result &&
-            Array.isArray(result.fees)
+            Array.isArray(
+                result.fees
+            )
         ){
 
             fees =
@@ -660,20 +1754,27 @@ async function loadAllData(){
 
         }
 
+
         setStatus(
             "✓ Data successfully loaded",
             "success"
         );
 
-        setTimeout(function(){
 
-            hideStatus();
+        setTimeout(
+            function(){
 
-        },1500);
+                hideStatus();
+
+            },
+            1500
+        );
+
 
     }catch(error){
 
         console.error(error);
+
 
         setStatus(
             "❌ Data load नहीं हो पाया: " +
@@ -698,13 +1799,16 @@ function searchCandidate(){
         .value
         .trim();
 
+
     const shift =
         document
         .getElementById("shift")
         .value;
 
+
     hideResult();
     hideNoResult();
+
 
     if(!seat){
 
@@ -716,6 +1820,7 @@ function searchCandidate(){
         return;
 
     }
+
 
     if(!shift){
 
@@ -730,32 +1835,53 @@ function searchCandidate(){
 
 
     const matched =
-        students.filter(function(student){
+        students.filter(
+            function(student){
 
-            return (
-                String(
-                    student.seatNo ??
-                    student.SeatNo ??
+                return (
+
+                    String(
+                        student.seatNo ??
+                        student.SeatNo ??
+                        ""
+                    )
+                    .trim()
+
+                    ===
+
+                    String(seat)
+                    .trim()
+
+                )
+
+                &&
+
+                normalizeShift(
+                    student.shift ??
+                    student.Shift ??
                     ""
-                ).trim() ===
-                String(seat).trim()
-            )
-            &&
-            normalizeShift(
-                student.shift ??
-                student.Shift ??
-                ""
-            )
-            ===
-            normalizeShift(shift)
-            &&
-            normalizeStatus(
-                student.status ??
-                student.Status ??
-                "Active"
-            ) !== "inactive";
+                )
 
-        });
+                ===
+
+                normalizeShift(
+                    shift
+                )
+
+                &&
+
+                normalizeStatus(
+                    student.status ??
+                    student.Status ??
+                    "Active"
+                )
+
+                !==
+
+                "inactive";
+
+            }
+        );
 
 
     if(matched.length === 0){
@@ -763,6 +1889,7 @@ function searchCandidate(){
         document
             .getElementById("noResult")
             .style.display = "block";
+
 
         setStatus(
             "❌ इस Seat और Shift पर कोई candidate नहीं मिला।",
@@ -778,9 +1905,11 @@ function searchCandidate(){
         .getElementById("resultArea")
         .style.display = "block";
 
+
     document
         .getElementById("resultSeat")
         .textContent = seat;
+
 
     document
         .getElementById("resultShift")
@@ -788,6 +1917,7 @@ function searchCandidate(){
 
 
     renderStudents(matched);
+
 
     setStatus(
         `✓ ${matched.length} candidate मिला।`,
@@ -835,212 +1965,263 @@ function renderStudents(list){
             "studentContainer"
         );
 
+
     container.innerHTML = "";
 
 
-    list.forEach(function(student){
+    list.forEach(
+        function(student){
 
-        const totalFees =
-            Number(
-                student.totalFees ??
-                student.TotalFees ??
-                0
-            );
-
-        const paidFees =
-            getPaidFees(student);
-
-        const pendingFees =
-            Math.max(
-                0,
-                totalFees - paidFees
-            );
+            const totalFees =
+                Number(
+                    student.totalFees ??
+                    student.TotalFees ??
+                    0
+                );
 
 
-        const shift =
-            student.shift ??
-            student.Shift ??
-            "";
+            const paidFees =
+                getPaidFees(student);
 
 
-        const shiftClass =
-            shift === "1st Shift"
-            ? "first"
-            : shift === "2nd Shift"
-            ? "second"
-            : "full";
+            const pendingFees =
+                Math.max(
+                    0,
+                    totalFees - paidFees
+                );
 
 
-        const html = `
+            const shift =
+                student.shift ??
+                student.Shift ??
+                "";
 
-        <div class="student-card">
 
-            <div class="student-top">
+            const shiftClass =
+                normalizeShift(shift)
+                === "1st shift"
 
-                <div class="student-name">
-                    ${escapeHTML(
-                        student.name ??
-                        student.Name ??
+                ? "first"
+
+                :
+
+                normalizeShift(shift)
+                === "2nd shift"
+
+                ? "second"
+
+                : "full";
+
+
+            const html = `
+
+            <div class="student-card">
+
+
+                <div class="student-top">
+
+                    <div class="student-name">
+
+                        ${escapeHTML(
+                            student.name ??
+                            student.Name ??
+                            "—"
+                        )}
+
+                    </div>
+
+
+                    <span
+                        class="badge ${shiftClass}"
+                    >
+
+                        ${escapeHTML(shift)}
+
+                    </span>
+
+                </div>
+
+
+
+                <div class="details-grid">
+
+
+                    ${detail(
+                        "🪑 Seat Number",
+                        student.seatNo ??
+                        student.SeatNo ??
                         "—"
                     )}
-                </div>
-
-                <span class="badge ${shiftClass}">
-                    ${escapeHTML(shift)}
-                </span>
-
-            </div>
 
 
-            <div class="details-grid">
-
-                ${detail(
-                    "🪑 Seat Number",
-                    student.seatNo ??
-                    student.SeatNo ??
-                    "—"
-                )}
-
-                ${detail(
-                    "👨 Father Name",
-                    student.fatherName ??
-                    student.FatherName ??
-                    "—"
-                )}
-
-                ${detail(
-                    "🎫 Roll Number",
-                    student.rollNumber ??
-                    student.RollNumber ??
-                    "—"
-                )}
-
-                ${detail(
-                    "📱 Mobile",
-                    student.mobile ??
-                    student.Mobile ??
-                    "—"
-                )}
-
-                ${detail(
-                    "📞 Alternate Mobile",
-                    student.alternateMobile ??
-                    student.AlternateMobile ??
-                    "—"
-                )}
-
-                ${detail(
-                    "🔄 Shift",
-                    shift
-                )}
-
-                ${detail(
-                    "📅 Admission Date",
-                    formatDate(
-                        student.admissionDate ??
-                        student.AdmissionDate
-                    )
-                )}
-
-                ${detail(
-                    "📌 Status",
-                    student.status ??
-                    student.Status ??
-                    "Active"
-                )}
-
-                ${detail(
-                    "🏠 Address",
-                    student.address ??
-                    student.Address ??
-                    "—"
-                )}
-
-                ${detail(
-                    "📝 Remark",
-                    student.remark ??
-                    student.Remark ??
-                    "—"
-                )}
-
-            </div>
+                    ${detail(
+                        "👨 Father Name",
+                        student.fatherName ??
+                        student.FatherName ??
+                        "—"
+                    )}
 
 
-            <div class="fee-section">
-
-                <h3>
-                    💰 Fee Details
-                </h3>
-
-                <div class="fee-grid">
-
-                    <div class="fee-box total">
-
-                        <small>Total Fees</small>
-
-                        <strong>
-                            ${formatCurrency(totalFees)}
-                        </strong>
-
-                    </div>
+                    ${detail(
+                        "🎫 Roll Number",
+                        student.rollNumber ??
+                        student.RollNumber ??
+                        "—"
+                    )}
 
 
-                    <div class="fee-box paid">
-
-                        <small>Paid Fees</small>
-
-                        <strong>
-                            ${formatCurrency(paidFees)}
-                        </strong>
-
-                    </div>
+                    ${detail(
+                        "📱 Mobile",
+                        student.mobile ??
+                        student.Mobile ??
+                        "—"
+                    )}
 
 
-                    <div class="fee-box pending">
+                    ${detail(
+                        "📞 Alternate Mobile",
+                        student.alternateMobile ??
+                        student.AlternateMobile ??
+                        "—"
+                    )}
 
-                        <small>Pending Fees</small>
 
-                        <strong>
-                            ${formatCurrency(pendingFees)}
-                        </strong>
+                    ${detail(
+                        "🔄 Shift",
+                        shift
+                    )}
 
-                    </div>
+
+                    ${detail(
+                        "📅 Admission Date",
+                        formatDate(
+                            student.admissionDate ??
+                            student.AdmissionDate
+                        )
+                    )}
+
+
+                    ${detail(
+                        "📌 Status",
+                        student.status ??
+                        student.Status ??
+                        "Active"
+                    )}
+
+
+                    ${detail(
+                        "🏠 Address",
+                        student.address ??
+                        student.Address ??
+                        "—"
+                    )}
+
+
+                    ${detail(
+                        "📝 Remark",
+                        student.remark ??
+                        student.Remark ??
+                        "—"
+                    )}
 
                 </div>
 
+
+
+                <div class="fee-section">
+
+                    <h3>
+                        💰 Fee Details
+                    </h3>
+
+
+                    <div class="fee-grid">
+
+
+                        <div class="fee-box total">
+
+                            <small>
+                                Total Fees
+                            </small>
+
+                            <strong>
+                                ${formatCurrency(
+                                    totalFees
+                                )}
+                            </strong>
+
+                        </div>
+
+
+                        <div class="fee-box paid">
+
+                            <small>
+                                Paid Fees
+                            </small>
+
+                            <strong>
+                                ${formatCurrency(
+                                    paidFees
+                                )}
+                            </strong>
+
+                        </div>
+
+
+                        <div class="fee-box pending">
+
+                            <small>
+                                Pending Fees
+                            </small>
+
+                            <strong>
+                                ${formatCurrency(
+                                    pendingFees
+                                )}
+                            </strong>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+
+                <div style="
+                    margin-top:20px;
+                    text-align:right;
+                ">
+
+                    <button
+                        class="print-btn"
+                        onclick="window.print()"
+                    >
+                        🖨️ Print
+                    </button>
+
+                </div>
+
+
             </div>
 
-            <div style="
-                margin-top:20px;
-                text-align:right;
-            ">
-
-                <button
-                    class="print-btn"
-                    onclick="window.print()"
-                >
-                    🖨️ Print
-                </button>
-
-            </div>
-
-        </div>
-
-        `;
+            `;
 
 
-        container.insertAdjacentHTML(
-            "beforeend",
-            html
-        );
+            container.insertAdjacentHTML(
+                "beforeend",
+                html
+            );
 
-    });
+        }
+    );
 
 }
 
 
 /* =========================================================
-   DETAIL BOX
+   DETAIL
 ========================================================= */
 
 function detail(label,value){
@@ -1054,6 +2235,7 @@ function detail(label,value){
             </div>
 
             <div class="detail-value">
+
                 ${escapeHTML(
                     value === null ||
                     value === undefined ||
@@ -1061,6 +2243,7 @@ function detail(label,value){
                     ? "—"
                     : String(value)
                 )}
+
             </div>
 
         </div>
@@ -1083,43 +2266,44 @@ function getPaidFees(student){
         student.StudentID;
 
 
-    /*
-       पहले Fees transactions से calculate करें।
-    */
-
     if(studentId){
 
         const transactionTotal =
             fees
-            .filter(function(fee){
+            .filter(
+                function(fee){
 
-                const feeStudentId =
-                    fee.studentId ??
-                    fee.StudentID;
+                    const feeStudentId =
+                        fee.studentId ??
+                        fee.StudentID;
 
-                return String(
-                    feeStudentId ?? ""
-                ) === String(
-                    studentId
-                );
 
-            })
-            .reduce(function(sum,fee){
+                    return String(
+                        feeStudentId ?? ""
+                    )
 
-                return sum +
-                    Number(
-                        fee.amount ??
-                        fee.Amount ??
-                        0
+                    ===
+
+                    String(
+                        studentId
                     );
 
-            },0);
+                }
+            )
+            .reduce(
+                function(sum,fee){
 
+                    return sum +
+                        Number(
+                            fee.amount ??
+                            fee.Amount ??
+                            0
+                        );
 
-        /*
-           अगर transaction मिला है
-           तो वही paid amount लें।
-        */
+                },
+                0
+            );
+
 
         if(transactionTotal > 0){
 
@@ -1129,11 +2313,6 @@ function getPaidFees(student){
 
     }
 
-
-    /*
-       पुराने records के लिए
-       student.paidFees use करें।
-    */
 
     return Number(
         student.paidFees ??
@@ -1154,8 +2333,10 @@ function formatDate(value){
         return "—";
     }
 
+
     const d =
         new Date(value);
+
 
     if(
         isNaN(
@@ -1166,6 +2347,7 @@ function formatDate(value){
         return String(value);
 
     }
+
 
     return d.toLocaleDateString(
         "en-IN"
@@ -1181,8 +2363,11 @@ function formatDate(value){
 function formatCurrency(value){
 
     return "₹" +
+
         Number(value || 0)
-        .toLocaleString("en-IN");
+        .toLocaleString(
+            "en-IN"
+        );
 
 }
 
@@ -1196,17 +2381,32 @@ function escapeHTML(value){
     return String(
         value ?? ""
     )
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
+    .replace(
+        /&/g,
+        "&amp;"
+    )
+    .replace(
+        /</g,
+        "&lt;"
+    )
+    .replace(
+        />/g,
+        "&gt;"
+    )
+    .replace(
+        /"/g,
+        "&quot;"
+    )
+    .replace(
+        /'/g,
+        "&#039;"
+    );
 
 }
 
 
 /* =========================================================
-   CLEAR
+   CLEAR SEARCH
 ========================================================= */
 
 function clearSearch(){
@@ -1215,9 +2415,11 @@ function clearSearch(){
         .getElementById("seatNumber")
         .value = "";
 
+
     document
         .getElementById("shift")
         .value = "";
+
 
     hideResult();
     hideNoResult();
@@ -1235,6 +2437,7 @@ function hideResult(){
     document
         .getElementById("resultArea")
         .style.display = "none";
+
 
     document
         .getElementById("studentContainer")
@@ -1260,14 +2463,20 @@ function hideNoResult(){
    STATUS
 ========================================================= */
 
-function setStatus(message,type){
+function setStatus(
+    message,
+    type
+){
 
     const box =
         document.getElementById(
             "status"
         );
 
-    box.textContent = message;
+
+    box.textContent =
+        message;
+
 
     box.className =
         "status " + type;
@@ -1282,12 +2491,40 @@ function hideStatus(){
             "status"
         );
 
+
     box.className =
         "status";
+
 
     box.textContent = "";
 
 }
+
+
+/* =========================================================
+   CLOSE MODAL BY CLICK OUTSIDE
+========================================================= */
+
+document.addEventListener(
+    "click",
+    function(e){
+
+        const modal =
+            document.getElementById(
+                "passwordModal"
+            );
+
+
+        if(
+            e.target === modal
+        ){
+
+            closeChangePassword();
+
+        }
+
+    }
+);
 
 </script>
 
