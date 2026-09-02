@@ -1,0 +1,1295 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Candidate View - New Drishti Digital Library</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    background:#f1f5f9;
+    color:#1e293b;
+    min-height:100vh;
+}
+
+.header{
+    background:linear-gradient(135deg,#0f172a,#1d4ed8);
+    color:white;
+    padding:22px 15px;
+    text-align:center;
+    box-shadow:0 4px 15px rgba(0,0,0,.15);
+}
+
+.header h1{
+    font-size:28px;
+    margin-bottom:6px;
+}
+
+.header p{
+    font-size:14px;
+    opacity:.9;
+}
+
+.container{
+    width:min(1100px,94%);
+    margin:25px auto;
+}
+
+.search-card{
+    background:white;
+    border-radius:16px;
+    padding:22px;
+    box-shadow:0 5px 20px rgba(15,23,42,.08);
+    margin-bottom:22px;
+}
+
+.search-title{
+    font-size:20px;
+    font-weight:700;
+    margin-bottom:18px;
+}
+
+.search-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr auto;
+    gap:14px;
+}
+
+.field label{
+    display:block;
+    font-size:14px;
+    font-weight:600;
+    margin-bottom:7px;
+}
+
+.field input,
+.field select{
+    width:100%;
+    height:46px;
+    border:1px solid #cbd5e1;
+    border-radius:10px;
+    padding:0 13px;
+    font-size:15px;
+    outline:none;
+    background:white;
+}
+
+.field input:focus,
+.field select:focus{
+    border-color:#2563eb;
+    box-shadow:0 0 0 3px rgba(37,99,235,.1);
+}
+
+.search-btn{
+    height:46px;
+    align-self:end;
+    border:0;
+    border-radius:10px;
+    padding:0 25px;
+    background:#2563eb;
+    color:white;
+    font-size:15px;
+    font-weight:700;
+    cursor:pointer;
+}
+
+.search-btn:hover{
+    background:#1d4ed8;
+}
+
+.clear-btn{
+    height:46px;
+    align-self:end;
+    border:0;
+    border-radius:10px;
+    padding:0 20px;
+    background:#64748b;
+    color:white;
+    font-size:15px;
+    font-weight:700;
+    cursor:pointer;
+}
+
+.buttons{
+    display:flex;
+    gap:10px;
+}
+
+.status{
+    text-align:center;
+    padding:15px;
+    border-radius:10px;
+    margin-bottom:20px;
+    display:none;
+    font-size:15px;
+}
+
+.status.loading{
+    display:block;
+    background:#eff6ff;
+    color:#1d4ed8;
+}
+
+.status.error{
+    display:block;
+    background:#fef2f2;
+    color:#b91c1c;
+}
+
+.status.success{
+    display:block;
+    background:#f0fdf4;
+    color:#15803d;
+}
+
+.result-area{
+    display:none;
+}
+
+.result-header{
+    background:white;
+    border-radius:16px 16px 0 0;
+    padding:18px 20px;
+    border-bottom:1px solid #e2e8f0;
+}
+
+.result-header h2{
+    font-size:20px;
+}
+
+.result-header span{
+    color:#2563eb;
+}
+
+.student-card{
+    background:white;
+    border-radius:0 0 16px 16px;
+    padding:25px;
+    box-shadow:0 5px 20px rgba(15,23,42,.08);
+    margin-bottom:20px;
+}
+
+.student-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    margin-bottom:22px;
+    padding-bottom:18px;
+    border-bottom:1px solid #e2e8f0;
+}
+
+.student-name{
+    font-size:25px;
+    font-weight:800;
+    color:#0f172a;
+}
+
+.badge{
+    padding:8px 14px;
+    border-radius:20px;
+    font-size:13px;
+    font-weight:700;
+    white-space:nowrap;
+}
+
+.badge.first{
+    background:#dbeafe;
+    color:#1d4ed8;
+}
+
+.badge.second{
+    background:#dcfce7;
+    color:#15803d;
+}
+
+.badge.full{
+    background:#fef3c7;
+    color:#b45309;
+}
+
+.details-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:14px;
+}
+
+.detail{
+    background:#f8fafc;
+    border:1px solid #e2e8f0;
+    border-radius:10px;
+    padding:14px;
+}
+
+.detail-label{
+    font-size:12px;
+    color:#64748b;
+    margin-bottom:5px;
+    font-weight:600;
+}
+
+.detail-value{
+    font-size:16px;
+    font-weight:700;
+    color:#0f172a;
+    word-break:break-word;
+}
+
+.fee-section{
+    margin-top:22px;
+}
+
+.fee-section h3{
+    margin-bottom:12px;
+    font-size:18px;
+}
+
+.fee-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:14px;
+}
+
+.fee-box{
+    border-radius:12px;
+    padding:17px;
+    text-align:center;
+    background:#f8fafc;
+    border:1px solid #e2e8f0;
+}
+
+.fee-box small{
+    display:block;
+    color:#64748b;
+    margin-bottom:5px;
+}
+
+.fee-box strong{
+    font-size:21px;
+}
+
+.total strong{
+    color:#1d4ed8;
+}
+
+.paid strong{
+    color:#15803d;
+}
+
+.pending strong{
+    color:#dc2626;
+}
+
+.no-result{
+    background:white;
+    padding:40px 20px;
+    text-align:center;
+    border-radius:16px;
+    box-shadow:0 5px 20px rgba(15,23,42,.08);
+    display:none;
+}
+
+.no-result .icon{
+    font-size:45px;
+    margin-bottom:10px;
+}
+
+.no-result h3{
+    margin-bottom:7px;
+}
+
+.no-result p{
+    color:#64748b;
+}
+
+.footer{
+    text-align:center;
+    color:#64748b;
+    font-size:13px;
+    padding:25px 10px;
+}
+
+.print-btn{
+    border:0;
+    background:#0f172a;
+    color:white;
+    padding:10px 18px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:600;
+}
+
+@media(max-width:750px){
+
+    .search-grid{
+        grid-template-columns:1fr;
+    }
+
+    .buttons{
+        display:grid;
+        grid-template-columns:1fr 1fr;
+    }
+
+    .search-btn,
+    .clear-btn{
+        width:100%;
+    }
+
+    .details-grid{
+        grid-template-columns:1fr;
+    }
+
+    .fee-grid{
+        grid-template-columns:1fr;
+    }
+
+    .student-top{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .student-name{
+        font-size:21px;
+    }
+
+    .header h1{
+        font-size:23px;
+    }
+}
+
+@media print{
+
+    body{
+        background:white;
+    }
+
+    .header{
+        background:white;
+        color:black;
+        box-shadow:none;
+        border-bottom:2px solid #000;
+    }
+
+    .search-card,
+    .footer{
+        display:none;
+    }
+
+    .container{
+        width:100%;
+        margin:0;
+    }
+
+    .student-card,
+    .result-header{
+        box-shadow:none;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+    <h1>📚 New Drishti Digital Library</h1>
+    <p>Candidate View Dashboard</p>
+</header>
+
+<div class="container">
+
+    <!-- SEARCH -->
+    <div class="search-card">
+
+        <div class="search-title">
+            🔎 Seat & Shift से Candidate Search करें
+        </div>
+
+        <div class="search-grid">
+
+            <div class="field">
+                <label>Seat Number</label>
+                <input
+                    type="text"
+                    id="seatNumber"
+                    placeholder="जैसे 1, 2, 10..."
+                    autocomplete="off"
+                >
+            </div>
+
+            <div class="field">
+                <label>Shift</label>
+                <select id="shift">
+                    <option value="">-- Shift Select करें --</option>
+                    <option value="1st Shift">1st Shift</option>
+                    <option value="2nd Shift">2nd Shift</option>
+                    <option value="Full Shift">Full Shift</option>
+                </select>
+            </div>
+
+            <div class="buttons">
+                <button class="search-btn" onclick="searchCandidate()">
+                    🔍 Search
+                </button>
+
+                <button class="clear-btn" onclick="clearSearch()">
+                    ✕ Clear
+                </button>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- STATUS -->
+    <div id="status" class="status"></div>
+
+    <!-- RESULT -->
+    <div id="resultArea" class="result-area">
+
+        <div class="result-header">
+            <h2>
+                Candidate Details —
+                <span id="resultSeat"></span>
+                /
+                <span id="resultShift"></span>
+            </h2>
+        </div>
+
+        <div id="studentContainer"></div>
+
+    </div>
+
+    <!-- NO RESULT -->
+    <div id="noResult" class="no-result">
+
+        <div class="icon">🔍</div>
+
+        <h3>Candidate नहीं मिला</h3>
+
+        <p>
+            कृपया Seat Number और Shift सही से चुनें।
+        </p>
+
+    </div>
+
+</div>
+
+<div class="footer">
+    New Drishti Computer Education & Digital Library
+    <br>
+    Candidate View Dashboard
+</div>
+
+
+<script>
+
+/* =========================================================
+   SAME GAS API URL AS YOUR EXISTING SCRIPT.JS
+========================================================= */
+
+const GAS_API_URL =
+"https://script.google.com/macros/s/AKfycbwiOywF3tKpCYmirbpiHxuiuj92VGxCMbuY3vTXMiiABChleqNIeTXgcsV5pU2ZhYkr/exec";
+
+
+let students = [];
+let fees = [];
+
+
+/* =========================================================
+   PAGE LOAD
+========================================================= */
+
+document.addEventListener("DOMContentLoaded", function(){
+
+    loadAllData();
+
+    document
+        .getElementById("seatNumber")
+        .addEventListener("keydown", function(e){
+
+            if(e.key === "Enter"){
+                searchCandidate();
+            }
+
+        });
+
+    document
+        .getElementById("shift")
+        .addEventListener("keydown", function(e){
+
+            if(e.key === "Enter"){
+                searchCandidate();
+            }
+
+        });
+
+});
+
+
+/* =========================================================
+   API REQUEST
+   Same API system as existing script.js
+========================================================= */
+
+async function apiRequest(action, payload = {}){
+
+    const body = {
+        action: action,
+        ...payload
+    };
+
+    const response = await fetch(
+        GAS_API_URL,
+        {
+            method:"POST",
+            headers:{
+                "Content-Type":
+                    "text/plain;charset=utf-8"
+            },
+            body:JSON.stringify(body)
+        }
+    );
+
+    if(!response.ok){
+
+        throw new Error(
+            "Server error: " + response.status
+        );
+
+    }
+
+    const text = await response.text();
+
+    let result;
+
+    try{
+
+        result = JSON.parse(text);
+
+    }catch(error){
+
+        console.error(
+            "Invalid API response:",
+            text
+        );
+
+        throw new Error(
+            "Invalid server response."
+        );
+
+    }
+
+    if(
+        result &&
+        result.ok === false
+    ){
+
+        throw new Error(
+            result.message ||
+            "API request failed."
+        );
+
+    }
+
+    if(
+        result &&
+        result.success === false
+    ){
+
+        throw new Error(
+            result.message ||
+            "API request failed."
+        );
+
+    }
+
+    return result;
+
+}
+
+
+/* =========================================================
+   LOAD ALL DATA
+========================================================= */
+
+async function loadAllData(){
+
+    setStatus(
+        "🔄 Student data load हो रहा है...",
+        "loading"
+    );
+
+    try{
+
+        const result =
+            await apiRequest("getAllData");
+
+        if(
+            result &&
+            Array.isArray(result.students)
+        ){
+
+            students =
+                result.students;
+
+        }else{
+
+            students = [];
+
+        }
+
+        if(
+            result &&
+            Array.isArray(result.fees)
+        ){
+
+            fees =
+                result.fees;
+
+        }else{
+
+            fees = [];
+
+        }
+
+        setStatus(
+            "✓ Data successfully loaded",
+            "success"
+        );
+
+        setTimeout(function(){
+
+            hideStatus();
+
+        },1500);
+
+    }catch(error){
+
+        console.error(error);
+
+        setStatus(
+            "❌ Data load नहीं हो पाया: " +
+            error.message,
+            "error"
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   SEARCH CANDIDATE
+========================================================= */
+
+function searchCandidate(){
+
+    const seat =
+        document
+        .getElementById("seatNumber")
+        .value
+        .trim();
+
+    const shift =
+        document
+        .getElementById("shift")
+        .value;
+
+    hideResult();
+    hideNoResult();
+
+    if(!seat){
+
+        setStatus(
+            "⚠️ कृपया Seat Number डालें।",
+            "error"
+        );
+
+        return;
+
+    }
+
+    if(!shift){
+
+        setStatus(
+            "⚠️ कृपया Shift Select करें।",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    const matched =
+        students.filter(function(student){
+
+            return (
+                String(
+                    student.seatNo ??
+                    student.SeatNo ??
+                    ""
+                ).trim() ===
+                String(seat).trim()
+            )
+            &&
+            normalizeShift(
+                student.shift ??
+                student.Shift ??
+                ""
+            )
+            ===
+            normalizeShift(shift)
+            &&
+            normalizeStatus(
+                student.status ??
+                student.Status ??
+                "Active"
+            ) !== "inactive";
+
+        });
+
+
+    if(matched.length === 0){
+
+        document
+            .getElementById("noResult")
+            .style.display = "block";
+
+        setStatus(
+            "❌ इस Seat और Shift पर कोई candidate नहीं मिला।",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    document
+        .getElementById("resultArea")
+        .style.display = "block";
+
+    document
+        .getElementById("resultSeat")
+        .textContent = seat;
+
+    document
+        .getElementById("resultShift")
+        .textContent = shift;
+
+
+    renderStudents(matched);
+
+    setStatus(
+        `✓ ${matched.length} candidate मिला।`,
+        "success"
+    );
+
+}
+
+
+/* =========================================================
+   NORMALIZE SHIFT
+========================================================= */
+
+function normalizeShift(value){
+
+    return String(value || "")
+        .trim()
+        .toLowerCase()
+        .replace(/\s+/g," ");
+
+}
+
+
+/* =========================================================
+   NORMALIZE STATUS
+========================================================= */
+
+function normalizeStatus(value){
+
+    return String(value || "")
+        .trim()
+        .toLowerCase();
+
+}
+
+
+/* =========================================================
+   RENDER STUDENTS
+========================================================= */
+
+function renderStudents(list){
+
+    const container =
+        document.getElementById(
+            "studentContainer"
+        );
+
+    container.innerHTML = "";
+
+
+    list.forEach(function(student){
+
+        const totalFees =
+            Number(
+                student.totalFees ??
+                student.TotalFees ??
+                0
+            );
+
+        const paidFees =
+            getPaidFees(student);
+
+        const pendingFees =
+            Math.max(
+                0,
+                totalFees - paidFees
+            );
+
+
+        const shift =
+            student.shift ??
+            student.Shift ??
+            "";
+
+
+        const shiftClass =
+            shift === "1st Shift"
+            ? "first"
+            : shift === "2nd Shift"
+            ? "second"
+            : "full";
+
+
+        const html = `
+
+        <div class="student-card">
+
+            <div class="student-top">
+
+                <div class="student-name">
+                    ${escapeHTML(
+                        student.name ??
+                        student.Name ??
+                        "—"
+                    )}
+                </div>
+
+                <span class="badge ${shiftClass}">
+                    ${escapeHTML(shift)}
+                </span>
+
+            </div>
+
+
+            <div class="details-grid">
+
+                ${detail(
+                    "🪑 Seat Number",
+                    student.seatNo ??
+                    student.SeatNo ??
+                    "—"
+                )}
+
+                ${detail(
+                    "👨 Father Name",
+                    student.fatherName ??
+                    student.FatherName ??
+                    "—"
+                )}
+
+                ${detail(
+                    "🎫 Roll Number",
+                    student.rollNumber ??
+                    student.RollNumber ??
+                    "—"
+                )}
+
+                ${detail(
+                    "📱 Mobile",
+                    student.mobile ??
+                    student.Mobile ??
+                    "—"
+                )}
+
+                ${detail(
+                    "📞 Alternate Mobile",
+                    student.alternateMobile ??
+                    student.AlternateMobile ??
+                    "—"
+                )}
+
+                ${detail(
+                    "🔄 Shift",
+                    shift
+                )}
+
+                ${detail(
+                    "📅 Admission Date",
+                    formatDate(
+                        student.admissionDate ??
+                        student.AdmissionDate
+                    )
+                )}
+
+                ${detail(
+                    "📌 Status",
+                    student.status ??
+                    student.Status ??
+                    "Active"
+                )}
+
+                ${detail(
+                    "🏠 Address",
+                    student.address ??
+                    student.Address ??
+                    "—"
+                )}
+
+                ${detail(
+                    "📝 Remark",
+                    student.remark ??
+                    student.Remark ??
+                    "—"
+                )}
+
+            </div>
+
+
+            <div class="fee-section">
+
+                <h3>
+                    💰 Fee Details
+                </h3>
+
+                <div class="fee-grid">
+
+                    <div class="fee-box total">
+
+                        <small>Total Fees</small>
+
+                        <strong>
+                            ${formatCurrency(totalFees)}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="fee-box paid">
+
+                        <small>Paid Fees</small>
+
+                        <strong>
+                            ${formatCurrency(paidFees)}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="fee-box pending">
+
+                        <small>Pending Fees</small>
+
+                        <strong>
+                            ${formatCurrency(pendingFees)}
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div style="
+                margin-top:20px;
+                text-align:right;
+            ">
+
+                <button
+                    class="print-btn"
+                    onclick="window.print()"
+                >
+                    🖨️ Print
+                </button>
+
+            </div>
+
+        </div>
+
+        `;
+
+
+        container.insertAdjacentHTML(
+            "beforeend",
+            html
+        );
+
+    });
+
+}
+
+
+/* =========================================================
+   DETAIL BOX
+========================================================= */
+
+function detail(label,value){
+
+    return `
+
+        <div class="detail">
+
+            <div class="detail-label">
+                ${escapeHTML(label)}
+            </div>
+
+            <div class="detail-value">
+                ${escapeHTML(
+                    value === null ||
+                    value === undefined ||
+                    value === ""
+                    ? "—"
+                    : String(value)
+                )}
+            </div>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =========================================================
+   GET PAID FEES
+========================================================= */
+
+function getPaidFees(student){
+
+    const studentId =
+        student.id ??
+        student.ID ??
+        student.studentId ??
+        student.StudentID;
+
+
+    /*
+       पहले Fees transactions से calculate करें।
+    */
+
+    if(studentId){
+
+        const transactionTotal =
+            fees
+            .filter(function(fee){
+
+                const feeStudentId =
+                    fee.studentId ??
+                    fee.StudentID;
+
+                return String(
+                    feeStudentId ?? ""
+                ) === String(
+                    studentId
+                );
+
+            })
+            .reduce(function(sum,fee){
+
+                return sum +
+                    Number(
+                        fee.amount ??
+                        fee.Amount ??
+                        0
+                    );
+
+            },0);
+
+
+        /*
+           अगर transaction मिला है
+           तो वही paid amount लें।
+        */
+
+        if(transactionTotal > 0){
+
+            return transactionTotal;
+
+        }
+
+    }
+
+
+    /*
+       पुराने records के लिए
+       student.paidFees use करें।
+    */
+
+    return Number(
+        student.paidFees ??
+        student.PaidFees ??
+        0
+    );
+
+}
+
+
+/* =========================================================
+   DATE FORMAT
+========================================================= */
+
+function formatDate(value){
+
+    if(!value){
+        return "—";
+    }
+
+    const d =
+        new Date(value);
+
+    if(
+        isNaN(
+            d.getTime()
+        )
+    ){
+
+        return String(value);
+
+    }
+
+    return d.toLocaleDateString(
+        "en-IN"
+    );
+
+}
+
+
+/* =========================================================
+   CURRENCY
+========================================================= */
+
+function formatCurrency(value){
+
+    return "₹" +
+        Number(value || 0)
+        .toLocaleString("en-IN");
+
+}
+
+
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
+
+function escapeHTML(value){
+
+    return String(
+        value ?? ""
+    )
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+/* =========================================================
+   CLEAR
+========================================================= */
+
+function clearSearch(){
+
+    document
+        .getElementById("seatNumber")
+        .value = "";
+
+    document
+        .getElementById("shift")
+        .value = "";
+
+    hideResult();
+    hideNoResult();
+    hideStatus();
+
+}
+
+
+/* =========================================================
+   HIDE RESULT
+========================================================= */
+
+function hideResult(){
+
+    document
+        .getElementById("resultArea")
+        .style.display = "none";
+
+    document
+        .getElementById("studentContainer")
+        .innerHTML = "";
+
+}
+
+
+/* =========================================================
+   HIDE NO RESULT
+========================================================= */
+
+function hideNoResult(){
+
+    document
+        .getElementById("noResult")
+        .style.display = "none";
+
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+function setStatus(message,type){
+
+    const box =
+        document.getElementById(
+            "status"
+        );
+
+    box.textContent = message;
+
+    box.className =
+        "status " + type;
+
+}
+
+
+function hideStatus(){
+
+    const box =
+        document.getElementById(
+            "status"
+        );
+
+    box.className =
+        "status";
+
+    box.textContent = "";
+
+}
+
+</script>
+
+</body>
+</html>
