@@ -1,0 +1,1720 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width,initial-scale=1.0"
+>
+
+<title>NEW DRISHTI COMPUTER EDUCATION</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     LOGIN
+===================================================== -->
+
+<div id="loginScreen" class="login-screen">
+
+  <div class="login-card">
+
+    <div class="login-logo">
+      🎓
+    </div>
+
+    <h1>NEW DRISHTI</h1>
+
+    <p>COMPUTER EDUCATION</p>
+
+    <div class="login-line"></div>
+
+    <input
+      type="password"
+      id="loginPin"
+      maxlength="8"
+      placeholder="Enter Login PIN"
+    >
+
+    <button
+      class="primary-btn full-btn"
+      onclick="login()"
+    >
+      🔐 LOGIN
+    </button>
+
+    <div
+      id="loginMessage"
+      class="login-message"
+    ></div>
+
+  </div>
+
+</div>
+
+
+<!-- =====================================================
+     MAIN APP
+===================================================== -->
+
+<div id="app" class="app hidden">
+
+
+<!-- =====================================================
+     TOP HEADER
+===================================================== -->
+
+<header class="top-header">
+
+  <div class="brand">
+
+    <div class="brand-icon">
+      🎓
+    </div>
+
+    <div>
+
+      <h2>NEW DRISHTI COMPUTER EDUCATION</h2>
+
+      <small>Smart Management System</small>
+
+    </div>
+
+  </div>
+
+
+  <div class="header-right">
+
+    <div class="digital-clock">
+
+      <div id="clock">00:00:00</div>
+
+      <div id="date">Loading...</div>
+
+    </div>
+
+    <button
+      class="icon-btn"
+      onclick="refreshData()"
+      title="Refresh"
+    >
+      🔄
+    </button>
+
+    <button
+      class="icon-btn"
+      onclick="logout()"
+      title="Logout"
+    >
+      🚪
+    </button>
+
+  </div>
+
+</header>
+
+
+<!-- =====================================================
+     LAYOUT
+===================================================== -->
+
+<div class="layout">
+
+
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
+
+<aside class="sidebar">
+
+  <button
+    class="nav-btn active"
+    data-section="dashboard"
+    onclick="showSection('dashboard',this)"
+  >
+    🏠 <span>Dashboard</span>
+  </button>
+
+  <button
+    class="nav-btn"
+    data-section="students"
+    onclick="showSection('students',this)"
+  >
+    👨‍🎓 <span>Students</span>
+  </button>
+
+  <button
+    class="nav-btn"
+    data-section="staff"
+    onclick="showSection('staff',this)"
+  >
+    👨‍🏫 <span>Teachers / Staff</span>
+  </button>
+
+  <button
+    class="nav-btn"
+    data-section="batches"
+    onclick="showSection('batches',this)"
+  >
+    📚 <span>Batches</span>
+  </button>
+
+  <button
+    class="nav-btn"
+    data-section="fees"
+    onclick="showSection('fees',this)"
+  >
+    💰 <span>Fees / Salary</span>
+  </button>
+
+  <button
+    class="nav-btn"
+    data-section="attendance"
+    onclick="showSection('attendance',this)"
+  >
+    📝 <span>Attendance</span>
+  </button>
+
+  <button
+    class="nav-btn"
+    data-section="expenses"
+    onclick="showSection('expenses',this)"
+  >
+    🧾 <span>Office Expenses</span>
+  </button>
+
+  <button
+    class="nav-btn"
+    data-section="reports"
+    onclick="showSection('reports',this)"
+  >
+    📊 <span>Reports</span>
+  </button>
+
+  <button
+    class="nav-btn"
+    data-section="courses"
+    onclick="showSection('courses',this)"
+  >
+    🎓 <span>Courses</span>
+  </button>
+
+  <button
+    class="nav-btn"
+    data-section="settings"
+    onclick="showSection('settings',this)"
+  >
+    ⚙️ <span>Settings</span>
+  </button>
+
+</aside>
+
+
+<!-- =====================================================
+     CONTENT
+===================================================== -->
+
+<main class="content">
+
+
+<!-- =====================================================
+     DASHBOARD
+===================================================== -->
+
+<section id="dashboard" class="page-section active">
+
+  <div class="page-title">
+
+    <div>
+
+      <h1>Dashboard</h1>
+
+      <p>
+        Welcome to your smart management system
+      </p>
+
+    </div>
+
+    <select
+      id="dashboardYear"
+      onchange="renderDashboard()"
+    ></select>
+
+  </div>
+
+
+  <div class="quick-menu">
+
+    <button onclick="quickAdd('students')">
+      ➕ Student
+    </button>
+
+    <button onclick="quickAdd('staff')">
+      ➕ Staff
+    </button>
+
+    <button onclick="quickAdd('fees')">
+      💰 Fee
+    </button>
+
+    <button onclick="quickAdd('attendance')">
+      📝 Attendance
+    </button>
+
+    <button onclick="quickAdd('expenses')">
+      🧾 Expense
+    </button>
+
+    <button onclick="quickAdd('reports')">
+      📊 Report
+    </button>
+
+  </div>
+
+
+  <div class="stats-grid">
+
+    <div class="stat-card blue">
+      <div class="stat-icon">👨‍🎓</div>
+      <div>
+        <span>Total Students</span>
+        <strong id="totalStudents">0</strong>
+      </div>
+    </div>
+
+    <div class="stat-card purple">
+      <div class="stat-icon">👨‍🏫</div>
+      <div>
+        <span>Teachers / Staff</span>
+        <strong id="totalStaff">0</strong>
+      </div>
+    </div>
+
+    <div class="stat-card green">
+      <div class="stat-icon">📚</div>
+      <div>
+        <span>Total Batches</span>
+        <strong id="totalBatches">0</strong>
+      </div>
+    </div>
+
+    <div class="stat-card orange">
+      <div class="stat-icon">🎓</div>
+      <div>
+        <span>Total Courses</span>
+        <strong id="totalCourses">0</strong>
+      </div>
+    </div>
+
+    <div class="stat-card teal">
+      <div class="stat-icon">💰</div>
+      <div>
+        <span>Student Fees</span>
+        <strong id="totalStudentFees">₹0</strong>
+      </div>
+    </div>
+
+    <div class="stat-card red">
+      <div class="stat-icon">💸</div>
+      <div>
+        <span>Salary Paid</span>
+        <strong id="totalSalary">₹0</strong>
+      </div>
+    </div>
+
+    <div class="stat-card pink">
+      <div class="stat-icon">🧾</div>
+      <div>
+        <span>Office Expenses</span>
+        <strong id="totalExpenses">₹0</strong>
+      </div>
+    </div>
+
+    <div class="stat-card dark">
+      <div class="stat-icon">📈</div>
+      <div>
+        <span>Net Balance</span>
+        <strong id="netBalance">₹0</strong>
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="charts-grid">
+
+    <div class="chart-card">
+
+      <div class="chart-header">
+        <h3>📊 Records Overview</h3>
+      </div>
+
+      <canvas
+        id="recordsChart"
+        width="700"
+        height="320"
+      ></canvas>
+
+    </div>
+
+
+    <div class="chart-card">
+
+      <div class="chart-header">
+        <h3>💰 Financial Overview</h3>
+      </div>
+
+      <canvas
+        id="financeChart"
+        width="700"
+        height="320"
+      ></canvas>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     STUDENTS
+===================================================== -->
+
+<section id="students" class="page-section">
+
+  <div class="page-title">
+
+    <div>
+      <h1>👨‍🎓 Students</h1>
+      <p>Student admission and records</p>
+    </div>
+
+    <button
+      class="primary-btn"
+      onclick="resetStudentForm()"
+    >
+      ➕ Add Student
+    </button>
+
+  </div>
+
+
+  <div class="form-card">
+
+    <h3>Student Registration</h3>
+
+    <form id="studentForm">
+
+      <input type="hidden" id="studentID">
+
+      <div class="form-grid">
+
+        <input
+          id="registrationNo"
+          placeholder="Registration No"
+        >
+
+        <input
+          id="studentName"
+          placeholder="Student Name *"
+          required
+        >
+
+        <input
+          id="fatherName"
+          placeholder="Father Name"
+        >
+
+        <input
+          id="mobile"
+          placeholder="Mobile"
+        >
+
+        <input
+          id="alternateMobile"
+          placeholder="Alternate Mobile"
+        >
+
+        <select id="gender">
+          <option value="">Gender</option>
+          <option>Male</option>
+          <option>Female</option>
+          <option>Other</option>
+        </select>
+
+        <input type="date" id="dob">
+
+        <select id="studentCourse">
+          <option value="">Select Course</option>
+        </select>
+
+        <select id="studentBatch">
+          <option value="">Select Batch</option>
+        </select>
+
+        <input type="date" id="admissionDate">
+
+        <input
+          type="number"
+          id="totalFee"
+          placeholder="Total Course Fee"
+        >
+
+        <input
+          type="number"
+          id="monthlyFee"
+          placeholder="Monthly Fee"
+        >
+
+        <input
+          type="number"
+          id="studentPaid"
+          placeholder="Initial Paid Amount"
+        >
+
+        <select id="studentStatus">
+          <option>Active</option>
+          <option>Inactive</option>
+          <option>Completed</option>
+        </select>
+
+        <input
+          id="studentAddress"
+          placeholder="Address"
+        >
+
+        <input
+          id="studentRemark"
+          placeholder="Remark"
+        >
+
+      </div>
+
+
+      <div class="form-actions">
+
+        <button
+          type="submit"
+          class="primary-btn"
+        >
+          💾 Save Student
+        </button>
+
+        <button
+          type="button"
+          class="secondary-btn"
+          onclick="resetStudentForm()"
+        >
+          Clear
+        </button>
+
+      </div>
+
+    </form>
+
+  </div>
+
+
+  <div class="table-card">
+
+    <div class="table-tools">
+
+      <input
+        id="studentSearch"
+        placeholder="🔍 Search student..."
+        oninput="renderStudents()"
+      >
+
+      <button
+        class="secondary-btn"
+        onclick="printStudents()"
+      >
+        🖨️ Print All
+      </button>
+
+    </div>
+
+
+    <div class="table-wrap">
+
+      <table>
+
+        <thead>
+
+          <tr>
+            <th>Reg. No</th>
+            <th>Student</th>
+            <th>Father</th>
+            <th>Mobile</th>
+            <th>Course</th>
+            <th>Batch</th>
+            <th>Monthly Fee</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+
+        </thead>
+
+        <tbody id="studentsTable"></tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     STAFF
+===================================================== -->
+
+<section id="staff" class="page-section">
+
+  <div class="page-title">
+
+    <div>
+      <h1>👨‍🏫 Teachers / Staff</h1>
+      <p>Staff and monthly salary management</p>
+    </div>
+
+  </div>
+
+
+  <div class="form-card">
+
+    <h3>Staff Registration</h3>
+
+    <form id="staffForm">
+
+      <input type="hidden" id="staffID">
+
+      <div class="form-grid">
+
+        <input
+          id="staffCode"
+          placeholder="Staff Code"
+        >
+
+        <input
+          id="staffName"
+          placeholder="Name *"
+          required
+        >
+
+        <input
+          id="staffFather"
+          placeholder="Father Name"
+        >
+
+        <input
+          id="staffMobile"
+          placeholder="Mobile"
+        >
+
+        <input
+          id="designation"
+          placeholder="Designation"
+        >
+
+        <input
+          type="date"
+          id="joiningDate"
+        >
+
+        <input
+          type="number"
+          id="monthlySalary"
+          placeholder="Monthly Salary"
+        >
+
+        <select id="staffStatus">
+          <option>Active</option>
+          <option>Inactive</option>
+        </select>
+
+        <input
+          id="staffAddress"
+          placeholder="Address"
+        >
+
+        <input
+          id="staffRemark"
+          placeholder="Remark"
+        >
+
+      </div>
+
+
+      <div class="form-actions">
+
+        <button
+          type="submit"
+          class="primary-btn"
+        >
+          💾 Save Staff
+        </button>
+
+        <button
+          type="button"
+          class="secondary-btn"
+          onclick="resetStaffForm()"
+        >
+          Clear
+        </button>
+
+      </div>
+
+    </form>
+
+  </div>
+
+
+  <div class="table-card">
+
+    <div class="table-tools">
+
+      <input
+        id="staffSearch"
+        placeholder="🔍 Search staff..."
+        oninput="renderStaff()"
+      >
+
+      <button
+        class="secondary-btn"
+        onclick="printStaff()"
+      >
+        🖨️ Print All
+      </button>
+
+    </div>
+
+
+    <div class="table-wrap">
+
+      <table>
+
+        <thead>
+
+          <tr>
+            <th>Code</th>
+            <th>Name</th>
+            <th>Mobile</th>
+            <th>Designation</th>
+            <th>Salary</th>
+            <th>Joining Date</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+
+        </thead>
+
+        <tbody id="staffTable"></tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     BATCHES
+===================================================== -->
+
+<section id="batches" class="page-section">
+
+  <div class="page-title">
+
+    <div>
+      <h1>📚 Batches</h1>
+      <p>Create and manage batches manually</p>
+    </div>
+
+  </div>
+
+
+  <div class="form-card">
+
+    <form id="batchForm">
+
+      <input type="hidden" id="batchID">
+
+      <div class="form-grid">
+
+        <input
+          id="batchName"
+          placeholder="Batch Name *"
+          required
+        >
+
+        <select id="batchCourse">
+          <option value="">Select Course</option>
+        </select>
+
+        <input type="time" id="batchStart">
+
+        <input type="time" id="batchEnd">
+
+        <select id="batchTeacher">
+          <option value="">Select Teacher</option>
+        </select>
+
+        <input
+          id="batchRoom"
+          placeholder="Room / Lab"
+        >
+
+        <input
+          type="number"
+          id="maxStudents"
+          placeholder="Maximum Students"
+        >
+
+        <select id="batchStatus">
+          <option>Active</option>
+          <option>Inactive</option>
+        </select>
+
+        <input
+          id="batchRemark"
+          placeholder="Remark"
+        >
+
+      </div>
+
+
+      <div class="form-actions">
+
+        <button
+          class="primary-btn"
+          type="submit"
+        >
+          💾 Save Batch
+        </button>
+
+        <button
+          class="secondary-btn"
+          type="button"
+          onclick="resetBatchForm()"
+        >
+          Clear
+        </button>
+
+      </div>
+
+    </form>
+
+  </div>
+
+
+  <div class="table-card">
+
+    <div class="table-tools">
+
+      <input
+        id="batchSearch"
+        placeholder="🔍 Search batch..."
+        oninput="renderBatches()"
+      >
+
+    </div>
+
+
+    <div class="table-wrap">
+
+      <table>
+
+        <thead>
+
+          <tr>
+            <th>Batch</th>
+            <th>Course</th>
+            <th>Time</th>
+            <th>Teacher</th>
+            <th>Room</th>
+            <th>Max Students</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+
+        </thead>
+
+        <tbody id="batchesTable"></tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     FEES
+===================================================== -->
+
+<section id="fees" class="page-section">
+
+  <div class="page-title">
+
+    <div>
+      <h1>💰 Fees / Salary</h1>
+      <p>Month-wise and year-wise payment management</p>
+    </div>
+
+  </div>
+
+
+  <div class="form-card">
+
+    <h3>💰 Payment Entry</h3>
+
+    <form id="feeForm">
+
+      <input type="hidden" id="feeID">
+
+      <div class="form-grid">
+
+        <select
+          id="feePersonType"
+          onchange="changeFeePersonType()"
+        >
+          <option value="Student">Student Fee</option>
+          <option value="Staff">Teacher / Staff Salary</option>
+        </select>
+
+        <select id="feePerson">
+          <option value="">Select Person</option>
+        </select>
+
+        <select id="feeMonth"></select>
+
+        <select id="feeYear"></select>
+
+        <input
+          type="number"
+          id="feeAmount"
+          placeholder="Amount"
+          required
+        >
+
+        <select id="feePaymentMode">
+          <option>Cash</option>
+          <option>UPI</option>
+          <option>Bank Transfer</option>
+          <option>Other</option>
+        </select>
+
+        <input type="date" id="feePaymentDate">
+
+        <input
+          id="feeRemark"
+          placeholder="Remark"
+        >
+
+      </div>
+
+
+      <div class="form-actions">
+
+        <button
+          type="submit"
+          class="primary-btn"
+        >
+          💾 Deposit Payment
+        </button>
+
+        <button
+          type="button"
+          class="secondary-btn"
+          onclick="resetFeeForm()"
+        >
+          Clear
+        </button>
+
+      </div>
+
+    </form>
+
+  </div>
+
+
+  <div class="table-card">
+
+    <div class="table-tools">
+
+      <select
+        id="feeFilterType"
+        onchange="renderFees()"
+      >
+        <option value="All">All</option>
+        <option value="Student">Student Fee</option>
+        <option value="Staff">Staff Salary</option>
+      </select>
+
+      <select
+        id="feeFilterMonth"
+        onchange="renderFees()"
+      ></select>
+
+      <select
+        id="feeFilterYear"
+        onchange="renderFees()"
+      ></select>
+
+      <input
+        id="feeSearch"
+        placeholder="🔍 Search..."
+        oninput="renderFees()"
+      >
+
+      <button
+        class="secondary-btn"
+        onclick="printFees()"
+      >
+        🖨️ Print
+      </button>
+
+    </div>
+
+
+    <div class="table-wrap">
+
+      <table>
+
+        <thead>
+
+          <tr>
+            <th>Type</th>
+            <th>Person</th>
+            <th>Month</th>
+            <th>Year</th>
+            <th>Amount</th>
+            <th>Mode</th>
+            <th>Date</th>
+            <th>Receipt</th>
+            <th>Action</th>
+          </tr>
+
+        </thead>
+
+        <tbody id="feesTable"></tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     ATTENDANCE
+===================================================== -->
+
+<section id="attendance" class="page-section">
+
+  <div class="page-title">
+
+    <div>
+
+      <h1>📝 Attendance</h1>
+
+      <p>
+        Student and staff attendance
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <div class="form-card">
+
+    <h3>📝 Attendance Entry</h3>
+
+    <form id="attendanceForm">
+
+      <!-- IMPORTANT: Edit के लिए ID -->
+
+      <input
+        type="hidden"
+        id="attendanceID"
+      >
+
+
+      <div class="form-grid">
+
+        <select
+          id="attendanceType"
+          onchange="loadAttendancePersons()"
+        >
+
+          <option value="Student">
+            Student
+          </option>
+
+          <option value="Staff">
+            Staff
+          </option>
+
+        </select>
+
+
+        <select id="attendancePerson">
+
+          <option value="">
+            Select Person
+          </option>
+
+        </select>
+
+
+        <input
+          type="date"
+          id="attendanceDate"
+        >
+
+
+        <select id="attendanceStatus">
+
+          <option value="Present">
+            Present
+          </option>
+
+          <option value="Absent">
+            Absent
+          </option>
+
+          <option value="Late">
+            Late
+          </option>
+
+          <option value="Leave">
+            Leave
+          </option>
+
+        </select>
+
+
+        <select id="attendanceBatch">
+
+          <option value="">
+            Select Batch
+          </option>
+
+        </select>
+
+
+        <input
+          id="attendanceRemark"
+          placeholder="Remark"
+        >
+
+      </div>
+
+
+      <div class="form-actions">
+
+        <button
+          class="primary-btn"
+          type="submit"
+          id="attendanceSaveBtn"
+        >
+          💾 Save Attendance
+        </button>
+
+
+        <button
+          class="secondary-btn"
+          type="button"
+          onclick="resetAttendanceForm()"
+        >
+          Clear
+        </button>
+
+      </div>
+
+    </form>
+
+  </div>
+
+
+  <div class="table-card">
+
+    <div class="table-tools">
+
+      <input
+        id="attendanceSearch"
+        placeholder="🔍 Search name / batch / status..."
+        oninput="renderAttendance()"
+      >
+
+
+      <button
+        class="secondary-btn"
+        onclick="printAttendance()"
+      >
+        🖨️ Print Attendance
+      </button>
+
+    </div>
+
+
+    <div class="table-wrap">
+
+      <table>
+
+        <thead>
+
+          <tr>
+
+            <th>Type</th>
+
+            <th>Name</th>
+
+            <th>Batch</th>
+
+            <th>Date</th>
+
+            <th>Status</th>
+
+            <th>Remark</th>
+
+            <th>Action</th>
+
+          </tr>
+
+        </thead>
+
+
+        <tbody id="attendanceTable"></tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     EXPENSES
+===================================================== -->
+
+<section id="expenses" class="page-section">
+
+  <div class="page-title">
+
+    <div>
+      <h1>🧾 Office Expenses</h1>
+      <p>Salary, electricity, rent and other expenses</p>
+    </div>
+
+  </div>
+
+
+  <div class="form-card">
+
+    <form id="expenseForm">
+
+      <input type="hidden" id="expenseID">
+
+      <div class="form-grid">
+
+        <input type="date" id="expenseDate">
+
+        <select id="expenseMonth"></select>
+
+        <select id="expenseYear"></select>
+
+        <select id="expenseType">
+
+          <option>Staff Salary</option>
+          <option>Electricity Bill</option>
+          <option>Room Rent</option>
+          <option>Internet</option>
+          <option>Stationery</option>
+          <option>Maintenance</option>
+          <option>Computer / Hardware</option>
+          <option>Other</option>
+
+        </select>
+
+        <input
+          id="expenseDescription"
+          placeholder="Description"
+        >
+
+        <input
+          type="number"
+          id="expenseAmount"
+          placeholder="Amount"
+          required
+        >
+
+        <select id="expensePaymentMode">
+          <option>Cash</option>
+          <option>UPI</option>
+          <option>Bank Transfer</option>
+          <option>Other</option>
+        </select>
+
+        <input
+          id="paidTo"
+          placeholder="Paid To"
+        >
+
+        <input
+          id="expenseRemark"
+          placeholder="Remark"
+        >
+
+      </div>
+
+
+      <div class="form-actions">
+
+        <button
+          type="submit"
+          class="primary-btn"
+        >
+          💾 Save Expense
+        </button>
+
+        <button
+          type="button"
+          class="secondary-btn"
+          onclick="resetExpenseForm()"
+        >
+          Clear
+        </button>
+
+      </div>
+
+    </form>
+
+  </div>
+
+
+  <div class="table-card">
+
+    <div class="table-tools">
+
+      <select
+        id="expenseFilterMonth"
+        onchange="renderExpenses()"
+      ></select>
+
+      <select
+        id="expenseFilterYear"
+        onchange="renderExpenses()"
+      ></select>
+
+      <input
+        id="expenseSearch"
+        placeholder="🔍 Search..."
+        oninput="renderExpenses()"
+      >
+
+      <button
+        class="secondary-btn"
+        onclick="printExpenses()"
+      >
+        🖨️ Print
+      </button>
+
+    </div>
+
+
+    <div class="table-wrap">
+
+      <table>
+
+        <thead>
+
+          <tr>
+            <th>Date</th>
+            <th>Month</th>
+            <th>Year</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Amount</th>
+            <th>Mode</th>
+            <th>Paid To</th>
+            <th>Action</th>
+          </tr>
+
+        </thead>
+
+        <tbody id="expensesTable"></tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     REPORTS
+===================================================== -->
+
+<section id="reports" class="page-section">
+
+  <div class="page-title">
+
+    <div>
+      <h1>📊 Reports</h1>
+      <p>Search, filter and print complete records</p>
+    </div>
+
+  </div>
+
+
+  <div class="report-controls">
+
+    <select id="reportType">
+
+      <option value="students">All Students</option>
+
+      <option value="staff">
+        All Teachers / Staff
+      </option>
+
+      <option value="studentFees">
+        Student Fees
+      </option>
+
+      <option value="staffFees">
+        Staff Salary
+      </option>
+
+      <option value="expenses">
+        Office Expenses
+      </option>
+
+      <option value="attendance">
+        Attendance
+      </option>
+
+      <option value="courses">
+        Courses
+      </option>
+
+      <option value="batches">
+        Batches
+      </option>
+
+    </select>
+
+
+    <select id="reportMonth"></select>
+
+    <select id="reportYear"></select>
+
+
+    <button
+      class="primary-btn"
+      onclick="generateReport()"
+    >
+      🔍 Generate
+    </button>
+
+
+    <button
+      class="secondary-btn"
+      onclick="printReport()"
+    >
+      🖨️ Print Report
+    </button>
+
+  </div>
+
+
+  <div
+    id="reportSummary"
+    class="report-summary"
+  ></div>
+
+
+  <div class="table-card">
+
+    <div class="table-wrap">
+
+      <table>
+
+        <thead id="reportHead"></thead>
+
+        <tbody id="reportBody"></tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     COURSES
+===================================================== -->
+
+<section id="courses" class="page-section">
+
+  <div class="page-title">
+
+    <div>
+      <h1>🎓 Courses</h1>
+      <p>Create your own courses manually</p>
+    </div>
+
+  </div>
+
+
+  <div class="form-card">
+
+    <form id="courseForm">
+
+      <input type="hidden" id="courseID">
+
+      <div class="form-grid">
+
+        <input
+          id="courseName"
+          placeholder="Course Name *"
+          required
+        >
+
+        <input
+          id="courseDuration"
+          placeholder="Duration"
+        >
+
+        <input
+          type="number"
+          id="courseFee"
+          placeholder="Total Course Fee"
+        >
+
+        <input
+          type="number"
+          id="courseMonthlyFee"
+          placeholder="Monthly Fee"
+        >
+
+        <select id="courseStatus">
+          <option>Active</option>
+          <option>Inactive</option>
+        </select>
+
+        <input
+          id="courseRemark"
+          placeholder="Remark"
+        >
+
+      </div>
+
+
+      <div class="form-actions">
+
+        <button
+          type="submit"
+          class="primary-btn"
+        >
+          💾 Save Course
+        </button>
+
+        <button
+          type="button"
+          class="secondary-btn"
+          onclick="resetCourseForm()"
+        >
+          Clear
+        </button>
+
+      </div>
+
+    </form>
+
+  </div>
+
+
+  <div class="table-card">
+
+    <div class="table-tools">
+
+      <input
+        id="courseSearch"
+        placeholder="🔍 Search course..."
+        oninput="renderCourses()"
+      >
+
+    </div>
+
+
+    <div class="table-wrap">
+
+      <table>
+
+        <thead>
+
+          <tr>
+            <th>Course</th>
+            <th>Duration</th>
+            <th>Total Fee</th>
+            <th>Monthly Fee</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+
+        </thead>
+
+        <tbody id="coursesTable"></tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     SETTINGS
+===================================================== -->
+
+<section id="settings" class="page-section">
+
+  <div class="page-title">
+
+    <div>
+      <h1>⚙️ Settings</h1>
+      <p>System settings and Login PIN</p>
+    </div>
+
+  </div>
+
+
+  <div class="settings-grid">
+
+
+    <div class="settings-card">
+
+      <h3>🔐 Change Login PIN</h3>
+
+      <form id="pinForm">
+
+        <input
+          type="password"
+          id="oldPin"
+          placeholder="Old PIN"
+          required
+        >
+
+        <input
+          type="password"
+          id="newPin"
+          placeholder="New PIN"
+          required
+        >
+
+        <input
+          type="password"
+          id="confirmPin"
+          placeholder="Confirm New PIN"
+          required
+        >
+
+        <button
+          class="primary-btn"
+          type="submit"
+        >
+          🔑 Change PIN
+        </button>
+
+      </form>
+
+    </div>
+
+
+    <div class="settings-card">
+
+      <h3>🎨 Dashboard Theme</h3>
+
+      <div class="theme-buttons">
+
+        <button onclick="setTheme('default')">
+          🌈 Default
+        </button>
+
+        <button onclick="setTheme('dark')">
+          🌙 Dark
+        </button>
+
+        <button onclick="setTheme('blue')">
+          💙 Blue
+        </button>
+
+        <button onclick="setTheme('green')">
+          💚 Green
+        </button>
+
+        <button onclick="setTheme('purple')">
+          💜 Purple
+        </button>
+
+        <button onclick="setTheme('sunset')">
+          🌅 Sunset
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+</main>
+
+</div>
+
+
+<!-- =====================================================
+     PRINT AREA
+===================================================== -->
+
+<div id="printArea"></div>
+
+
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+
+</html>
